@@ -1,0 +1,243 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Nav from '../components/Nav.astro';
+import Hero from '../components/Hero.astro';
+import TracksSection from '../components/TracksSection.astro';
+import ScheduleSection from '../components/ScheduleSection.astro';
+import CfpSection from '../components/CfpSection.astro';
+import SponsorSection from '../components/SponsorSection.astro';
+import Footer from '../components/Footer.astro';
+import BlogCard from '../components/BlogCard.astro';
+import { getCollection } from 'astro:content';
+
+// Fetch 3 most recent blog posts for the homepage
+const allPosts = await getCollection('blog', ({ data }) => !data.draft);
+const recentPosts = allPosts
+  .sort((a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime())
+  .slice(0, 3);
+---
+
+<BaseLayout title="InfraConf Africa 2026 — Infrastructure Engineering Conference">
+  <Nav />
+
+  <!-- Nav spacer -->
+  <div style="height: 64px;"></div>
+
+  <Hero />
+
+  <!-- Why section -->
+  <section class="section" aria-labelledby="why-heading">
+    <div class="container">
+      <div class="section__header">
+        <span class="label">01 — Why</span>
+        <hr>
+        <h2 class="label" id="why-heading" style="color:var(--muted)">The problem we're solving</h2>
+      </div>
+
+      <div class="why__grid reveal">
+        <div class="why__cell">
+          <div class="why__icon">!</div>
+          <h3 class="why__heading">Africa's engineers have no home.</h3>
+          <p class="why__body">
+            KubeCon, SREcon, PlatformCon — the conferences that matter to infrastructure engineers
+            all happen in San Francisco, Amsterdam, or Chicago. African engineers either buy a $3,000
+            flight or watch a recording alone at 2am.
+          </p>
+        </div>
+        <div class="why__cell why__cell--accent">
+          <div class="why__icon" style="color:var(--mint)">!</div>
+          <h3 class="why__heading">InfraConf Africa is that home.</h3>
+          <p class="why__body">
+            Practitioner-level content. Global speakers. Africa-specific infrastructure realities.
+            Built by engineers, for engineers. Strictly infrastructure — no panels about "the future
+            of work", no pitch competitions.
+          </p>
+        </div>
+        <div class="why__cell" style="border-top: 1px solid var(--rule);">
+          <h3 class="why__heading" style="font-size:1.3rem;">CNCF-aligned</h3>
+          <p class="why__body">Applying for Kubernetes Community Days status — which brings global
+            speaker networks, co-branding, and community amplification from the world's largest
+            cloud-native foundation.</p>
+        </div>
+        <div class="why__cell why__cell--accent" style="border-top: 1px solid var(--mid);">
+          <h3 class="why__heading" style="font-size:1.3rem; color:var(--white);">Part of theinfra</h3>
+          <p class="why__body">InfraConf Africa is the flagship conference of
+            <strong style="color:var(--mint);">theinfra</strong> — a growing infrastructure media
+            ecosystem building for Africa. Newsletter, podcast, research, community. InfraConf is where
+            it all peaks each year.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <TracksSection />
+  <ScheduleSection />
+  <CfpSection />
+  <SponsorSection />
+
+  <!-- Numbers -->
+  <section class="section" aria-label="Key numbers">
+    <div class="container">
+      <div class="numbers reveal">
+        <div class="number-cell">
+          <div class="number-cell__val">700<em>M+</em></div>
+          <div class="number-cell__label">People under 30 in Africa — the engineers of tomorrow are already here</div>
+        </div>
+        <div class="number-cell">
+          <div class="number-cell__val">500<em>+</em></div>
+          <div class="number-cell__label">Target attendees in Year 1 — virtual, global, infrastructure-only</div>
+        </div>
+        <div class="number-cell">
+          <div class="number-cell__val">12<em>–16</em></div>
+          <div class="number-cell__label">Talks across 6 tracks, 2 keynotes, and optional paid workshops</div>
+        </div>
+        <div class="number-cell">
+          <div class="number-cell__val">1<em>st</em></div>
+          <div class="number-cell__label">Dedicated infrastructure engineering conference on the African continent</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Blog preview section -->
+  {recentPosts.length > 0 && (
+    <section class="section section--cream" aria-labelledby="blog-preview-heading">
+      <div class="container">
+        <div class="section__header">
+          <span class="label">06 — Blog</span>
+          <hr>
+          <h2 class="label" id="blog-preview-heading" style="color:var(--muted)">From the community</h2>
+        </div>
+
+        <div class="blog-grid reveal">
+          {recentPosts.map(post => (
+            <BlogCard
+              title={post.data.title}
+              description={post.data.description}
+              pubDate={post.data.pubDate}
+              author={post.data.author}
+              tags={post.data.tags}
+              id={post.id}
+            />
+          ))}
+        </div>
+
+        <div style="margin-top: var(--space-md); text-align:center;">
+          <a href="/blog" class="btn btn--forest">
+            View all posts →
+          </a>
+        </div>
+      </div>
+    </section>
+  )}
+
+  <!-- CTA Band -->
+  <div class="cta-band" role="complementary" aria-label="Call to action">
+    <div class="container">
+      <div class="cta-band__inner">
+        <h2 class="cta-band__heading">
+          Build the layer.<br>
+          <em>Register free.</em>
+        </h2>
+        <div class="cta-band__actions">
+          <a href="#" class="btn btn--forest">Register now</a>
+          <a href="https://sessionize.com/infraconf-africa-2026/" class="btn btn--outline-forest" target="_blank" rel="noopener">Submit a talk</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <Footer />
+</BaseLayout>
+
+<style>
+  /* Why grid */
+  .why__grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1px;
+    background: var(--rule);
+    border: 1px solid var(--rule);
+  }
+
+  .why__cell { background: var(--cream); padding: var(--space-lg) var(--space-md); }
+  .why__cell--accent { background: var(--forest); color: var(--white); }
+
+  .why__icon {
+    font-family: var(--serif);
+    font-size: 4rem;
+    color: var(--mint);
+    line-height: 1;
+    margin-bottom: var(--space-md);
+    font-style: italic;
+  }
+
+  .why__heading {
+    font-family: var(--serif);
+    font-size: 1.6rem;
+    margin-bottom: var(--space-sm);
+    line-height: 1.15;
+  }
+  .why__cell--accent .why__heading { color: var(--white); }
+
+  .why__body {
+    font-size: 0.95rem;
+    font-weight: 300;
+    line-height: 1.7;
+    color: var(--muted);
+    max-width: 38ch;
+  }
+  .why__cell--accent .why__body { color: rgba(255,255,255,0.55); }
+
+  /* Numbers */
+  .numbers {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1px;
+    background: var(--rule);
+    border: 1px solid var(--rule);
+  }
+  .number-cell { background: var(--cream); padding: var(--space-md); }
+  .number-cell__val {
+    font-family: var(--serif);
+    font-size: 3rem;
+    line-height: 1;
+    color: var(--forest);
+    margin-bottom: 8px;
+  }
+  .number-cell__val em { font-style: normal; color: var(--mint); }
+  .number-cell__label { font-size: 0.85rem; font-weight: 300; color: var(--muted); line-height: 1.5; }
+
+  /* Blog grid */
+  .blog-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: var(--rule);
+    border: 1px solid var(--rule);
+  }
+
+  /* CTA band */
+  .cta-band { background: var(--mint); padding: var(--space-lg) 0; }
+  .cta-band__inner {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: center;
+    gap: var(--space-md);
+  }
+  .cta-band__heading {
+    font-family: var(--serif);
+    font-size: clamp(1.75rem, 3vw, 2.75rem);
+    color: var(--forest);
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+  }
+  .cta-band__actions { display: flex; gap: var(--space-sm); }
+
+  @media (max-width: 900px) {
+    .why__grid { grid-template-columns: 1fr; }
+    .numbers { grid-template-columns: repeat(2, 1fr); }
+    .blog-grid { grid-template-columns: 1fr; }
+    .cta-band__inner { grid-template-columns: 1fr; }
+  }
+</style>

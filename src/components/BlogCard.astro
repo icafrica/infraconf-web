@@ -1,0 +1,34 @@
+---
+interface Props {
+  title: string;
+  description: string;
+  pubDate: Date;
+  author?: string;
+  tags?: string[];
+  id: string;
+}
+
+const { title, description, pubDate, author, tags = [], id } = Astro.props;
+
+const formattedDate = pubDate.toLocaleDateString('en-GB', {
+  day: 'numeric',
+  month: 'short',
+  year: 'numeric',
+});
+---
+
+<article class="blog-card">
+  <time class="blog-card__date" datetime={pubDate.toISOString()}>
+    {formattedDate}
+    {author && <span style="opacity:0.5"> · {author}</span>}
+  </time>
+  <a href={`/blog/${id}`}>
+    <h2 class="blog-card__title">{title}</h2>
+  </a>
+  <p class="blog-card__desc">{description}</p>
+  {tags.length > 0 && (
+    <div class="blog-card__tags">
+      {tags.map(tag => <span class="blog-card__tag">{tag}</span>)}
+    </div>
+  )}
+</article>

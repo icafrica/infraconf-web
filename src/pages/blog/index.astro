@@ -1,0 +1,181 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Nav from '../../components/Nav.astro';
+import Footer from '../../components/Footer.astro';
+import BlogCard from '../../components/BlogCard.astro';
+import { getCollection } from 'astro:content';
+
+const allPosts = await getCollection('blog', ({ data }) => !data.draft);
+const posts = allPosts.sort((a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime());
+
+// Group by tag for filtering UI
+const allTags = [...new Set(posts.flatMap(p => p.data.tags))].sort();
+---
+
+<BaseLayout
+  title="Blog — InfraConf Africa"
+  description="Infrastructure engineering stories, announcements, and deep dives from the InfraConf Africa team and community."
+>
+  <Nav />
+
+  <main style="padding-top: 64px;">
+    <!-- Page header -->
+    <header class="blog-header section--dark">
+      <div class="container">
+        <div class="blog-header__inner">
+          <div>
+            <div class="label label--light" style="margin-bottom:var(--space-sm);">07 — Blog</div>
+            <h1 class="heading-1 text-white">From the community</h1>
+            <p style="font-size:1rem; font-weight:300; color:rgba(255,255,255,0.5); max-width:44ch; line-height:1.7; margin-top:var(--space-sm);">
+              Infrastructure engineering stories, deep dives, and announcements from the
+              InfraConf Africa team and community.
+            </p>
+          </div>
+          <div class="blog-header__stats">
+            <div>
+              <div style="font-family:var(--mono); font-size:2rem; color:var(--mint);">{posts.length}</div>
+              <div style="font-size:0.8rem; color:rgba(255,255,255,0.4);">posts published</div>
+            </div>
+            <div>
+              <div style="font-family:var(--mono); font-size:2rem; color:var(--amber);">{allTags.length}</div>
+              <div style="font-size:0.8rem; color:rgba(255,255,255,0.4);">topic tags</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Tag filter -->
+    {allTags.length > 0 && (
+      <div style="background:var(--cream); border-bottom:1px solid var(--rule); padding:var(--space-sm) 0;">
+        <div class="container">
+          <div class="tag-filter" role="group" aria-label="Filter by tag">
+            <button class="tag-btn tag-btn--active" data-tag="all" id="tag-all">All</button>
+            {allTags.map(tag => (
+              <button class="tag-btn" data-tag={tag} id={`tag-${tag}`}>{tag}</button>
+            ))}
+          </div>
+        </div>
+      </div>
+    )}
+
+    <!-- Post grid -->
+    <div class="section">
+      <div class="container">
+        <div class="blog-page-grid">
+          {posts.map(post => (
+            <div class="blog-page-item" data-tags={post.data.tags.join(',')}>
+              <BlogCard
+                title={post.data.title}
+                description={post.data.description}
+                pubDate={post.data.pubDate}
+                author={post.data.author}
+                tags={post.data.tags}
+                id={post.id}
+              />
+            </div>
+          ))}
+        </div>
+
+        {posts.length === 0 && (
+          <div style="text-align:center; padding:var(--space-xl) 0;">
+            <p class="label" style="color:var(--muted);">No posts yet — check back soon.</p>
+          </div>
+        )}
+      </div>
+    </div>
+
+    <!-- CTA -->
+    <div style="background:var(--forest); padding:var(--space-lg) 0; border-top:1px solid var(--mid);">
+      <div class="container" style="text-align:center;">
+        <p style="font-size:1rem; color:rgba(255,255,255,0.6); margin-bottom:var(--space-md);">
+          Have an infrastructure story to tell?
+        </p>
+        <a href="mailto:hello@infraconf.africa" class="btn btn--primary">
+          Pitch a guest post →
+        </a>
+      </div>
+    </div>
+  </main>
+
+  <Footer />
+</BaseLayout>
+
+<script>
+  const buttons = document.querySelectorAll<HTMLButtonElement>('.tag-btn');
+  const items = document.querySelectorAll<HTMLElement>('.blog-page-item');
+
+  buttons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const tag = btn.dataset.tag ?? 'all';
+
+      // Update active button
+      buttons.forEach(b => b.classList.remove('tag-btn--active'));
+      btn.classList.add('tag-btn--active');
+
+      // Filter items
+      items.forEach(item => {
+        if (tag === 'all') {
+          item.style.display = '';
+        } else {
+          const tags = item.dataset.tags?.split(',') ?? [];
+          item.style.display = tags.includes(tag) ? '' : 'none';
+        }
+      });
+    });
+  });
+</script>
+
+<style>
+  .blog-header { padding: var(--space-xl) 0 var(--space-lg); }
+
+  .blog-header__inner {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: var(--space-lg);
+  }
+
+  .blog-header__stats {
+    display: flex;
+    gap: var(--space-lg);
+    flex-shrink: 0;
+    padding-bottom: 4px;
+  }
+
+  .tag-filter {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .tag-btn {
+    font-family: var(--mono);
+    font-size: 0.65rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--muted);
+    border: 1px solid var(--rule);
+    padding: 6px 12px;
+    border-radius: 1px;
+    background: var(--white);
+    transition: all 0.15s;
+  }
+  .tag-btn:hover { border-color: var(--muted); color: var(--forest); }
+  .tag-btn--active { background: var(--forest); color: var(--mint); border-color: var(--forest); }
+
+  .blog-page-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-md);
+  }
+
+  @media (max-width: 900px) {
+    .blog-page-grid { grid-template-columns: repeat(2, 1fr); }
+    .blog-header__inner { flex-direction: column; align-items: flex-start; }
+  }
+  @media (max-width: 600px) {
+    .blog-page-grid { grid-template-columns: 1fr; }
+    .blog-header__stats { gap: var(--space-md); }
+  }
+</style>

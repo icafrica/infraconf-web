@@ -1,0 +1,136 @@
+---
+const tracks = [
+  {
+    num: '01',
+    name: 'Platform Engineering & Internal Developer Platforms',
+    desc: 'IDPs, Backstage, golden paths, developer self-service, platform as a product, team topologies.',
+    tag: 'Featured track',
+    tagColor: 'var(--mint)',
+  },
+  {
+    num: '02',
+    name: 'Cloud Infrastructure & Architecture',
+    desc: 'Multi-cloud design, cloud-native patterns, Terraform, Pulumi, OpenTofu, cost engineering.',
+    tag: 'Core track',
+  },
+  {
+    num: '03',
+    name: 'Reliability, Observability & SRE',
+    desc: 'SLOs, error budgets, OpenTelemetry, Prometheus, Grafana, chaos engineering, on-call culture.',
+    tag: 'Core track',
+  },
+  {
+    num: '04',
+    name: 'Infrastructure for Africa',
+    desc: 'Building for low-bandwidth, high-latency environments. Local data center realities. African cloud regions.',
+    tag: 'Unique to us',
+    tagColor: 'var(--amber)',
+  },
+  {
+    num: '05',
+    name: 'AI & ML Infrastructure',
+    desc: 'GPU cluster management, MLOps pipelines, inference infrastructure, vector databases, LLM serving.',
+    tag: 'New in 2026',
+    tagColor: 'var(--sahara)',
+  },
+  {
+    num: '06',
+    name: 'Security in Infrastructure',
+    desc: 'Zero trust, secrets management, supply chain security, DevSecOps integration, compliance as code.',
+    tag: 'Core track',
+  },
+];
+---
+
+<section class="section section--dark" id="tracks" aria-labelledby="tracks-heading">
+  <div class="container">
+    <div class="section__header">
+      <span class="label label--light">02 — Tracks</span>
+      <hr class="rule-forest">
+      <h2 class="label label--light" id="tracks-heading">Six tracks. Strictly infrastructure.</h2>
+    </div>
+
+    <nav class="tracks__list reveal" aria-label="Conference tracks">
+      {tracks.map(({ num, name, desc, tag, tagColor }) => (
+        <div class="track" tabindex="0" role="listitem">
+          <div class="track__num">{num}</div>
+          <div class="track__body">
+            <div class="track__name">{name}</div>
+            <div class="track__desc">{desc}</div>
+          </div>
+          <div class="track__tag" style={tagColor ? `color:${tagColor}; border-color:${tagColor}40;` : ''}>
+            {tag}
+          </div>
+        </div>
+      ))}
+    </nav>
+  </div>
+</section>
+
+<style>
+  .tracks__list { display: flex; flex-direction: column; }
+
+  .track {
+    display: grid;
+    grid-template-columns: 56px 1fr auto;
+    align-items: start;
+    gap: var(--space-md);
+    padding: var(--space-md) 0;
+    border-bottom: 1px solid var(--mid);
+    transition: background 0.2s;
+    cursor: default;
+  }
+  .track:first-child { border-top: 1px solid var(--mid); }
+
+  .track__num {
+    font-family: var(--mono);
+    font-size: 0.75rem;
+    color: var(--muted);
+    padding-top: 4px;
+    letter-spacing: 0.05em;
+  }
+
+  .track__name {
+    font-family: var(--serif);
+    font-size: 1.4rem;
+    color: var(--white);
+    margin-bottom: 6px;
+    line-height: 1.2;
+    transition: color 0.2s;
+  }
+  .track:hover .track__name { color: var(--mint); }
+
+  .track__desc {
+    font-size: 0.875rem;
+    color: rgba(255,255,255,0.4);
+    max-width: 60ch;
+    line-height: 1.6;
+    font-weight: 300;
+  }
+
+  .track__tag {
+    font-family: var(--mono);
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--mint);
+    border: 1px solid rgba(127,255,197,0.25);
+    padding: 4px 10px;
+    border-radius: 1px;
+    white-space: nowrap;
+    margin-top: 4px;
+  }
+
+  @media (max-width: 600px) {
+    .track {
+      grid-template-columns: 32px 1fr;
+      gap: 12px;
+    }
+    .track__tag {
+      grid-column: 2;
+      align-self: start;
+      width: max-content;
+      margin-top: 6px;
+    }
+  }
+</style>

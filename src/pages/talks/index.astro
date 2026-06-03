@@ -1,0 +1,97 @@
+---
+import { getCollection, render } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Nav from '../../components/Nav.astro';
+import Footer from '../../components/Footer.astro';
+
+const allTalks = await getCollection('talks');
+const confirmedTalks = allTalks.filter(t => t.data.confirmed);
+
+const tracks = [...new Set(allTalks.map(t => t.data.track))].sort();
+---
+
+<BaseLayout
+  title="Talks — InfraConf Africa 2026"
+  description="Confirmed and submitted talks for InfraConf Africa 2026. Infrastructure engineering content across 6 tracks."
+>
+  <Nav />
+
+  <main style="padding-top: 64px;">
+    <header class="section section--dark" style="padding-bottom: var(--space-lg);">
+      <div class="container">
+        <div class="label label--light" style="margin-bottom:var(--space-sm);">Conference talks</div>
+        <h1 class="heading-1 text-white">Talks for 2026</h1>
+        <p style="font-size:1rem; color:rgba(255,255,255,0.5); max-width:48ch; line-height:1.7; margin-top:var(--space-sm);">
+          Practitioner-level talks across 6 tracks. Deep technical content, no hype.
+          Full programme confirmed after CFP closes August 15.
+        </p>
+        <div style="display:flex; gap:var(--space-md); margin-top:var(--space-lg);">
+          <div>
+            <div style="font-family:var(--mono); font-size:2rem; color:var(--mint);">{confirmedTalks.length}</div>
+            <div style="font-size:0.8rem; color:rgba(255,255,255,0.4);">talks confirmed</div>
+          </div>
+          <div>
+            <div style="font-family:var(--mono); font-size:2rem; color:var(--amber);">{tracks.length}</div>
+            <div style="font-size:0.8rem; color:rgba(255,255,255,0.4);">tracks</div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <div class="section">
+      <div class="container">
+        {tracks.length > 0 ? tracks.map(track => {
+          const trackTalks = allTalks.filter(t => t.data.track === track);
+          return (
+            <div style="margin-bottom: var(--space-xl);">
+              <h2 class="heading-2" style="margin-bottom:var(--space-md); padding-bottom:var(--space-sm); border-bottom:1px solid var(--rule);">
+                {track}
+              </h2>
+              <div class="talks-grid">
+                {trackTalks.map(talk => (
+                  <div class="talk-card">
+                    <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:var(--space-sm);">
+                      <span class="label" style="color:var(--muted);">{talk.data.level} · {talk.data.duration}</span>
+                      {talk.data.confirmed && (
+                        <span style="font-family:var(--mono); font-size:0.6rem; letter-spacing:0.08em; text-transform:uppercase; color:var(--mint); border:1px solid rgba(127,255,197,0.3); padding:3px 8px; border-radius:1px;">Confirmed</span>
+                      )}
+                    </div>
+                    <h3 class="heading-2" style="font-size:1.3rem; margin-bottom:var(--space-xs);">{talk.data.title}</h3>
+                    <p style="font-size:0.875rem; color:var(--muted); margin-bottom:var(--space-sm);">by {talk.data.speaker}</p>
+                    <p style="font-size:0.9rem; color:var(--forest); line-height:1.65; font-weight:300;">{talk.data.description}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          );
+        }) : (
+          <div style="text-align:center; padding:var(--space-xl) 0; border:1px solid var(--rule);">
+            <p class="heading-2" style="color:var(--muted); margin-bottom:var(--space-sm);">CFP is open</p>
+            <p style="color:var(--muted); font-size:0.9rem; margin-bottom:var(--space-md);">Talks will be listed here once confirmed. CFP closes August 15, 2026.</p>
+            <a href="https://sessionize.com/infraconf-africa-2026/" class="btn btn--primary" target="_blank" rel="noopener">Submit your talk →</a>
+          </div>
+        )}
+      </div>
+    </div>
+  </main>
+
+  <Footer />
+</BaseLayout>
+
+<style>
+  .talks-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-md);
+  }
+
+  .talk-card {
+    border: 1px solid var(--rule);
+    padding: var(--space-md);
+    background: var(--white);
+    transition: border-color 0.2s;
+  }
+  .talk-card:hover { border-color: var(--muted); }
+
+  @media (max-width: 768px) { .talks-grid { grid-template-columns: 1fr; } }
+</style>

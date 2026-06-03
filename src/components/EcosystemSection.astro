@@ -1,0 +1,144 @@
+---
+const products = [
+  {
+    index: '01',
+    type: 'Annual conference',
+    name: '!nfraconf',
+    nameEm: 'Africa',
+    desc: 'The flagship event. Fully virtual in 2026. Physical from 2027. Strictly infrastructure engineering.',
+    corner: 'infraconf.africa',
+  },
+  {
+    index: '02',
+    type: 'Weekly newsletter',
+    name: 'The',
+    nameEm: 'Stack',
+    desc: 'A weekly digest of infrastructure engineering news, tools, releases, and deep dives. Curated by practitioners.',
+    corner: 'Coming 2026',
+  },
+  {
+    index: '03',
+    type: 'Podcast',
+    name: '',
+    nameEm: 'Runtime',
+    desc: 'Conversations with platform engineers, SREs, and infra leaders shipping systems at scale. No fluff.',
+    corner: 'Coming 2026',
+  },
+  {
+    index: '04',
+    type: 'Annual research',
+    name: 'State of',
+    nameEm: 'Infra',
+    desc: 'The definitive annual survey on the state of infrastructure engineering across Africa and emerging markets.',
+    corner: 'First report 2027',
+  },
+  {
+    index: '05',
+    type: 'Video / YouTube',
+    name: 'Infraconf',
+    nameEm: 'TV',
+    desc: 'All conference talks, deep-dive tutorials, and infrastructure walkthroughs. Published within one week.',
+    corner: 'youtube.com',
+  },
+  {
+    index: '06',
+    type: 'Community',
+    name: 'The',
+    nameEm: 'Layer',
+    desc: 'Discord community for infrastructure engineers. Channels by track, job board, peer support, monthly events.',
+    corner: 'discord.gg/infraconf',
+  },
+];
+---
+
+<section class="section section--deep" id="ecosystem" aria-labelledby="ecosystem-heading">
+  <div class="container">
+    <div class="section__header">
+      <span class="label label--light">06 — Ecosystem</span>
+      <hr class="rule-forest">
+      <h2 class="label label--light" id="ecosystem-heading">Infrastructure media company</h2>
+    </div>
+
+    <p class="reveal" style="font-size:1rem; font-weight:300; color:rgba(255,255,255,0.45); max-width:60ch; line-height:1.75; margin-bottom:var(--space-lg);">
+      InfraConf Africa is the flagship event of a broader infrastructure media ecosystem.
+      The conference is the annual peak. Everything else keeps the community running year-round.
+    </p>
+
+    <div class="products reveal">
+      {products.map(({ index, type, name, nameEm, desc, corner }) => (
+        <div class="product">
+          <div class="product__index">{index}</div>
+          <div class="product__type">{type}</div>
+          <div class="product__name">{name} <em>{nameEm}</em></div>
+          <div class="product__desc">{desc}</div>
+          <div class="product__corner">{corner}</div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .products {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: var(--mid);
+    border: 1px solid var(--mid);
+  }
+
+  .product {
+    background: var(--deep);
+    padding: var(--space-md);
+    position: relative;
+    overflow: hidden;
+    transition: background 0.25s;
+  }
+  .product:hover { background: #152e22; }
+
+  .product__index {
+    font-family: var(--mono);
+    font-size: 0.65rem;
+    color: var(--muted);
+    letter-spacing: 0.08em;
+    margin-bottom: var(--space-md);
+  }
+
+  .product__type {
+    font-family: var(--mono);
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: var(--space-xs);
+  }
+
+  .product__name {
+    font-family: var(--serif);
+    font-size: 1.5rem;
+    color: var(--white);
+    margin-bottom: var(--space-xs);
+    line-height: 1.15;
+  }
+  .product__name em { color: var(--mint); font-style: italic; }
+
+  .product__desc {
+    font-size: 0.85rem;
+    font-weight: 300;
+    color: rgba(255,255,255,0.4);
+    line-height: 1.6;
+  }
+
+  .product__corner {
+    position: absolute;
+    bottom: var(--space-md);
+    right: var(--space-md);
+    font-family: var(--mono);
+    font-size: 0.65rem;
+    color: var(--muted);
+    letter-spacing: 0.06em;
+  }
+
+  @media (max-width: 900px) { .products { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 600px) { .products { grid-template-columns: 1fr; } }
+</style>

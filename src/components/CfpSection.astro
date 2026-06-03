@@ -1,0 +1,143 @@
+---
+// CFP Section
+---
+
+<section class="section section--deep" id="cfp" aria-labelledby="cfp-heading">
+  <div class="container">
+    <div class="section__header">
+      <span class="label label--light">04 — CFP</span>
+      <hr class="rule-forest">
+      <h2 class="label label--light" id="cfp-heading">Call for papers</h2>
+    </div>
+
+    <div class="grid-12 reveal">
+      <div style="grid-column: 1 / 7;">
+        <h2 class="heading-1 text-white" style="margin-bottom: var(--space-md);">
+          We want<br>
+          <em class="text-mint" style="font-family:var(--serif); font-style:italic;">practitioners.</em>
+        </h2>
+        <p style="font-size:1rem; font-weight:300; color:rgba(255,255,255,0.5); line-height:1.75; max-width:44ch;">
+          People who have done the work, hit the walls, found the solutions,
+          and can share those lessons in a concrete, actionable way. You do not
+          need to be famous. You need to have something real to say.
+        </p>
+
+        <div class="cfp__timeline">
+          <div class="cfp__row">
+            <span>CFP opens</span>
+            <span class="cfp__date">July 1, 2026</span>
+          </div>
+          <div class="cfp__row">
+            <span>CFP closes</span>
+            <span class="cfp__date">August 15, 2026</span>
+          </div>
+          <div class="cfp__row">
+            <span>Notifications</span>
+            <span class="cfp__date">August 22, 2026</span>
+          </div>
+          <div class="cfp__row">
+            <span>Submit via</span>
+            <span class="cfp__date">Sessionize</span>
+          </div>
+        </div>
+      </div>
+
+      <div style="grid-column: 8 / 13;">
+        <div class="cfp__card">
+          <div class="label label--light" style="margin-bottom:var(--space-xs);">We especially want</div>
+          <ul class="cfp__list">
+            <li>First-time speakers — we actively support you</li>
+            <li>Africa-based engineers with local infra stories</li>
+            <li>Engineers at African fintechs, telcos, startups</li>
+            <li>Diaspora engineers with global-scale experience</li>
+            <li>Open-source contributors and maintainers</li>
+          </ul>
+
+          <div style="height:1px; background:var(--mid); margin:var(--space-sm) 0;"></div>
+
+          <div class="label" style="margin-bottom:var(--space-xs); color:rgba(255,100,100,0.6);">We will decline</div>
+          <ul class="cfp__list cfp__list--decline">
+            <li>Vendor sales pitches disguised as talks</li>
+            <li>Talks with no concrete takeaways</li>
+            <li>General intro content without depth</li>
+          </ul>
+
+          <a href="https://sessionize.com/infraconf-africa-2026/" class="btn btn--primary" style="margin-top:var(--space-md); width:100%; justify-content:center;" target="_blank" rel="noopener">
+            Submit your talk
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+              <path d="M2 7h10M7 2l5 5-5 5" stroke="currentColor" stroke-width="1.5"
+                    stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .cfp__timeline {
+    margin-top: var(--space-lg);
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+    background: var(--mid);
+    border: 1px solid var(--mid);
+  }
+
+  .cfp__row {
+    background: var(--deep);
+    padding: 14px 18px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.9rem;
+    color: rgba(255,255,255,0.7);
+  }
+
+  .cfp__date {
+    font-family: var(--mono);
+    font-size: 0.85rem;
+    color: var(--mint);
+  }
+
+  .cfp__card {
+    border: 1px solid var(--mid);
+    padding: var(--space-md);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+    height: 100%;
+  }
+
+  .cfp__list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .cfp__list li {
+    display: grid;
+    grid-template-columns: 16px 1fr;
+    gap: 10px;
+    font-size: 0.875rem;
+    color: rgba(255,255,255,0.65);
+    font-weight: 300;
+    line-height: 1.45;
+  }
+  .cfp__list li::before {
+    content: '—';
+    font-family: var(--mono);
+    color: var(--mint);
+    font-size: 0.7rem;
+    padding-top: 2px;
+  }
+
+  .cfp__list--decline li { color: rgba(255,255,255,0.3); }
+  .cfp__list--decline li::before { content: '×'; color: rgba(255,100,100,0.4); }
+
+  @media (max-width: 900px) {
+    .grid-12 > div:first-child { grid-column: 1 / -1 !important; }
+    .grid-12 > div:last-child  { grid-column: 1 / -1 !important; }
+  }
+</style>

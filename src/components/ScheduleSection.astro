@@ -1,0 +1,176 @@
+---
+const schedule = [
+  { time: '10:00', talk: 'Opening keynote — all attendees', talk2: '', special: true },
+  { time: '10:45', talk: 'Platform engineering at scale', talk2: 'SLOs that actually work', special: false },
+  { time: '11:15', talk: 'IaC best practices: Terraform & Pulumi', talk2: 'Observability on a budget', special: false },
+  { time: '11:45', talk: 'Break + sponsor spotlight', talk2: '', special: true },
+  { time: '12:00', talk: 'Building internal developer platforms', talk2: 'Incident response playbooks', special: false },
+  { time: '12:30', talk: 'Multi-cloud strategy for Africa', talk2: 'Data center reality in Africa', special: false },
+  { time: '13:00', talk: 'Lunch break', talk2: '', special: true },
+  { time: '14:00', talk: 'AI infrastructure for engineers', talk2: 'Zero trust security in infra', special: false },
+  { time: '14:30', talk: 'CI/CD pipeline design patterns', talk2: 'Kubernetes networking deep dive', special: false },
+  { time: '15:00', talk: 'Sponsor lightning talks', talk2: '', special: true },
+  { time: '15:20', talk: 'Africa fintech infrastructure panel', talk2: '', special: true },
+  { time: '16:00', talk: 'Closing keynote + community Q&A', talk2: '', special: true },
+];
+---
+
+<section class="section" id="programme" aria-labelledby="programme-heading">
+  <div class="container">
+    <div class="section__header">
+      <span class="label">03 — Programme</span>
+      <hr>
+      <h2 class="label" id="programme-heading" style="color:var(--muted)">1 day · 6 tracks · 2 keynotes</h2>
+    </div>
+
+    <div class="reveal">
+      <div class="track-legend">
+        <span class="track-legend__item">
+          <span class="track-legend__dot" style="background:var(--mint)"></span>
+          Track A — Platform &amp; Cloud
+        </span>
+        <span class="track-legend__item">
+          <span class="track-legend__dot" style="background:var(--amber)"></span>
+          Track B — Reliability &amp; Security
+        </span>
+      </div>
+
+      <div class="schedule" role="table" aria-label="Conference schedule">
+        {schedule.map(({ time, talk, talk2, special }) => (
+          <div class={`schedule-row${special ? ' schedule-row--special' : ''}`} role="row">
+            <div class="schedule-cell" role="cell">
+              <span class="schedule__time">{time}</span>
+            </div>
+            <div class="schedule-cell" role="cell">
+              <span class="schedule__talk">{talk}</span>
+            </div>
+            <div class="schedule-cell" role="cell">
+              {talk2 && <span class="schedule__talk-2">{talk2}</span>}
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <p style="font-size:0.8rem; color:var(--muted); margin-top:var(--space-sm); font-family:var(--mono);">
+        ↑ Full programme subject to change. Talks confirmed after CFP closes Aug 15.
+      </p>
+    </div>
+  </div>
+</section>
+
+<style>
+  .track-legend {
+    display: flex;
+    gap: var(--space-md);
+    margin-bottom: var(--space-sm);
+  }
+  .track-legend__item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-family: var(--mono);
+    font-size: 0.65rem;
+    color: var(--muted);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+  .track-legend__dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+
+  .schedule { display: flex; flex-direction: column; }
+
+  .schedule-row {
+    display: grid;
+    grid-template-columns: 80px 1fr 1fr;
+    gap: 1px;
+    background: var(--rule);
+    border-left: 1px solid var(--rule);
+    border-right: 1px solid var(--rule);
+  }
+  .schedule-row:first-child { border-top: 1px solid var(--rule); }
+  .schedule-row:last-child  { border-bottom: 1px solid var(--rule); }
+
+  .schedule-row--special { background: var(--forest); }
+
+  .schedule-cell {
+    background: var(--white);
+    padding: 14px 18px;
+  }
+  .schedule-row--special .schedule-cell { background: var(--forest); }
+
+  .schedule__time {
+    font-family: var(--mono);
+    font-size: 0.8rem;
+    color: var(--muted);
+    padding-top: 2px;
+  }
+  .schedule-row--special .schedule__time { color: var(--mint); }
+
+  .schedule__talk {
+    font-size: 0.9rem;
+    font-weight: 400;
+    color: var(--forest);
+  }
+  .schedule-row--special .schedule__talk { font-weight: 500; color: var(--mint); }
+
+  .schedule__talk-2 {
+    font-size: 0.9rem;
+    color: var(--muted);
+    font-style: italic;
+  }
+
+  @media (max-width: 768px) {
+    .schedule-row {
+      display: flex;
+      flex-direction: column;
+      border-bottom: 1px solid var(--rule);
+    }
+    .schedule-row:last-child {
+      border-bottom: none;
+    }
+    .schedule-cell {
+      background: var(--white);
+      padding: 10px 16px;
+      border-right: none;
+    }
+    .schedule-cell:first-child {
+      background: rgba(29, 76, 55, 0.05);
+      border-bottom: 1px solid rgba(29, 76, 55, 0.08);
+      padding-top: 8px;
+      padding-bottom: 8px;
+    }
+    .schedule-row--special .schedule-cell {
+      background: var(--forest) !important;
+    }
+    .schedule-row--special .schedule-cell:first-child {
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+    .schedule-cell:nth-child(2):before {
+      content: "Track A · Platform & Cloud";
+      display: block;
+      font-family: var(--mono);
+      font-size: 0.6rem;
+      color: var(--muted);
+      text-transform: uppercase;
+      margin-bottom: 4px;
+      letter-spacing: 0.05em;
+    }
+    .schedule-cell:nth-child(3):before {
+      content: "Track B · Reliability & Security";
+      display: block;
+      font-family: var(--mono);
+      font-size: 0.6rem;
+      color: var(--amber);
+      text-transform: uppercase;
+      margin-bottom: 4px;
+      letter-spacing: 0.05em;
+    }
+    .schedule-row--special .schedule-cell:nth-child(2):before,
+    .schedule-row--special .schedule-cell:nth-child(3):before {
+      display: none;
+    }
+    .track-legend {
+      flex-direction: column;
+      gap: var(--space-xs);
+    }
+  }
+</style>

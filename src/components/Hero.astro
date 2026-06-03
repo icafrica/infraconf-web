@@ -1,0 +1,268 @@
+---
+// Hero section component
+---
+
+<header class="hero" role="banner">
+  <div aria-hidden="true"></div><!-- nav spacer -->
+
+  <!-- African kente-inspired geometric background pattern -->
+  <div class="hero__pattern" aria-hidden="true">
+    <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <pattern id="kente" x="0" y="0" width="60" height="60" patternUnits="userSpaceOnUse">
+          <!-- Horizontal bars -->
+          <rect x="0" y="0" width="60" height="4" fill="rgba(127,255,197,0.04)"/>
+          <rect x="0" y="28" width="60" height="4" fill="rgba(127,255,197,0.03)"/>
+          <rect x="0" y="56" width="60" height="4" fill="rgba(127,255,197,0.04)"/>
+          <!-- Vertical bars -->
+          <rect x="0" y="0" width="4" height="60" fill="rgba(127,255,197,0.03)"/>
+          <rect x="28" y="0" width="4" height="60" fill="rgba(127,255,197,0.02)"/>
+          <!-- Accent diamonds -->
+          <rect x="12" y="12" width="8" height="8" transform="rotate(45 16 16)" fill="rgba(232,160,48,0.06)"/>
+          <rect x="40" y="40" width="8" height="8" transform="rotate(45 44 44)" fill="rgba(127,255,197,0.05)"/>
+        </pattern>
+      </defs>
+      <rect width="100%" height="100%" fill="url(#kente)"/>
+    </svg>
+  </div>
+
+  <!-- Structural vertical rules -->
+  <div class="hero__bg-rule" aria-hidden="true"></div>
+  <div class="hero__bg-rule-2" aria-hidden="true"></div>
+
+  <div class="container">
+    <div class="hero__content">
+      <div class="hero__left">
+        <div class="hero__eyebrow">
+          <div class="hero__eyebrow-dot" aria-hidden="true"></div>
+          <span class="label label--light">Virtual · November 2026 · Strictly infrastructure</span>
+        </div>
+
+        <h1 class="display hero__title">
+          Build<br>
+          the layer<br>
+          <em>everything<br>runs on.</em>
+        </h1>
+
+        <p class="hero__sub">
+          Africa's first conference dedicated strictly to platform engineering,
+          DevOps, SRE, and cloud infrastructure. Deep technical content.
+          No hype. No startup pitches.
+        </p>
+
+        <div class="hero__actions">
+          <a href="https://sessionize.com/infraconf-africa-2026/" class="btn btn--primary" target="_blank" rel="noopener">
+            Submit a talk
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+              <path d="M2 7h10M7 2l5 5-5 5" stroke="currentColor" stroke-width="1.5"
+                    stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </a>
+          <a href="#programme" class="btn btn--ghost">View programme</a>
+        </div>
+      </div>
+
+      <aside class="hero__right" aria-label="Event details">
+        <div class="hero__meta-item">
+          <div class="label label--light">Date</div>
+          <div class="hero__meta-val">November 2026</div>
+        </div>
+        <div class="hero__meta-item">
+          <div class="label label--light">Format</div>
+          <div class="hero__meta-val">Fully virtual</div>
+        </div>
+        <div class="hero__meta-item">
+          <div class="label label--light">Tracks</div>
+          <div class="hero__meta-val">6 tracks</div>
+        </div>
+        <div class="hero__meta-item">
+          <div class="label label--light">CFP closes</div>
+          <div class="hero__meta-val">Aug 15, 2026</div>
+        </div>
+        <div class="hero__meta-item">
+          <div class="label label--light">Attendance</div>
+          <div class="hero__meta-val" style="color: var(--mint);">Free to attend</div>
+        </div>
+      </aside>
+    </div>
+  </div>
+
+  <!-- Stats strip -->
+  <div class="container">
+    <div class="hero__bottom" role="region" aria-label="Key statistics">
+      <div class="hero__stat">
+        <div class="hero__stat-num">700M<span style="color:var(--amber)">+</span></div>
+        <div class="hero__stat-desc">People under 30 in Africa</div>
+      </div>
+      <div class="hero__stat">
+        <div class="hero__stat-num">#1</div>
+        <div class="hero__stat-desc">Fastest-growing dev population</div>
+      </div>
+      <div class="hero__stat">
+        <div class="hero__stat-num" style="color:var(--amber);">0</div>
+        <div class="hero__stat-desc">Dedicated infra conferences in Africa — until now</div>
+      </div>
+      <div class="hero__stat">
+        <div class="hero__stat-num">12<span style="font-size:1rem; opacity:0.5;">–16</span></div>
+        <div class="hero__stat-desc">Talks across 6 tracks</div>
+      </div>
+      <div class="hero__stat">
+        <div class="hero__stat-num">1<span style="font-size:1rem; color:var(--amber)">st</span></div>
+        <div class="hero__stat-desc">Infrastructure conference on the continent</div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<style>
+  .hero {
+    background: var(--forest);
+    min-height: 100svh;
+    display: grid;
+    grid-template-rows: 64px 1fr auto;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero__pattern {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    animation: patternDrift 40s linear infinite alternate;
+  }
+
+  .hero__bg-rule {
+    position: absolute;
+    top: 0; bottom: 0;
+    left: calc(50% + 280px);
+    width: 1px;
+    background: var(--mid);
+    pointer-events: none;
+  }
+  .hero__bg-rule-2 {
+    position: absolute;
+    top: 0; bottom: 0;
+    left: calc(50% - 560px);
+    width: 1px;
+    background: var(--mid);
+    pointer-events: none;
+  }
+
+  .hero__content {
+    display: grid;
+    grid-template-columns: 1fr 340px;
+    gap: 0;
+    align-items: end;
+    padding-top: var(--space-xl);
+    padding-bottom: var(--space-lg);
+  }
+
+  .hero__left { padding-right: var(--space-lg); }
+
+  .hero__eyebrow {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    margin-bottom: var(--space-md);
+    opacity: 0;
+    animation: fadeUp 0.6s 0.1s ease forwards;
+  }
+
+  .hero__eyebrow-dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--mint);
+    flex-shrink: 0;
+  }
+
+  .hero__title {
+    opacity: 0;
+    animation: fadeUp 0.7s 0.25s ease forwards;
+    margin-bottom: var(--space-md);
+  }
+
+  .hero__sub {
+    font-size: 1.1rem;
+    font-weight: 300;
+    color: rgba(255,255,255,0.55);
+    max-width: 440px;
+    line-height: 1.65;
+    opacity: 0;
+    animation: fadeUp 0.7s 0.4s ease forwards;
+    margin-bottom: var(--space-lg);
+  }
+
+  .hero__actions {
+    display: flex;
+    gap: var(--space-sm);
+    flex-wrap: wrap;
+    opacity: 0;
+    animation: fadeUp 0.7s 0.55s ease forwards;
+  }
+
+  .hero__right {
+    border-left: 1px solid var(--mid);
+    padding-left: var(--space-md);
+    opacity: 0;
+    animation: fadeIn 0.8s 0.6s ease forwards;
+  }
+
+  .hero__meta-item {
+    padding: var(--space-sm) 0;
+    border-bottom: 1px solid var(--mid);
+  }
+  .hero__meta-item:last-child { border-bottom: none; }
+
+  .hero__meta-val {
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: var(--white);
+    margin-top: 4px;
+  }
+
+  .hero__bottom {
+    border-top: 1px solid var(--mid);
+    padding: var(--space-sm) 0;
+    display: flex;
+    gap: var(--space-lg);
+    overflow-x: auto;
+    opacity: 0;
+    animation: fadeIn 0.7s 0.8s ease forwards;
+  }
+
+  .hero__stat { flex-shrink: 0; }
+
+  .hero__stat-num {
+    font-family: var(--mono);
+    font-size: 1.5rem;
+    font-weight: 500;
+    color: var(--mint);
+  }
+
+  .hero__stat-desc {
+    font-size: 0.8rem;
+    color: rgba(255,255,255,0.4);
+    margin-top: 2px;
+  }
+
+  @media (max-width: 900px) {
+    .hero__content { grid-template-columns: 1fr; }
+    .hero__right {
+      border-left: none;
+      border-top: 1px solid var(--mid);
+      padding: var(--space-md) 0 0;
+      margin-top: var(--space-md);
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (max-width: 600px) {
+    .hero__bottom {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: var(--space-md);
+      overflow-x: visible;
+    }
+  }
+</style>

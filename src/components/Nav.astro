@@ -1,0 +1,209 @@
+---
+import Logo from './Logo.astro';
+
+const navLinks = [
+  { href: '/#tracks',    label: 'Tracks' },
+  { href: '/#programme', label: 'Programme' },
+  { href: '/#sponsors',  label: 'Sponsors' },
+  { href: '/blog',       label: 'Blog' },
+];
+
+const pathname = Astro.url.pathname;
+---
+
+<nav class="nav" role="navigation" aria-label="Main navigation">
+  <div class="container">
+    <div class="nav__inner">
+      <!-- Logo -->
+      <a href="/" class="nav__logo" aria-label="InfraConf Africa home">
+        <Logo size={28} variant="dark" />
+        <div>
+          <div class="nav__name">
+            <span class="nav__name-brand">infraconf</span>
+            <span class="nav__name-sub">africa</span>
+          </div>
+          <div class="nav__year">2026</div>
+        </div>
+      </a>
+
+      <!-- Desktop links -->
+      <ul class="nav__links" role="list">
+        {navLinks.map(({ href, label }) => (
+          <li>
+            <a
+              href={href}
+              class={pathname === href ? 'nav__link nav__link--active' : 'nav__link'}
+            >
+              {label}
+            </a>
+          </li>
+        ))}
+        <li>
+          <a href="https://sessionize.com/infraconf-africa-2026/" class="nav__cta" target="_blank" rel="noopener">Submit a talk</a>
+        </li>
+      </ul>
+
+      <!-- Mobile hamburger -->
+      <button class="nav__hamburger" aria-label="Toggle menu" aria-expanded="false" aria-controls="mobile-menu" id="nav-hamburger">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Mobile menu -->
+  <div class="nav__mobile" id="mobile-menu" role="dialog" aria-label="Mobile navigation" hidden>
+    <ul role="list">
+      {navLinks.map(({ href, label }) => (
+        <li><a href={href} class="nav__mobile-link">{label}</a></li>
+      ))}
+      <li><a href="https://sessionize.com/infraconf-africa-2026/" class="btn btn--primary" style="margin-top:var(--space-sm); display:inline-flex;" target="_blank" rel="noopener">Submit a talk</a></li>
+    </ul>
+  </div>
+</nav>
+
+<script>
+  const btn = document.getElementById('nav-hamburger') as HTMLButtonElement;
+  const menu = document.getElementById('mobile-menu') as HTMLElement;
+
+  btn?.addEventListener('click', () => {
+    const isOpen = !menu.hidden;
+    menu.hidden = isOpen;
+    btn.setAttribute('aria-expanded', String(!isOpen));
+    btn.classList.toggle('is-open', !isOpen);
+  });
+
+  // Close on link click
+  menu?.querySelectorAll('a').forEach(a => {
+    a.addEventListener('click', () => {
+      menu.hidden = true;
+      btn.setAttribute('aria-expanded', 'false');
+      btn.classList.remove('is-open');
+    });
+  });
+</script>
+
+<style>
+  .nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    background: rgba(15, 43, 31, 0.97);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--mid);
+  }
+
+  .nav__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 64px;
+  }
+
+  .nav__logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .nav__name {
+    display: flex;
+    align-items: baseline;
+    gap: 4px;
+    line-height: 1;
+    margin-bottom: 2px;
+  }
+  .nav__name-brand {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 1.15rem;
+    color: var(--mint);
+    letter-spacing: -0.02em;
+    font-weight: 400;
+  }
+  .nav__name-sub {
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    color: var(--white);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    font-weight: 400;
+  }
+
+  .nav__year {
+    font-family: var(--mono);
+    font-size: 0.6rem;
+    color: var(--muted);
+    letter-spacing: 0.1em;
+  }
+
+  .nav__links {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+  }
+
+  .nav__link {
+    font-size: 0.85rem;
+    font-weight: 400;
+    color: rgba(255,255,255,0.5);
+    transition: color 0.2s;
+  }
+  .nav__link:hover { color: var(--mint); }
+  .nav__link--active { color: var(--white); }
+
+  .nav__cta {
+    background: var(--mint);
+    color: var(--forest);
+    font-weight: 500;
+    font-size: 0.85rem;
+    padding: 8px 18px;
+    border-radius: 2px;
+    transition: opacity 0.2s;
+  }
+  .nav__cta:hover { opacity: 0.85; }
+
+  /* Hamburger */
+  .nav__hamburger {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    padding: 8px;
+  }
+  .nav__hamburger span {
+    display: block;
+    width: 22px;
+    height: 1.5px;
+    background: var(--white);
+    transition: all 0.2s;
+    transform-origin: center;
+  }
+  .nav__hamburger.is-open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+  .nav__hamburger.is-open span:nth-child(2) { opacity: 0; }
+  .nav__hamburger.is-open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+
+  /* Mobile menu */
+  .nav__mobile {
+    background: var(--deep);
+    border-top: 1px solid var(--mid);
+    padding: var(--space-md);
+  }
+  .nav__mobile ul {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .nav__mobile-link {
+    display: block;
+    padding: 12px 0;
+    font-size: 1.1rem;
+    color: rgba(255,255,255,0.7);
+    border-bottom: 1px solid var(--mid);
+    transition: color 0.2s;
+  }
+  .nav__mobile-link:hover { color: var(--mint); }
+
+  @media (max-width: 900px) {
+    .nav__links { display: none; }
+    .nav__hamburger { display: flex; }
+  }
+</style>
