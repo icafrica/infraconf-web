@@ -1,0 +1,280 @@
+---
+// Programme section — shows the conference FORMAT not fictional talk titles
+---
+
+<section class="section" id="programme" aria-labelledby="programme-heading">
+  <div class="container">
+    <div class="section__header">
+      <span class="label">03 — Programme</span>
+      <hr>
+      <h2 class="label" id="programme-heading" style="color:var(--muted)">1 day · 6 tracks · 2 keynotes</h2>
+    </div>
+
+    <div class="reveal">
+      <!-- Timezone callout -->
+      <div class="prog__timezone-bar">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+          <circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>
+        </svg>
+        All times in <strong>WAT (West Africa Time, UTC+1)</strong> — November 2026. Convert to your local timezone via <a href="https://www.worldtimebuddy.com/" target="_blank" rel="noopener">worldtimebuddy.com ↗</a>
+      </div>
+
+      <!-- Day structure -->
+      <div class="prog__day">
+        <div class="prog__block prog__block--keynote">
+          <div class="prog__time">10:00 – 10:45 WAT</div>
+          <div class="prog__content">
+            <div class="prog__tag">Opening Keynote</div>
+            <div class="prog__title">All attendees · Main stage</div>
+            <div class="prog__desc">The state of infrastructure engineering in Africa. Setting the stage for the day.</div>
+          </div>
+        </div>
+
+        <div class="prog__split-label">
+          <span>Dual-track sessions begin</span>
+          <div class="prog__tracks-legend">
+            <span><span class="dot dot--mint"></span>Track A — Platform &amp; Cloud</span>
+            <span><span class="dot dot--amber"></span>Track B — Reliability &amp; Security</span>
+            <span><span class="dot dot--sahara"></span>Track C — Africa-specific Infra</span>
+            <span><span class="dot dot--terra"></span>Track D — AI &amp; ML Infrastructure</span>
+          </div>
+        </div>
+
+        <div class="prog__block">
+          <div class="prog__time">10:45 – 12:30 WAT</div>
+          <div class="prog__content">
+            <div class="prog__tag">Morning Sessions</div>
+            <div class="prog__title">6 talks across 3 parallel tracks</div>
+            <div class="prog__desc">30-min practitioner talks. No vendor pitches. Each talk includes 5 min live Q&amp;A.</div>
+          </div>
+        </div>
+
+        <div class="prog__block prog__block--break">
+          <div class="prog__time">12:30 – 13:00 WAT</div>
+          <div class="prog__content">
+            <div class="prog__tag">Sponsor Spotlight</div>
+            <div class="prog__title">5-min lightning slots · All attendees</div>
+            <div class="prog__desc">Community sponsors introduce their tools. Engineers, not sales reps.</div>
+          </div>
+        </div>
+
+        <div class="prog__block prog__block--break">
+          <div class="prog__time">13:00 – 14:00 WAT</div>
+          <div class="prog__content">
+            <div class="prog__tag">Lunch Break</div>
+            <div class="prog__title">1 hour · Community networking</div>
+            <div class="prog__desc">Open Discord voice rooms by track. Hallway track in text channels. Optional lunch AMA with a speaker.</div>
+          </div>
+        </div>
+
+        <div class="prog__block">
+          <div class="prog__time">14:00 – 15:45 WAT</div>
+          <div class="prog__content">
+            <div class="prog__tag">Afternoon Sessions</div>
+            <div class="prog__title">6 talks across 3 parallel tracks</div>
+            <div class="prog__desc">Deep dives and case studies. Includes the Africa infrastructure panel.</div>
+          </div>
+        </div>
+
+        <div class="prog__block prog__block--keynote">
+          <div class="prog__time">16:00 – 17:00 WAT</div>
+          <div class="prog__content">
+            <div class="prog__tag">Closing Keynote + Q&amp;A</div>
+            <div class="prog__title">All attendees · Main stage</div>
+            <div class="prog__desc">Closing talk + live community Q&amp;A. Awards for best talk, best first-time speaker.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Format details -->
+      <div class="prog__format-grid">
+        <div class="prog__format-cell">
+          <div class="prog__format-label">Talk format</div>
+          <div class="prog__format-val">25 min + 5 min Q&amp;A</div>
+        </div>
+        <div class="prog__format-cell">
+          <div class="prog__format-label">Platform</div>
+          <div class="prog__format-val">Fully virtual — confirmed closer to event</div>
+        </div>
+        <div class="prog__format-cell">
+          <div class="prog__format-label">Recordings</div>
+          <div class="prog__format-val">All talks will be published after the event</div>
+        </div>
+        <div class="prog__format-cell">
+          <div class="prog__format-label">Captions</div>
+          <div class="prog__format-val">Live captions on all sessions</div>
+        </div>
+      </div>
+
+      <p class="prog__note">
+        ↑ Full programme published after speaker notifications on <strong>August 22, 2026</strong>.
+        Talk titles and speakers will be confirmed then.
+      </p>
+    </div>
+  </div>
+</section>
+
+<style>
+  /* Timezone bar */
+  .prog__timezone-bar {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(232, 160, 48, 0.08);
+    border: 1px solid rgba(232, 160, 48, 0.2);
+    border-radius: 3px;
+    padding: 10px 16px;
+    font-family: var(--mono);
+    font-size: 0.75rem;
+    color: var(--muted);
+    margin-bottom: var(--space-lg);
+    line-height: 1.5;
+  }
+  .prog__timezone-bar svg { flex-shrink: 0; color: var(--amber); }
+  .prog__timezone-bar strong { color: var(--amber); font-weight: 500; }
+  .prog__timezone-bar a { color: var(--amber); text-decoration: underline; text-underline-offset: 2px; }
+
+  /* Day grid */
+  .prog__day {
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+    background: var(--rule);
+    border: 1px solid var(--rule);
+    margin-bottom: var(--space-md);
+  }
+
+  .prog__block {
+    display: grid;
+    grid-template-columns: 180px 1fr;
+    gap: var(--space-md);
+    background: var(--white);
+    padding: var(--space-md);
+    align-items: start;
+  }
+  .prog__block--keynote { background: var(--forest); }
+  .prog__block--break   { background: rgba(29, 76, 55, 0.04); }
+
+  .prog__time {
+    font-family: var(--mono);
+    font-size: 0.75rem;
+    color: var(--muted);
+    padding-top: 3px;
+    line-height: 1.4;
+  }
+  .prog__block--keynote .prog__time { color: var(--mint); }
+
+  .prog__tag {
+    font-family: var(--mono);
+    font-size: 0.62rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 4px;
+  }
+  .prog__block--keynote .prog__tag { color: rgba(127, 255, 197, 0.55); }
+
+  .prog__title {
+    font-family: var(--serif);
+    font-size: 1.15rem;
+    color: var(--forest);
+    margin-bottom: 4px;
+    line-height: 1.2;
+  }
+  .prog__block--keynote .prog__title { color: var(--white); }
+
+  .prog__desc {
+    font-size: 0.85rem;
+    font-weight: 300;
+    color: var(--muted);
+    line-height: 1.6;
+  }
+  .prog__block--keynote .prog__desc { color: rgba(255, 255, 255, 0.45); }
+
+  /* Split label with track legend */
+  .prog__split-label {
+    background: var(--forest);
+    padding: 10px var(--space-md);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-md);
+    flex-wrap: wrap;
+  }
+  .prog__split-label > span:first-child {
+    font-family: var(--mono);
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--mint);
+  }
+  .prog__tracks-legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  .prog__tracks-legend span {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-family: var(--mono);
+    font-size: 0.6rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.4);
+  }
+
+  /* Track dots */
+  .dot { width: 7px; height: 7px; border-radius: 50%; display: inline-block; flex-shrink: 0; }
+  .dot--mint   { background: var(--mint); }
+  .dot--amber  { background: var(--amber); }
+  .dot--sahara { background: var(--sahara); }
+  .dot--terra  { background: var(--terra); }
+
+  /* Format grid */
+  .prog__format-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1px;
+    background: var(--rule);
+    border: 1px solid var(--rule);
+    margin-bottom: var(--space-sm);
+  }
+  .prog__format-cell {
+    background: var(--cream);
+    padding: var(--space-sm);
+  }
+  .prog__format-label {
+    font-family: var(--mono);
+    font-size: 0.62rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 4px;
+  }
+  .prog__format-val {
+    font-size: 0.875rem;
+    font-weight: 400;
+    color: var(--forest);
+    line-height: 1.4;
+  }
+
+  .prog__note {
+    font-size: 0.78rem;
+    font-family: var(--mono);
+    color: var(--muted);
+    margin-top: var(--space-sm);
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .prog__block { grid-template-columns: 1fr; gap: var(--space-xs); }
+    .prog__split-label { flex-direction: column; align-items: flex-start; }
+    .prog__format-grid { grid-template-columns: 1fr 1fr; }
+    .prog__tracks-legend { gap: 8px; }
+  }
+  @media (max-width: 480px) {
+    .prog__format-grid { grid-template-columns: 1fr; }
+    .prog__time { font-size: 0.7rem; }
+  }
+</style>

@@ -1,0 +1,189 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<BaseLayout
+  title="Code of Conduct — InfraConf Africa 2026"
+  description="InfraConf Africa is dedicated to providing a welcoming, safe, and productive environment for all participants. Read our community code of conduct."
+>
+  <Nav />
+  <div style="height: 64px;"></div>
+
+  <main class="coc-page">
+    <div class="container">
+
+      <div class="coc-header">
+        <span class="label">Community</span>
+        <h1 class="heading-1 coc-title">Code of Conduct</h1>
+        <p class="coc-lead">
+          InfraConf Africa is dedicated to providing a welcoming, safe, and productive environment
+          for all participants regardless of background, identity, or experience level.
+        </p>
+        <div class="coc-meta">
+          <span>Effective: November 2026</span>
+          <span>·</span>
+          <span>Based on <a href="https://www.contributor-covenant.org/" target="_blank" rel="noopener">Contributor Covenant v2.1</a></span>
+          <span>·</span>
+          <a href="mailto:conduct@infraconf.africa">Report: conduct@infraconf.africa</a>
+        </div>
+      </div>
+
+      <div class="coc-body prose">
+
+        <h2>Our Pledge</h2>
+        <p>
+          We as participants, contributors, and organisers of InfraConf Africa pledge to make
+          participation in our conference and community a harassment-free experience for everyone,
+          regardless of age, body size, visible or invisible disability, ethnicity, sex characteristics,
+          gender identity and expression, level of experience, education, socio-economic status,
+          nationality, personal appearance, race, caste, colour, religion, or sexual identity and orientation.
+        </p>
+        <p>
+          We pledge to act and interact in ways that contribute to an open, welcoming, diverse,
+          inclusive, and healthy community.
+        </p>
+
+        <h2>Our Standards</h2>
+        <p>Examples of behaviour that contributes to a positive environment:</p>
+        <ul>
+          <li>Using welcoming and inclusive language</li>
+          <li>Being respectful of differing experiences and viewpoints</li>
+          <li>Giving and gracefully accepting constructive feedback</li>
+          <li>Accepting responsibility and learning from mistakes</li>
+          <li>Focusing on what is best for the community as a whole</li>
+          <li>Showing empathy towards other community members</li>
+        </ul>
+
+        <p>Examples of unacceptable behaviour:</p>
+        <ul>
+          <li>The use of sexualised language or imagery, and sexual attention or advances of any kind</li>
+          <li>Trolling, insulting or derogatory comments, and personal or political attacks</li>
+          <li>Public or private harassment</li>
+          <li>Publishing others' private information without explicit permission</li>
+          <li>Vendor pitches or unsolicited commercial promotion in session Q&amp;As or chat</li>
+          <li>Other conduct which could reasonably be considered inappropriate in a professional setting</li>
+        </ul>
+
+        <h2>Scope</h2>
+        <p>
+          This Code of Conduct applies to all InfraConf Africa spaces — including the virtual conference
+          platform, Discord server, GitHub repositories, social media channels, and any off-platform
+          interactions that arise from or relate to conference participation.
+        </p>
+
+        <h2>Enforcement</h2>
+        <p>
+          Instances of abusive, harassing, or otherwise unacceptable behaviour may be reported to the
+          conference organisers at <a href="mailto:conduct@infraconf.africa">conduct@infraconf.africa</a>.
+          All complaints will be reviewed and investigated promptly and fairly.
+        </p>
+        <p>
+          Conference organisers have the right and responsibility to remove, edit, or reject comments,
+          commits, posts, and other contributions not aligned with this Code of Conduct, and to
+          temporarily or permanently remove any participant for behaviours they deem inappropriate,
+          threatening, offensive, or harmful.
+        </p>
+
+        <h2>Enforcement Guidelines</h2>
+        <p>Conference organisers will follow these guidelines in determining consequences:</p>
+        <ul>
+          <li><strong>Correction</strong> — Private written warning, clarification of the violation.</li>
+          <li><strong>Warning</strong> — A formal warning with conditions for continued participation.</li>
+          <li><strong>Temporary removal</strong> — A temporary ban from all community spaces.</li>
+          <li><strong>Permanent removal</strong> — A permanent ban from all community spaces.</li>
+        </ul>
+
+        <h2>Attribution</h2>
+        <p>
+          This Code of Conduct is adapted from the
+          <a href="https://www.contributor-covenant.org/version/2/1/code_of_conduct/" target="_blank" rel="noopener">Contributor Covenant, version 2.1</a>,
+          and the <a href="https://www.djangoproject.com/conduct/" target="_blank" rel="noopener">Django Code of Conduct</a>.
+        </p>
+
+        <div class="coc-contact-box">
+          <div class="coc-contact-label">Report a concern</div>
+          <p>
+            If you experience or witness a code of conduct violation at InfraConf Africa,
+            please reach out immediately. All reports are confidential.
+          </p>
+          <a href="mailto:conduct@infraconf.africa" class="btn btn--forest">
+            conduct@infraconf.africa
+          </a>
+        </div>
+
+      </div>
+    </div>
+  </main>
+
+  <Footer />
+</BaseLayout>
+
+<style>
+  .coc-page {
+    background: var(--cream);
+    padding-bottom: var(--space-xl);
+  }
+
+  .coc-header {
+    padding: var(--space-xl) 0 var(--space-lg);
+    border-bottom: 1px solid var(--rule);
+    margin-bottom: var(--space-lg);
+  }
+
+  .coc-header .label {
+    display: block;
+    margin-bottom: var(--space-sm);
+  }
+
+  .coc-title {
+    margin-bottom: var(--space-sm);
+    color: var(--forest);
+  }
+
+  .coc-lead {
+    font-size: 1.1rem;
+    font-weight: 300;
+    color: var(--muted);
+    max-width: 56ch;
+    line-height: 1.7;
+    margin-bottom: var(--space-md);
+  }
+
+  .coc-meta {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    color: var(--muted);
+    flex-wrap: wrap;
+  }
+  .coc-meta a { color: var(--forest); text-decoration: underline; text-underline-offset: 2px; }
+
+  .coc-body { max-width: 72ch; }
+
+  .coc-contact-box {
+    background: var(--forest);
+    color: var(--white);
+    padding: var(--space-md);
+    border-radius: 3px;
+    margin-top: var(--space-lg);
+  }
+  .coc-contact-label {
+    font-family: var(--mono);
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--mint);
+    margin-bottom: var(--space-xs);
+  }
+  .coc-contact-box p {
+    font-size: 0.9rem;
+    font-weight: 300;
+    color: rgba(255,255,255,0.6);
+    line-height: 1.6;
+    margin-bottom: var(--space-md);
+  }
+</style>

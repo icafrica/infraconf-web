@@ -1,10 +1,11 @@
 ---
 import Logo from './Logo.astro';
+import InfraConfAfricaArt from './InfraConfAfricaArt.astro';
 ---
 
 <footer class="footer" role="contentinfo">
   <div class="container">
-    <!-- Why InfraConf — quick blurb before links -->
+    <!-- Why InfraConf — expanded with visa story -->
     <div class="footer__mission reveal">
       <div class="footer__mission-text">
         <span class="label label--light">Why this exists</span>
@@ -19,6 +20,32 @@ import Logo from './Logo.astro';
         <div style="font-size:0.85rem; color:rgba(255,255,255,0.4); max-width:18ch; line-height:1.4;">
           Dedicated infra conferences in Africa — before us
         </div>
+      </div>
+    </div>
+
+    <!-- Visa rejection callout -->
+    <div class="footer__visa reveal">
+      <div class="footer__visa-stamp" aria-hidden="true">REJECTED</div>
+      <div class="footer__visa-body">
+        <div class="footer__visa-label">The barrier nobody talks about</div>
+        <h3 class="footer__visa-heading">
+          The visa was <em>never</em> going to come through.
+        </h3>
+        <p class="footer__visa-text">
+          Every year, African engineers submit Schengen applications, US B1/B2 visas, and UK visitor
+          visas to attend KubeCon, AWS re:Invent, and PlatformCon. And every year, a significant
+          share are rejected — not because of anything the engineer did wrong, but because the system
+          doesn't believe an engineer from Lagos or Nairobi will return home from a tech conference in Chicago.
+          The flight is $3,000. The hotel is $250/night. The ticket is $1,500. The visa office says no
+          — with no explanation, no appeal, and no refund.
+        </p>
+        <p class="footer__visa-text footer__visa-text--highlight">
+          <strong>InfraConf Africa is fully virtual.</strong> No passport. No visa. No embassy queue.
+          No rejection letter. Just your laptop, your terminal, and a conference built for you.
+        </p>
+        <a href="/blog/visa-rejections-and-the-african-tech-engineer" class="footer__visa-link">
+          Read: Visa rejections and the African tech engineer →
+        </a>
       </div>
     </div>
 
@@ -56,8 +83,8 @@ import Logo from './Logo.astro';
           <li><a href="/#tracks">Tracks</a></li>
           <li><a href="/#programme">Programme</a></li>
           <li><a href="https://sessionize.com/infraconf-africa-2026/" target="_blank" rel="noopener">Submit a talk</a></li>
-          <li><a href="/#">Register</a></li>
-          <li><a href="/#">Code of conduct</a></li>
+          <li><a href="mailto:hello@infraconf.africa?subject=InfraConf Africa 2026 — Notify me">Get notified</a></li>
+          <li><a href="/code-of-conduct">Code of conduct</a></li>
         </ul>
       </div>
 
@@ -65,9 +92,7 @@ import Logo from './Logo.astro';
         <div class="footer__col-head">Sponsors</div>
         <ul class="footer__links">
           <li><a href="/#sponsors">Sponsor tiers</a></li>
-          <li><a href="mailto:sponsorships@infraconf.africa">Founding sponsor</a></li>
-          <li><a href="/#">Download prospectus</a></li>
-          <li><a href="/#">Media kit</a></li>
+          <li><a href="mailto:sponsorships@infraconf.africa">Become a founding sponsor</a></li>
         </ul>
       </div>
 
@@ -77,9 +102,13 @@ import Logo from './Logo.astro';
           <li><a href="/blog">Blog</a></li>
           <li><a href="/talks">Talks</a></li>
           <li><a href="mailto:hello@infraconf.africa">Get in touch</a></li>
-          <li><a href="https://theinfra.dev" target="_blank" rel="noopener">theinfra ↗</a></li>
+          <li><a href="https://icafrica.github.io/theinfra/" target="_blank" rel="noopener">theinfra ↗</a></li>
         </ul>
       </div>
+    </div>
+
+    <div class="footer__showcase reveal">
+      <InfraConfAfricaArt />
     </div>
 
     <div class="footer__bottom">
@@ -101,9 +130,10 @@ import Logo from './Logo.astro';
     grid-template-columns: 1fr auto;
     gap: var(--space-lg);
     align-items: center;
-    margin-bottom: var(--space-lg);
+    margin-bottom: 0;
     padding: var(--space-md);
     border: 1px solid var(--mid);
+    border-bottom: none;
     background: rgba(42,92,67,0.15);
   }
 
@@ -115,6 +145,104 @@ import Logo from './Logo.astro';
     color: rgba(255,255,255,0.4);
     line-height: 1.65;
     max-width: 52ch;
+  }
+
+  /* Visa callout in footer */
+  .footer__visa {
+    position: relative;
+    overflow: hidden;
+    background: #0a1810;
+    border: 1px solid var(--mid);
+    border-top: none;
+    padding: var(--space-lg) var(--space-md);
+    margin-bottom: var(--space-lg);
+  }
+
+  .footer__visa-stamp {
+    position: absolute;
+    top: 50%;
+    right: -10px;
+    transform: translateY(-50%) rotate(-10deg);
+    font-family: var(--mono);
+    font-size: clamp(3.5rem, 8vw, 7rem);
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    color: rgba(196, 43, 43, 0.06);
+    line-height: 1;
+    pointer-events: none;
+    user-select: none;
+    white-space: nowrap;
+  }
+
+  .footer__visa-body {
+    position: relative;
+    z-index: 1;
+    max-width: 72ch;
+  }
+
+  .footer__visa-label {
+    font-family: var(--mono);
+    font-size: 0.62rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgba(196, 43, 43, 0.65);
+    margin-bottom: var(--space-sm);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .footer__visa-label::before {
+    content: '';
+    display: inline-block;
+    width: 24px;
+    height: 1px;
+    background: rgba(196, 43, 43, 0.35);
+  }
+
+  .footer__visa-heading {
+    font-family: var(--serif);
+    font-size: clamp(1.4rem, 3vw, 2rem);
+    color: var(--white);
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    margin-bottom: var(--space-md);
+  }
+  .footer__visa-heading em {
+    color: rgba(196, 43, 43, 0.8);
+    font-style: italic;
+    text-decoration: line-through;
+    text-decoration-color: rgba(196, 43, 43, 0.35);
+  }
+
+  .footer__visa-text {
+    font-size: 0.875rem;
+    font-weight: 300;
+    color: rgba(255, 255, 255, 0.38);
+    line-height: 1.75;
+    max-width: 66ch;
+    margin-bottom: var(--space-sm);
+  }
+  .footer__visa-text--highlight {
+    color: rgba(255, 255, 255, 0.5);
+    margin-bottom: var(--space-md);
+  }
+  .footer__visa-text--highlight strong {
+    color: var(--mint);
+    font-weight: 500;
+  }
+
+  .footer__visa-link {
+    font-family: var(--mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.04em;
+    color: var(--mint);
+    border-bottom: 1px solid rgba(127, 255, 197, 0.2);
+    padding-bottom: 2px;
+    transition: border-color 0.2s, color 0.2s;
+  }
+  .footer__visa-link:hover {
+    border-color: var(--mint);
+    color: var(--white);
   }
 
   .footer__grid {
@@ -191,9 +319,22 @@ import Logo from './Logo.astro';
     text-transform: uppercase;
   }
 
+  .footer__showcase {
+    margin-top: var(--space-md);
+    margin-bottom: var(--space-lg);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+  }
+
   @media (max-width: 900px) {
     .footer__grid { grid-template-columns: 1fr 1fr; }
     .footer__mission { grid-template-columns: 1fr; }
+    .footer__showcase {
+      margin-top: var(--space-md);
+      margin-bottom: var(--space-md);
+    }
   }
   @media (max-width: 600px) {
     .footer__grid { grid-template-columns: 1fr; }
