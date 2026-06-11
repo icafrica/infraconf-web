@@ -1,0 +1,947 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+import InfraConfAfricaArt from '../components/InfraConfAfricaArt.astro';
+---
+
+<BaseLayout title="Apply for a Pass — InfraConf Africa 2026">
+  <Nav />
+
+  <!-- Nav spacer -->
+  <div style="height: 64px;"></div>
+
+  <section class="section section--dark register-section" aria-labelledby="register-heading">
+    <!-- Geometric pattern overlay to match Hero styling -->
+    <div class="register-section__pattern" aria-hidden="true">
+      <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+        <pattern id="kente-register" x="0" y="0" width="60" height="60" patternUnits="userSpaceOnUse">
+          <rect x="0" y="0" width="60" height="4" fill="rgba(127,255,197,0.02)"/>
+          <rect x="0" y="28" width="60" height="4" fill="rgba(127,255,197,0.01)"/>
+          <rect x="0" y="0" width="4" height="60" fill="rgba(127,255,197,0.01)"/>
+          <rect x="12" y="12" width="8" height="8" transform="rotate(45 16 16)" fill="rgba(232,160,48,0.04)"/>
+        </pattern>
+        <rect width="100%" height="100%" fill="url(#kente-register)"/>
+      </svg>
+    </div>
+
+    <div class="container container--form">
+      <div class="form-wrapper">
+        <!-- Main Form Screen -->
+        <div id="form-container" class="form-card reveal">
+          <div class="form-header">
+            <span class="label label--light">Curated Attendance</span>
+            <h1 class="heading-1 text-white" id="register-heading" style="margin-top: 10px;">Apply for a Pass</h1>
+            <p class="form-subtitle">
+              InfraConf Africa is an application-only virtual conference. To maintain a highly focused, practitioner-first environment for infrastructure engineers, all registration requests are manually reviewed before free invitation passes are issued.
+            </p>
+          </div>
+
+          <form id="register-form" novalidate class="form-element">
+            <div class="form-grid">
+              <div class="form-group">
+                <label for="reg-name" class="form-label">Full Name</label>
+                <input 
+                  type="text" 
+                  id="reg-name" 
+                  name="name" 
+                  required 
+                  autocomplete="name" 
+                  placeholder="e.g. Ama Mensah" 
+                  class="form-input"
+                  aria-describedby="reg-name-error"
+                />
+                <span class="form-error" id="reg-name-error" aria-live="polite"></span>
+              </div>
+
+              <div class="form-group">
+                <label for="reg-email" class="form-label">Email Address</label>
+                <input 
+                  type="email" 
+                  id="reg-email" 
+                  name="email" 
+                  required 
+                  autocomplete="email" 
+                  placeholder="e.g. ama.mensah@infra.org" 
+                  class="form-input"
+                  aria-describedby="reg-email-error"
+                />
+                <span class="form-error" id="reg-email-error" aria-live="polite"></span>
+              </div>
+
+              <div class="form-group">
+                <label for="reg-role" class="form-label">Your Role / Job Title</label>
+                <select id="reg-role" name="role" class="form-select" required>
+                  <option value="" disabled selected>Select your current role</option>
+                  <option value="Platform Engineer">Platform Engineer</option>
+                  <option value="SRE">Site Reliability Engineer (SRE)</option>
+                  <option value="DevOps Engineer">DevOps Engineer</option>
+                  <option value="Software Engineer">Software Engineer</option>
+                  <option value="Cloud Architect">Cloud Architect</option>
+                  <option value="Infrastructure Engineer">Infrastructure Engineer / Ops</option>
+                  <option value="Engineering Manager">Engineering Manager / Lead</option>
+                  <option value="Student">Student / Aspiring Engineer</option>
+                  <option value="Other">Other Tech Role</option>
+                </select>
+                <span class="form-error" id="reg-role-error" aria-live="polite"></span>
+              </div>
+
+              <div class="form-group">
+                <label for="reg-company" class="form-label">Company / Organisation <span class="form-label-opt">(Optional)</span></label>
+                <input 
+                  type="text" 
+                  id="reg-company" 
+                  name="company" 
+                  autocomplete="organization"
+                  placeholder="e.g. TechCorp Solutions" 
+                  class="form-input"
+                />
+              </div>
+
+              <div class="form-group">
+                <label for="reg-country" class="form-label">Region / Country</label>
+                <input 
+                  type="text" 
+                  id="reg-country" 
+                  name="country" 
+                  required
+                  placeholder="e.g. Kenya, Nigeria, South Africa" 
+                  class="form-input"
+                  aria-describedby="reg-country-error"
+                />
+                <span class="form-error" id="reg-country-error" aria-live="polite"></span>
+              </div>
+
+              <!-- Application reason -->
+              <div class="form-group" style="grid-column: 1 / -1;">
+                <label for="reg-reason" class="form-label">What infrastructure challenges are you currently solving? <span class="form-label-opt">(A short sentence helps us review your application)</span></label>
+                <textarea 
+                  id="reg-reason" 
+                  name="reason" 
+                  rows="3"
+                  placeholder="e.g. Scaling our database clusters / setting up platform metrics / managing cloud spend." 
+                  class="form-input form-input--textarea"
+                  required
+                ></textarea>
+                <span class="form-error" id="reg-reason-error" aria-live="polite"></span>
+              </div>
+            </div>
+
+            <!-- Custom checkbox selector for tracks -->
+            <div class="form-group form-group--checkboxes">
+              <span class="form-label">Tracks you are interested in <span class="form-label-opt">(Select all that apply)</span></span>
+              <div class="checkbox-grid">
+                <label class="checkbox-container">
+                  <input type="checkbox" name="tracks" value="Platform Engineering" class="checkbox-input" />
+                  <span class="checkbox-box"></span>
+                  <span class="checkbox-label">Platform Eng. &amp; IDPs</span>
+                </label>
+                <label class="checkbox-container">
+                  <input type="checkbox" name="tracks" value="Cloud Infrastructure" class="checkbox-input" />
+                  <span class="checkbox-box"></span>
+                  <span class="checkbox-label">Cloud Infra &amp; Tools</span>
+                </label>
+                <label class="checkbox-container">
+                  <input type="checkbox" name="tracks" value="SRE & Reliability" class="checkbox-input" />
+                  <span class="checkbox-box"></span>
+                  <span class="checkbox-label">Reliability &amp; SRE</span>
+                </label>
+                <label class="checkbox-container">
+                  <input type="checkbox" name="tracks" value="Infrastructure for Africa" class="checkbox-input" />
+                  <span class="checkbox-box"></span>
+                  <span class="checkbox-label">Infrastructure for Africa</span>
+                </label>
+                <label class="checkbox-container">
+                  <input type="checkbox" name="tracks" value="AI ML Infrastructure" class="checkbox-input" />
+                  <span class="checkbox-box"></span>
+                  <span class="checkbox-label">AI &amp; ML Infrastructure</span>
+                </label>
+                <label class="checkbox-container">
+                  <input type="checkbox" name="tracks" value="Security" class="checkbox-input" />
+                  <span class="checkbox-box"></span>
+                  <span class="checkbox-label">Infrastructure Security</span>
+                </label>
+              </div>
+            </div>
+
+            <div class="form-footer">
+              <button type="submit" class="btn btn--primary btn--submit" id="btn-submit">
+                <span>Submit Pass Application</span>
+                <svg class="submit-arrow" width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+                  <path d="M2 7h10M7 2l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                <div class="submit-spinner" aria-hidden="true" hidden></div>
+              </button>
+            </div>
+          </form>
+        </div>
+
+        <!-- Success Screen -->
+        <div id="success-container" class="form-card form-card--success" hidden>
+          <div class="success-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <polyline points="20 6 9 17 4 12" stroke-linecap="round" stroke-linejoin="round"></polyline>
+            </svg>
+          </div>
+          <span class="label label--light" style="color: var(--mint);">Application Received</span>
+          <h2 class="heading-1 text-white" style="margin-top: 10px; margin-bottom: var(--space-sm);">Under Review</h2>
+          <p class="form-subtitle" style="max-width: 54ch; margin: 0 auto var(--space-sm);">
+            Thank you for applying, <strong id="success-name" class="text-mint"></strong>. Your registration is now in our review queue. Pass confirmations and virtual access details will be sent to <strong id="success-email" class="text-mint"></strong> once approved.
+          </p>
+
+          <!-- Shareable Ticket Card Preview -->
+          <div class="ticket-preview-wrapper">
+            <div id="downloadable-ticket" class="ticket-preview">
+              <!-- Typographic Artwork Background Watermark -->
+              <div class="ticket-preview__watermark" aria-hidden="true">
+                <InfraConfAfricaArt />
+              </div>
+
+              <div class="ticket-preview__top">
+                <div class="ticket-preview__logo">▲</div>
+                <div class="ticket-preview__brand">infraconf</div>
+                <div class="ticket-preview__brand-sub">africa · 2026</div>
+                <div class="ticket-preview__badge">Application Pass</div>
+              </div>
+              
+              <div class="ticket-preview__separator">
+                <div class="ticket-preview__cutout ticket-preview__cutout--left"></div>
+                <div class="ticket-preview__cutout ticket-preview__cutout--right"></div>
+                <div class="ticket-preview__dash"></div>
+              </div>
+
+              <div class="ticket-preview__body">
+                <div class="ticket-preview__row">
+                  <div>
+                    <div class="ticket-preview__label">Attendee</div>
+                    <div class="ticket-preview__val" id="ticket-name">Ama Mensah</div>
+                  </div>
+                  <div style="text-align: right;">
+                    <div class="ticket-preview__label">Status</div>
+                    <div class="ticket-preview__val" style="color: var(--amber);" id="ticket-status">Under Review</div>
+                  </div>
+                </div>
+
+                <div class="ticket-preview__row">
+                  <div>
+                    <div class="ticket-preview__label">Role</div>
+                    <div class="ticket-preview__val" id="ticket-role">Platform Engineer</div>
+                  </div>
+                  <div style="text-align: right;">
+                    <div class="ticket-preview__label">Location</div>
+                    <div class="ticket-preview__val" id="ticket-location">West Africa</div>
+                  </div>
+                </div>
+
+                <div class="ticket-preview__row" style="margin-bottom: 0;">
+                  <div>
+                    <div class="ticket-preview__label">Date</div>
+                    <div class="ticket-preview__val">November 2026</div>
+                  </div>
+                  <div style="text-align: right;">
+                    <div class="ticket-preview__label">Pass ID</div>
+                    <div class="ticket-preview__val font-mono text-mint" id="ticket-pass-id">ICA-PENDING</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <button type="button" class="btn btn--primary btn--download" id="btn-download-ticket">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+              <span>Download Shareable Pass</span>
+            </button>
+          </div>
+
+          <div class="success-actions">
+            <a href="https://sessionize.com/infraconf-africa-2026/" class="btn btn--primary" target="_blank" rel="noopener">
+              Submit a talk
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+                <path d="M2 7h10M7 2l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </a>
+            <a href="/" class="btn btn--ghost">Return Home</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <Footer />
+</BaseLayout>
+
+<script>
+  const form = document.getElementById('register-form') as HTMLFormElement;
+  const formContainer = document.getElementById('form-container') as HTMLElement;
+  const successContainer = document.getElementById('success-container') as HTMLElement;
+  const submitBtn = document.getElementById('btn-submit') as HTMLButtonElement;
+  const successName = document.getElementById('success-name') as HTMLElement;
+  const successEmail = document.getElementById('success-email') as HTMLElement;
+
+  const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+
+  const validateField = (input: HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement, errorEl: HTMLElement) => {
+    if (!input.value.trim()) {
+      errorEl.textContent = 'This field is required.';
+      input.classList.add('form-input--invalid');
+      return false;
+    }
+    
+    if (input.type === 'email' && !emailRegex.test(input.value)) {
+      errorEl.textContent = 'Please enter a valid email address.';
+      input.classList.add('form-input--invalid');
+      return false;
+    }
+
+    errorEl.textContent = '';
+    input.classList.remove('form-input--invalid');
+    return true;
+  };
+
+  // Real-time validation on input/change
+  const nameInput = document.getElementById('reg-name') as HTMLInputElement;
+  const emailInput = document.getElementById('reg-email') as HTMLInputElement;
+  const roleSelect = document.getElementById('reg-role') as HTMLSelectElement;
+  const countryInput = document.getElementById('reg-country') as HTMLInputElement;
+  const reasonInput = document.getElementById('reg-reason') as HTMLTextAreaElement;
+
+  nameInput?.addEventListener('input', () => validateField(nameInput, document.getElementById('reg-name-error')!));
+  emailInput?.addEventListener('input', () => validateField(emailInput, document.getElementById('reg-email-error')!));
+  roleSelect?.addEventListener('change', () => validateField(roleSelect, document.getElementById('reg-role-error')!));
+  countryInput?.addEventListener('input', () => validateField(countryInput, document.getElementById('reg-country-error')!));
+  reasonInput?.addEventListener('input', () => validateField(reasonInput, document.getElementById('reg-reason-error')!));
+
+  // State to hold submission details for shareable pass generation
+  let lastSubmission = {
+    name: '',
+    role: '',
+    passId: ''
+  };
+
+  form?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    // Validate all fields before submission
+    const isNameValid = validateField(nameInput, document.getElementById('reg-name-error')!);
+    const isEmailValid = validateField(emailInput, document.getElementById('reg-email-error')!);
+    const isRoleValid = validateField(roleSelect, document.getElementById('reg-role-error')!);
+    const isCountryValid = validateField(countryInput, document.getElementById('reg-country-error')!);
+    const isReasonValid = validateField(reasonInput, document.getElementById('reg-reason-error')!);
+
+    if (!isNameValid || !isEmailValid || !isRoleValid || !isCountryValid || !isReasonValid) {
+      // Scroll to the first invalid field
+      const firstInvalid = document.querySelector('.form-input--invalid, .form-select.form-input--invalid, .form-input--textarea.form-input--invalid');
+      firstInvalid?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      return;
+    }
+
+    // Prepare button loading state
+    const textSpan = submitBtn.querySelector('span')!;
+    const arrowSvg = submitBtn.querySelector('.submit-arrow') as HTMLElement;
+    const spinner = submitBtn.querySelector('.submit-spinner') as HTMLElement;
+
+    submitBtn.disabled = true;
+    textSpan.textContent = 'Submitting...';
+    arrowSvg.style.display = 'none';
+    spinner.removeAttribute('hidden');
+
+    // Gather checked tracks
+    const checkedTracks: string[] = [];
+    const checkboxes = form.querySelectorAll('input[name="tracks"]:checked');
+    checkboxes.forEach((cb) => {
+      checkedTracks.push((cb as HTMLInputElement).value);
+    });
+
+    // Generate a random Pass ID suffix for realistic design aesthetics
+    const randId = Math.random().toString(36).substring(2, 6).toUpperCase();
+    const passId = `ICA-${randId}`;
+
+    const formData = {
+      name: nameInput.value.trim(),
+      email: emailInput.value.trim(),
+      role: roleSelect.value,
+      company: (document.getElementById('reg-company') as HTMLInputElement).value.trim(),
+      country: countryInput.value.trim(),
+      reason: reasonInput.value.trim(),
+      tracks: checkedTracks,
+      timestamp: new Date().toISOString()
+    };
+
+    lastSubmission = {
+      name: formData.name,
+      role: formData.role,
+      passId: passId
+    };
+
+    // Save registration locally to simulate success & preserve backup
+    try {
+      const registrations = JSON.parse(localStorage.getItem('infraconf_registrations') || '[]');
+      registrations.push({ ...formData, passId });
+      localStorage.setItem('infraconf_registrations', JSON.stringify(registrations));
+    } catch (e) {
+      console.error('Local storage error: ', e);
+    }
+
+    // Post to Google Forms backup
+    const formUrl = 'https://docs.google.com/forms/u/2/d/17AWjIHCOnzfCEl6S_kSvDEqdVMOl7tZO8hn22D7lyls/formResponse';
+    const submissionBody = new URLSearchParams();
+    
+    submissionBody.append('entry.1941203368', formData.name);
+    submissionBody.append('entry.1253437776', formData.email);
+    submissionBody.append('entry.205482783', formData.role);
+    submissionBody.append('entry.915779055', formData.company || 'Not Provided');
+    submissionBody.append('entry.1139641430', formData.country);
+    submissionBody.append('entry.1421227106', formData.reason);
+    
+    // Checkboxes need to be repeated under the same key or marked as default if none selected
+    if (formData.tracks.length > 0) {
+      formData.tracks.forEach(track => {
+        submissionBody.append('entry.201590728', track);
+      });
+    } else {
+      submissionBody.append('entry.201590728', 'General Interest');
+    }
+
+    try {
+      await fetch(formUrl, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded'
+        },
+        body: submissionBody.toString()
+      });
+    } catch (error) {
+      console.error('Google Form backup submission failed:', error);
+    }
+
+    // Populate values to success card and download preview card
+    if (successName) successName.textContent = formData.name;
+    if (successEmail) successEmail.textContent = formData.email;
+    
+    const ticketName = document.getElementById('ticket-name')!;
+    const ticketRole = document.getElementById('ticket-role')!;
+    const ticketLocation = document.getElementById('ticket-location')!;
+    const ticketPassId = document.getElementById('ticket-pass-id')!;
+
+    if (ticketName) ticketName.textContent = formData.name;
+    if (ticketRole) ticketRole.textContent = formData.role;
+    if (ticketLocation) ticketLocation.textContent = formData.country;
+    if (ticketPassId) ticketPassId.textContent = passId;
+
+    formContainer.style.opacity = '0';
+    formContainer.style.transform = 'translateY(-10px)';
+    
+    setTimeout(() => {
+      formContainer.setAttribute('hidden', '');
+      successContainer.removeAttribute('hidden');
+      successContainer.style.opacity = '1';
+      successContainer.style.transform = 'none';
+      successContainer.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }, 300);
+  });
+
+  // Download logic using html2canvas
+  const downloadBtn = document.getElementById('btn-download-ticket') as HTMLButtonElement;
+  downloadBtn?.addEventListener('click', async () => {
+    // Disable download button while generating
+    downloadBtn.disabled = true;
+    const originalText = downloadBtn.querySelector('span')!.textContent;
+    downloadBtn.querySelector('span')!.textContent = 'Generating Image...';
+
+    try {
+      // Load html2canvas dynamically if not already present
+      if (!(window as any).html2canvas) {
+        const script = document.createElement('script');
+        script.src = 'https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js';
+        document.head.appendChild(script);
+        await new Promise((resolve) => script.onload = resolve);
+      }
+
+      const ticketNode = document.getElementById('downloadable-ticket')!;
+      
+      // Render ticket component using html2canvas
+      const canvas = await (window as any).html2canvas(ticketNode, {
+        scale: 3, // High DPI scaling
+        backgroundColor: '#0F2B1F', // Dark green backdrop
+        logging: false,
+        useCORS: true
+      });
+
+      const url = canvas.toDataURL('image/png');
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = `infraconf-pass-${lastSubmission.name.toLowerCase().replace(/\s+/g, '-')}.png`;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    } catch (err) {
+      console.error('Failed to generate image:', err);
+    } finally {
+      downloadBtn.disabled = false;
+      downloadBtn.querySelector('span')!.textContent = originalText;
+    }
+  });
+</script>
+
+<style>
+  .register-section {
+    position: relative;
+    overflow: hidden;
+    min-height: calc(100svh - 64px - 300px);
+    display: flex;
+    align-items: center;
+    padding-block: var(--space-lg);
+  }
+
+  .register-section__pattern {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+  }
+
+  .container--form {
+    max-width: 760px;
+    position: relative;
+    z-index: 2;
+  }
+
+  .form-wrapper {
+    position: relative;
+  }
+
+  .form-card {
+    background: rgba(15, 43, 31, 0.7);
+    border: 1px solid var(--mid);
+    padding: var(--space-lg) var(--space-md);
+    backdrop-filter: blur(20px);
+    border-radius: 4px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+  }
+
+  .form-header {
+    margin-bottom: var(--space-md);
+    text-align: center;
+  }
+
+  .form-subtitle {
+    font-size: 0.95rem;
+    font-weight: 300;
+    color: rgba(255, 255, 255, 0.5);
+    line-height: 1.7;
+    margin-top: var(--space-sm);
+  }
+
+  .form-element {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+  }
+
+  .form-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-sm) var(--space-md);
+  }
+
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .form-group--checkboxes {
+    border-top: 1px solid var(--mid);
+    padding-top: var(--space-md);
+    margin-top: 8px;
+  }
+
+  .form-label {
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.85);
+  }
+
+  .form-label-opt {
+    color: rgba(255, 255, 255, 0.4);
+    text-transform: none;
+    font-family: var(--sans);
+    font-size: 0.75rem;
+  }
+
+  .form-input,
+  .form-select {
+    width: 100%;
+    background: rgba(29, 76, 55, 0.3);
+    border: 1px solid var(--mid);
+    padding: 12px 16px;
+    font-size: 0.95rem;
+    color: var(--white);
+    font-family: var(--sans);
+    border-radius: 2px;
+    transition: border-color 0.2s, box-shadow 0.2s;
+  }
+
+  .form-input--textarea {
+    resize: vertical;
+    font-family: var(--sans);
+    line-height: 1.5;
+  }
+
+  .form-input:focus,
+  .form-select:focus {
+    outline: none;
+    border-color: var(--mint);
+    box-shadow: 0 0 0 1px var(--mint);
+  }
+
+  .form-input--invalid {
+    border-color: rgba(255, 100, 100, 0.6) !important;
+    box-shadow: 0 0 0 1px rgba(255, 100, 100, 0.4) !important;
+  }
+
+  .form-select {
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%237FFFC5' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 16px center;
+    background-size: 12px;
+    padding-right: 40px;
+  }
+
+  .form-select option {
+    background: var(--deep);
+    color: var(--white);
+  }
+
+  .form-error {
+    font-size: 0.78rem;
+    color: rgba(255, 100, 100, 0.85);
+    min-height: 16px;
+  }
+
+  /* Checkbox grid styling */
+  .checkbox-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+    margin-top: 8px;
+  }
+
+  .checkbox-container {
+    display: grid;
+    grid-template-columns: 20px 1fr;
+    gap: 10px;
+    align-items: center;
+    cursor: pointer;
+    user-select: none;
+  }
+
+  .checkbox-input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0; width: 0;
+  }
+
+  .checkbox-box {
+    width: 20px;
+    height: 20px;
+    background: rgba(29, 76, 55, 0.3);
+    border: 1px solid var(--mid);
+    border-radius: 2px;
+    position: relative;
+    transition: border-color 0.2s, background-color 0.2s;
+  }
+
+  .checkbox-container:hover .checkbox-box {
+    border-color: var(--mint);
+  }
+
+  .checkbox-input:checked ~ .checkbox-box {
+    background: var(--mint);
+    border-color: var(--mint);
+  }
+
+  .checkbox-box::after {
+    content: "";
+    position: absolute;
+    display: none;
+    left: 6px;
+    top: 2px;
+    width: 5px;
+    height: 10px;
+    border: solid var(--forest);
+    border-width: 0 2.5px 2.5px 0;
+    transform: rotate(45deg);
+  }
+
+  .checkbox-input:checked ~ .checkbox-box::after {
+    display: block;
+  }
+
+  .checkbox-label {
+    font-size: 0.875rem;
+    color: rgba(255, 255, 255, 0.7);
+    font-weight: 300;
+    line-height: 1.3;
+    transition: color 0.2s;
+  }
+
+  .checkbox-container:hover .checkbox-label {
+    color: var(--white);
+  }
+
+  .form-footer {
+    display: flex;
+    justify-content: center;
+    margin-top: var(--space-sm);
+  }
+
+  .btn--submit {
+    width: 100%;
+    justify-content: center;
+    font-weight: 600;
+    letter-spacing: 0.03em;
+  }
+
+  .submit-spinner {
+    width: 16px;
+    height: 16px;
+    border: 2px solid var(--forest);
+    border-top: 2px solid transparent;
+    border-radius: 50%;
+    animation: rotate-spinner 0.8s linear infinite;
+  }
+
+  @keyframes rotate-spinner {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+
+  /* Success Screen Specifics */
+  .form-card--success {
+    text-align: center;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+  }
+
+  .success-icon {
+    width: 64px;
+    height: 64px;
+    background: rgba(127, 255, 197, 0.1);
+    border: 1px solid var(--mint);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--mint);
+    margin: 0 auto var(--space-md);
+  }
+
+  .success-icon svg {
+    width: 28px;
+    height: 28px;
+  }
+
+  .success-actions {
+    display: flex;
+    gap: var(--space-sm);
+    justify-content: center;
+    margin-top: var(--space-md);
+  }
+
+  /* Ticket Preview Card Styling */
+  .ticket-preview-wrapper {
+    margin: var(--space-md) auto;
+    max-width: 380px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .ticket-preview {
+    width: 100%;
+    background: #1D4C37;
+    border: 1px solid var(--mid);
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4);
+    text-align: left;
+    position: relative;
+    padding: 24px;
+  }
+
+  .ticket-preview__watermark {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(1.1);
+    width: 100%;
+    opacity: 0.18;
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  .ticket-preview__watermark .infraconf-art-wrapper {
+    margin: 0 !important;
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+
+  .ticket-preview__watermark .infraconf-art-bg-grid {
+    display: none !important;
+  }
+
+  .ticket-preview__top {
+    text-align: center;
+    padding-bottom: var(--space-sm);
+    position: relative;
+    z-index: 2;
+  }
+
+  .ticket-preview__logo {
+    font-size: 1.8rem;
+    color: var(--mint);
+    line-height: 1;
+    margin-bottom: 6px;
+  }
+
+  .ticket-preview__brand {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 1.6rem;
+    color: var(--mint);
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+  }
+
+  .ticket-preview__brand-sub {
+    font-family: var(--mono);
+    font-size: 0.65rem;
+    color: var(--white);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-top: 4px;
+  }
+
+  .ticket-preview__badge {
+    display: inline-block;
+    font-family: var(--mono);
+    font-size: 0.55rem;
+    color: var(--mint);
+    border: 1px solid rgba(127, 255, 197, 0.25);
+    padding: 3px 8px;
+    border-radius: 1px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-top: 12px;
+  }
+
+  .ticket-preview__separator {
+    position: relative;
+    height: 16px;
+    margin: 16px -24px;
+    display: flex;
+    align-items: center;
+    z-index: 2;
+  }
+
+  .ticket-preview__cutout {
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    background: #0f2b1f; /* Matches outer dark page color */
+    border-radius: 50%;
+    border: 1px solid var(--mid);
+    z-index: 2;
+  }
+
+  .ticket-preview__cutout--left {
+    left: -9px;
+  }
+
+  .ticket-preview__cutout--right {
+    right: -9px;
+  }
+
+  .ticket-preview__dash {
+    width: 100%;
+    height: 1px;
+    border-top: 1px dashed var(--mid);
+  }
+
+  .ticket-preview__body {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    position: relative;
+    z-index: 2;
+  }
+
+  .ticket-preview__row {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+
+  .ticket-preview__label {
+    font-family: var(--mono);
+    font-size: 0.6rem;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 2px;
+  }
+
+  .ticket-preview__val {
+    font-size: 0.9rem;
+    color: var(--white);
+    font-weight: 500;
+  }
+
+  .btn--download {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    padding: 10px 20px;
+    border-radius: 2px;
+    background: var(--mint);
+    color: var(--forest);
+    border: none;
+    transition: opacity 0.2s;
+    margin-top: var(--space-sm);
+    cursor: pointer;
+  }
+
+  .btn--download:hover {
+    opacity: 0.9;
+  }
+
+  @media (max-width: 768px) {
+    .form-grid {
+      grid-template-columns: 1fr;
+    }
+    .checkbox-grid {
+      grid-template-columns: 1fr;
+      gap: 14px;
+    }
+    .form-card {
+      padding: var(--space-md) var(--space-sm);
+    }
+    .success-actions {
+      flex-direction: column;
+    }
+    .success-actions a {
+      width: 100%;
+      justify-content: center;
+    }
+  }
+</style>

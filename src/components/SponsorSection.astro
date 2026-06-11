@@ -1,45 +1,44 @@
 ---
 const tiers = [
   {
-    badge: 'Community sponsor',
-    price: '$750',
-    period: 'Per event',
+    badge: 'Community Partner',
+    label: 'Visibility & reach',
+    tagline: 'Put your brand in front of Africa\'s infrastructure engineers.',
     featured: false,
     benefits: [
       'Logo on website, event page & stream overlays',
-      'Social mention at announcement & post-event',
-      'Job listing on conference board — 3 months',
+      'Social mention at announcement & post-event wrap-up',
+      'Job listing on conference board for 3 months',
       'Named in opening keynote acknowledgements',
-      '2 complimentary virtual passes',
+      '2 complimentary virtual passes for your team',
     ],
   },
   {
-    badge: 'Founding sponsor',
-    price: '$2,500',
-    period: 'Per event',
+    badge: 'Anchor Partner',
+    label: 'Deep integration',
+    tagline: 'Be woven into the fabric of InfraConf Africa — on stage and online.',
     featured: true,
     benefits: [
-      'Prominent logo on all materials & stream overlays',
-      '5-min lightning talk slot during main programme',
-      'Job listings on conference board — 6 months',
-      'Founding Partner badge — permanent recognition',
-      'Mentioned in opening & closing keynotes',
-      'Full attendee list post-event (opt-in)',
-      'Priority right for 2027 physical conference',
-      '2 complimentary workshop passes',
+      'Prominent logo placement across all event materials & overlays',
+      '5-min lightning talk slot during the main programme',
+      'Job listings on conference board for 6 months',
+      'Recognised in both opening & closing keynotes',
+      'Post-event attendee insights report (opt-in data)',
+      'First-look opportunity for 2027 in-person conference',
+      '2 complimentary workshop passes for your engineers',
     ],
   },
   {
-    badge: 'Tool sponsor',
-    price: 'In-kind',
-    period: 'Tool licenses / credits',
+    badge: 'Tool Partner',
+    label: 'In-kind support',
+    tagline: 'Donate licenses or credits — engineers who use your tool become its best advocates.',
     featured: false,
     benefits: [
-      'Free tool licenses / credits donated to attendees',
-      'Logo on website & \'tools we love\' section',
-      'Social mention post with tool description',
-      'Community goodwill — engineers become advocates',
-      '1 complimentary virtual pass',
+      'Tool licenses or platform credits gifted directly to attendees',
+      'Logo on website & featured in our "Tools We Love" spotlight',
+      'Dedicated social post introducing your tool to the community',
+      'Authentic grassroots advocacy from practitioners',
+      '1 complimentary virtual pass for your team',
     ],
   },
 ];
@@ -48,17 +47,25 @@ const tiers = [
 <section class="section" id="sponsors" aria-labelledby="sponsors-heading">
   <div class="container">
     <div class="section__header">
-      <span class="label">05 — Sponsors</span>
+      <span class="label">05 — Partners</span>
       <hr>
       <h2 class="label" id="sponsors-heading" style="color:var(--muted)">Community investment, not advertising</h2>
     </div>
 
+    <div class="sponsor-intro reveal">
+      <p class="sponsor-intro__text">
+        InfraConf Africa is free for every attendee. That only works because companies that care about
+        the African infrastructure community choose to back it. If that sounds like your organisation,
+        we'd love to talk — reach out and we'll send you our full partnership prospectus.
+      </p>
+    </div>
+
     <div class="tiers reveal">
-      {tiers.map(({ badge, price, period, featured, benefits }) => (
+      {tiers.map(({ badge, label, tagline, featured, benefits }) => (
         <div class={`tier${featured ? ' tier--featured' : ''}`}>
           <div class="tier__badge">{badge}</div>
-          <div class="tier__price">{price}</div>
-          <div class="tier__name">{period}</div>
+          <div class="tier__label">{label}</div>
+          <p class="tier__tagline">{tagline}</p>
           <div class="tier__divider"></div>
           <ul class="tier__benefits">
             {benefits.map(b => <li class="tier__benefit">{b}</li>)}
@@ -68,21 +75,33 @@ const tiers = [
     </div>
 
     <div class="mt-md reveal reveal-delay-2" style="text-align:center;">
-      <a href="mailto:sponsorships@infraconf.africa" class="btn btn--primary">
-        Become a founding partner
+      <a href="mailto:sponsorships@infraconf.africa?subject=Partnership%20Enquiry%20%E2%80%94%20InfraConf%20Africa%202026" class="btn btn--primary">
+        Request the partnership prospectus
         <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
           <path d="M2 7h10M7 2l5 5-5 5" stroke="currentColor" stroke-width="1.5"
                 stroke-linecap="round" stroke-linejoin="round"/>
         </svg>
       </a>
       <p style="font-size:0.8rem; color:var(--muted); margin-top:10px; font-family:var(--mono);">
-        sponsorships@infraconf.africa · Founding spots are limited
+        sponsorships@infraconf.africa · Anchor Partner spots are limited
       </p>
     </div>
   </div>
 </section>
 
 <style>
+  .sponsor-intro {
+    max-width: 72ch;
+    margin: 0 auto var(--space-lg);
+    text-align: center;
+  }
+  .sponsor-intro__text {
+    font-size: 0.95rem;
+    font-weight: 300;
+    color: var(--muted);
+    line-height: 1.8;
+  }
+
   .tiers {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -104,24 +123,32 @@ const tiers = [
     padding: 4px 10px;
     border-radius: 1px;
     color: var(--muted);
-    margin-bottom: var(--space-md);
+    margin-bottom: var(--space-sm);
   }
   .tier--featured .tier__badge { border-color: rgba(127,255,197,0.3); color: var(--mint); }
 
-  .tier__price {
+  .tier__label {
     font-family: var(--serif);
-    font-size: 2.5rem;
-    line-height: 1;
+    font-size: 1.6rem;
+    line-height: 1.1;
     color: var(--forest);
     margin-bottom: var(--space-xs);
+    letter-spacing: -0.02em;
   }
-  .tier--featured .tier__price { color: var(--mint); }
+  .tier--featured .tier__label { color: var(--mint); }
 
-  .tier__name { font-size: 0.85rem; font-weight: 300; color: var(--muted); margin-bottom: var(--space-md); }
-  .tier--featured .tier__name { color: rgba(255,255,255,0.45); }
+  .tier__tagline {
+    font-size: 0.82rem;
+    font-weight: 300;
+    color: var(--muted);
+    line-height: 1.6;
+    margin-bottom: var(--space-md);
+    max-width: 32ch;
+  }
+  .tier--featured .tier__tagline { color: rgba(255,255,255,0.45); }
 
   .tier__divider { height: 1px; background: var(--rule); margin-bottom: var(--space-md); }
-  .tier--featured .tier__divider { background: var(--mid); }
+  .tier--featured .tier__divider { background: rgba(255,255,255,0.12); }
 
   .tier__benefits { display: flex; flex-direction: column; gap: 10px; }
 

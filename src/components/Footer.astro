@@ -1,6 +1,8 @@
 ---
 import Logo from './Logo.astro';
 import InfraConfAfricaArt from './InfraConfAfricaArt.astro';
+
+const base = import.meta.env.BASE_URL;
 ---
 
 <footer class="footer" role="contentinfo">
@@ -43,7 +45,7 @@ import InfraConfAfricaArt from './InfraConfAfricaArt.astro';
           <strong>InfraConf Africa is fully virtual.</strong> No passport. No visa. No embassy queue.
           No rejection letter. Just your laptop, your terminal, and a conference built for you.
         </p>
-        <a href="/blog/visa-rejections-and-the-african-tech-engineer" class="footer__visa-link">
+        <a href={`${base}blog/visa-rejections-and-the-african-tech-engineer`} class="footer__visa-link">
           Read: Visa rejections and the African tech engineer →
         </a>
       </div>
@@ -80,27 +82,27 @@ import InfraConfAfricaArt from './InfraConfAfricaArt.astro';
       <div>
         <div class="footer__col-head">Conference</div>
         <ul class="footer__links">
-          <li><a href="/#tracks">Tracks</a></li>
-          <li><a href="/#programme">Programme</a></li>
+          <li><a href={`${base}#tracks`}>Tracks</a></li>
+          <li><a href={`${base}#programme`}>Programme</a></li>
           <li><a href="https://sessionize.com/infraconf-africa-2026/" target="_blank" rel="noopener">Submit a talk</a></li>
-          <li><a href="mailto:hello@infraconf.africa?subject=InfraConf Africa 2026 — Notify me">Get notified</a></li>
-          <li><a href="/code-of-conduct">Code of conduct</a></li>
+          <li><a href={`${base}register`}>Apply for a pass</a></li>
+          <li><a href={`${base}code-of-conduct`}>Code of conduct</a></li>
         </ul>
       </div>
 
       <div>
         <div class="footer__col-head">Sponsors</div>
         <ul class="footer__links">
-          <li><a href="/#sponsors">Sponsor tiers</a></li>
-          <li><a href="mailto:sponsorships@infraconf.africa">Become a founding sponsor</a></li>
+          <li><a href={`${base}#sponsors`}>Sponsor tiers</a></li>
+          <li><a href="mailto:sponsorships@infraconf.africa">Become an anchor partner</a></li>
         </ul>
       </div>
 
       <div>
         <div class="footer__col-head">Community</div>
         <ul class="footer__links">
-          <li><a href="/blog">Blog</a></li>
-          <li><a href="/talks">Talks</a></li>
+          <li><a href={`${base}blog`}>Blog</a></li>
+          <li><a href={`${base}talks`}>Talks</a></li>
           <li><a href="mailto:hello@infraconf.africa">Get in touch</a></li>
           <li><a href="https://icafrica.github.io/theinfra/" target="_blank" rel="noopener">theinfra ↗</a></li>
         </ul>

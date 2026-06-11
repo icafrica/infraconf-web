@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Your InfraConf Africa 2026 Pass</title>
+  <style>
+    /* Global styles reset for email clients */
+    body, table, td, a { -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; }
+    table, td { mso-table-lspace: 0pt; mso-table-rspace: 0pt; }
+    img { -ms-interpolation-mode: bicubic; }
+
+    /* RESET STYLES */
+    img { border: 0; height: auto; line-height: 100%; outline: none; text-decoration: none; }
+    table { border-collapse: collapse !important; }
+    body { height: 100% !important; margin: 0 !important; padding: 0 !important; width: 100% !important; }
+
+    /* Custom styles */
+    body {
+      background-color: #0F2B1F;
+      font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      color: #F4FBF7;
+    }
+
+    /* Ticket Container */
+    .ticket-container {
+      max-width: 600px;
+      margin: 40px auto;
+      padding: 0 20px;
+    }
+
+    /* Outer Ticket Frame */
+    .ticket-frame {
+      background-color: #1D4C37;
+      border: 1px solid #2A5C43;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+    }
+
+    /* Geometric Header */
+    .ticket-header {
+      background-color: #0F2B1F;
+      padding: 24px;
+      border-bottom: 1px dashed #2A5C43;
+      position: relative;
+      text-align: center;
+    }
+
+    /* Semi-circle ticket cutouts */
+    .ticket-header::before, .ticket-header::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      width: 20px;
+      height: 20px;
+      background-color: #0F2B1F;
+      border-radius: 50%;
+      border: 1px solid #2A5C43;
+      z-index: 10;
+    }
+    .ticket-header::before { left: -11px; }
+    .ticket-header::after { right: -11px; }
+
+    /* Ticket Body */
+    .ticket-body {
+      padding: 32px 24px;
+    }
+
+    .brand-title {
+      font-family: 'DM Serif Display', Georgia, serif;
+      font-size: 24px;
+      color: #7FFFC5;
+      font-style: italic;
+      margin: 0;
+      letter-spacing: -0.02em;
+    }
+
+    .brand-sub {
+      font-family: 'DM Mono', monospace;
+      font-size: 11px;
+      color: #FFFFFF;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-top: 4px;
+    }
+
+    .ticket-status {
+      display: inline-block;
+      font-family: 'DM Mono', monospace;
+      font-size: 9px;
+      color: #7FFFC5;
+      border: 1px solid rgba(127, 255, 197, 0.3);
+      padding: 4px 10px;
+      border-radius: 2px;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-top: 16px;
+    }
+
+    .pass-details-table {
+      width: 100%;
+      margin-top: 24px;
+      margin-bottom: 24px;
+    }
+
+    .pass-details-table td {
+      padding: 12px 0;
+      vertical-align: top;
+      border-bottom: 1px solid rgba(74, 122, 99, 0.2);
+    }
+
+    .detail-label {
+      font-family: 'DM Mono', monospace;
+      font-size: 10px;
+      color: #4A7A63;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .detail-val {
+      font-size: 15px;
+      color: #FFFFFF;
+      font-weight: 500;
+      margin-top: 4px;
+    }
+
+    .detail-val--accent {
+      color: #7FFFC5;
+      font-family: 'DM Mono', monospace;
+      font-size: 16px;
+      font-weight: 600;
+    }
+
+    /* SVG Art classes for email compatibility */
+    .infraconf-art-svg {
+      width: 100%;
+      height: auto;
+      display: block;
+      margin: 20px auto;
+    }
+    .m-stroke { stroke: rgba(127, 255, 197, 0.4); stroke-width: 1.5px; }
+    .m-fill { fill: rgba(127, 255, 197, 0.15); }
+    .a-stroke { stroke: rgba(232, 160, 48, 0.4); stroke-width: 1.5px; }
+    .a-fill { fill: rgba(232, 160, 48, 0.2); }
+    .d-fill { fill: rgba(15, 43, 31, 0.8); }
+    .bg-card { fill: rgba(15, 43, 31, 0.5); stroke: rgba(42, 92, 67, 0.3); stroke-width: 1px; }
+
+    /* Ticket Footer Info */
+    .ticket-footer {
+      background-color: rgba(15, 43, 31, 0.5);
+      padding: 24px;
+      text-align: center;
+      border-top: 1px solid #2A5C43;
+    }
+
+    /* Action Buttons */
+    .btn {
+      display: block;
+      text-align: center;
+      background-color: #7FFFC5;
+      color: #1D4C37;
+      padding: 14px 24px;
+      font-size: 14px;
+      font-weight: 600;
+      text-decoration: none;
+      border-radius: 2px;
+      margin: 16px 0;
+      transition: background-color 0.2s;
+    }
+    .btn:hover {
+      background-color: #5de8ab;
+    }
+
+    .btn-secondary {
+      background-color: transparent;
+      color: #7FFFC5;
+      border: 1px solid rgba(127, 255, 197, 0.4);
+      margin-top: 8px;
+    }
+    .btn-secondary:hover {
+      border-color: #7FFFC5;
+      background-color: rgba(127, 255, 197, 0.05);
+    }
+
+    .footer-note {
+      font-size: 12px;
+      color: #4A7A63;
+      line-height: 1.6;
+      margin-top: 24px;
+      text-align: center;
+    }
+
+    .footer-note a {
+      color: #7FFFC5;
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="ticket-container">
+    
+    <!-- Ticket Card -->
+    <div class="ticket-frame">
+      
+      <!-- Top Section -->
+      <div class="ticket-header">
+        <table width="100%" cellpadding="0" cellspacing="0" border="0">
+          <tr>
+            <td align="center">
+              <!-- Inline logo approximation -->
+              <div style="font-size: 28px; color: #7FFFC5; line-height: 1; font-weight: bold; margin-bottom: 8px;">▲</div>
+              <h1 class="brand-title">infraconf</h1>
+              <div class="brand-sub">africa · 2026</div>
+              <div class="ticket-status">Access Granted</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+
+      <!-- Main Section -->
+      <div class="ticket-body">
+        <p style="font-size: 14px; color: rgba(255,255,255,0.7); line-height: 1.6; margin: 0 0 20px 0;">
+          Congratulations! Your application has been reviewed and approved. Here is your access pass for Africa's first conference dedicated strictly to infrastructure engineering.
+        </p>
+
+        <table class="pass-details-table" cellpadding="0" cellspacing="0" border="0">
+          <tr>
+            <td width="50%">
+              <div class="detail-label">Attendee</div>
+              <div class="detail-val" id="attendee-name">{{name}}</div>
+            </td>
+            <td width="50%">
+              <div class="detail-label">Pass ID</div>
+              <div class="detail-val detail-val--accent" id="pass-id">{{pass_id}}</div>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <div class="detail-label">Role</div>
+              <div class="detail-val" id="attendee-role">{{role}}</div>
+            </td>
+            <td>
+              <div class="detail-label">Company</div>
+              <div class="detail-val" id="attendee-company">{{company}}</div>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <div class="detail-label">Location</div>
+              <div class="detail-val" id="attendee-country">{{country}}</div>
+            </td>
+            <td>
+              <div class="detail-label">Status</div>
+              <div class="detail-val" style="color: #7FFFC5;">Access Granted</div>
+            </td>
+          </tr>
+          <tr>
+            <td colspan="2" style="border-bottom: none; padding-top: 16px;">
+              <div class="detail-label">Selected Tracks</div>
+              <div class="detail-val" style="font-size: 13px; color: rgba(255,255,255,0.85); line-height: 1.5; margin-top: 6px;">
+                {{tracks}}
+              </div>
+            </td>
+          </tr>
+        </table>
+
+        <!-- SVG Typographic Artwork Watermark -->
+        <svg
+          class="infraconf-art-svg"
+          viewBox="0 0 510 320"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <!-- Background circuit paths for visual depth -->
+          <g class="circuit-paths" opacity="0.15">
+            <path class="circuit-flow" d="M 10 45 h 490 M 10 153 h 490 M 10 261 h 490" stroke="rgba(127, 255, 197, 0.4)" stroke-width="1" />
+            <path class="circuit-flow" d="M 35 10 v 300 M 120 10 v 300 M 205 10 v 300 M 290 10 v 300 M 375 10 v 300 M 460 10 v 300" stroke="rgba(127, 255, 197, 0.4)" stroke-width="0.8" />
+          </g>
+
+          <!-- ROW 1: INFRA -->
+          <g class="letter">
+            <rect x="25" y="0" width="20" height="90" rx="2" class="d-fill m-stroke" />
+            <polygon points="35,10 42,17 35,24 28,17" class="a-fill" />
+            <polygon points="35,32 42,39 35,46 28,39" class="m-fill" />
+            <polygon points="35,54 42,61 35,68 28,61" class="a-fill" />
+            <polygon points="35,76 42,83 35,90 28,83" class="m-fill" />
+          </g>
+          <g class="letter">
+            <rect x="90" y="0" width="15" height="90" rx="2" class="d-fill m-stroke" />
+            <rect x="140" y="0" width="15" height="90" rx="2" class="d-fill m-stroke" />
+            <polygon points="105,0 140,90 128,90 90,0" class="a-fill" />
+          </g>
+          <g class="letter">
+            <rect x="175" y="0" width="15" height="90" rx="2" class="d-fill m-stroke" />
+            <rect x="190" y="0" width="45" height="15" rx="2" class="a-fill" />
+            <rect x="190" y="32" width="35" height="15" rx="2" class="d-fill m-stroke" />
+          </g>
+          <g class="letter">
+            <rect x="260" y="0" width="15" height="90" rx="2" class="d-fill m-stroke" />
+            <path d="M 275,0 h 30 c 12,0 20,8 20,20 s -8,20 -20,20 h -30 z" class="d-fill m-stroke" />
+            <polygon points="285,40 320,90 305,90 275,40" class="a-fill" />
+          </g>
+          <g class="letter">
+            <polygon points="345,90 375,0 360,0 340,90" class="d-fill m-stroke" />
+            <polygon points="375,0 405,90 390,90 365,0" class="a-fill" />
+            <rect x="355" y="50" width="30" height="12" rx="2" class="d-fill m-stroke" />
+          </g>
+          <g class="letter">
+            <polygon points="460,5 495,45 460,85 425,45" class="m-stroke" fill="none" />
+            <polygon points="460,18 482,45 460,72 438,45" class="a-stroke" fill="none" />
+            <polygon points="460,30 472,45 460,60 448,45" class="a-fill" />
+          </g>
+
+          <!-- ROW 2: CONF -->
+          <g class="letter">
+            <rect x="0" y="108" width="70" height="90" rx="4" class="bg-card" />
+            <rect x="5" y="146" width="60" height="14" rx="2" class="a-fill" />
+          </g>
+          <g class="letter">
+            <path d="M 145,126 h -35 c -12,0 -20,10 -20,35 s 8,35 20,35 h 35 v -15 h -30 c -5,0 -8,-6 -8,-20 s 3,-20 8,-20 h 30 z" class="a-fill" />
+          </g>
+          <g class="letter">
+            <path d="M 175,153 A 25,25 0 0,1 235,153" class="m-stroke" fill="none" />
+            <path d="M 175,153 A 25,25 0 0,0 235,153 h -12 A 13,13 0 0,1 187,153 z" class="d-fill m-stroke" />
+          </g>
+          <g class="letter">
+            <rect x="260" y="108" width="15" height="90" rx="2" class="d-fill m-stroke" />
+            <rect x="310" y="108" width="15" height="90" rx="2" class="d-fill m-stroke" />
+            <polygon points="275,108 310,198 298,198 260,108" class="a-fill" />
+          </g>
+          <g class="letter">
+            <rect x="345" y="108" width="15" height="90" rx="2" class="d-fill m-stroke" />
+            <rect x="360" y="108" width="45" height="15" rx="2" class="a-fill" />
+            <rect x="360" y="140" width="35" height="15" rx="2" class="d-fill m-stroke" />
+          </g>
+          <g class="letter">
+            <circle cx="460" cy="153" r="18" class="a-fill" />
+            <circle cx="460" cy="153" r="6" class="d-fill" />
+          </g>
+
+          <!-- ROW 3: AFRICA -->
+          <g class="letter">
+            <polygon points="5,306 35,216 45,216 20,306" class="d-fill m-stroke" />
+            <polygon points="35,216 65,306 53,306 28,216" class="a-fill" />
+            <rect x="15" y="266" width="30" height="12" rx="2" class="d-fill m-stroke" />
+          </g>
+          <g class="letter">
+            <rect x="90" y="216" width="15" height="90" rx="2" class="d-fill m-stroke" />
+            <rect x="105" y="216" width="45" height="15" rx="2" class="a-fill" />
+            <rect x="105" y="248" width="35" height="15" rx="2" class="d-fill m-stroke" />
+          </g>
+          <g class="letter">
+            <rect x="175" y="216" width="15" height="90" rx="2" class="d-fill m-stroke" />
+            <path d="M 190,216 h 30 c 12,0 20,8 20,20 s -8,20 -20,20 h -30 z" class="d-fill m-stroke" />
+            <polygon points="200,256 235,306 220,306 190,256" class="a-fill" />
+          </g>
+          <g class="letter">
+            <rect x="280" y="216" width="20" height="90" rx="2" class="d-fill m-stroke" />
+            <polygon points="290,226 297,233 290,240 283,233" class="a-fill" />
+            <polygon points="290,248 297,255 290,262 283,255" class="m-fill" />
+            <polygon points="290,270 297,277 290,284 283,277" class="a-fill" />
+            <polygon points="290,292 297,299 290,306 283,299" class="m-fill" />
+          </g>
+          <g class="letter">
+            <path d="M 400,234 h -35 c -12,0 -20,10 -20,35 s 8,35 20,35 h 35 v -15 h -30 c -5,0 -8,-6 -8,-20 s 3,-20 8,-20 h 30 z" class="a-fill" />
+          </g>
+          <g class="letter">
+            <polygon points="430,306 460,216 470,216 445,306" class="d-fill m-stroke" />
+            <polygon points="460,216 490,306 478,306 453,216" class="a-fill" />
+            <rect x="440" y="266" width="30" height="12" rx="2" class="d-fill m-stroke" />
+          </g>
+        </svg>
+
+        <a href="{{calendar_link}}" class="btn" target="_blank">Add to Google Calendar</a>
+        <a href="{{discord_link}}" class="btn btn-secondary" target="_blank">Join Conference Discord</a>
+      </div>
+
+      <!-- Ticket Footer info -->
+      <div class="ticket-footer">
+        <div class="detail-label" style="margin-bottom: 8px;">Access Instruction</div>
+        <p style="font-size: 13px; color: rgba(255,255,255,0.6); line-height: 1.6; margin: 0;">
+          This virtual pass code is unique to you. Closer to the event, you will receive an invitation link to register on the streaming platform using your Pass ID.
+        </p>
+      </div>
+
+    </div>
+
+    <!-- Email Footer -->
+    <div class="footer-note">
+      This email was sent to {{email}} because you submitted an application for InfraConf Africa 2026.<br>
+      Have questions or need to make changes? Reach out to us at <a href="mailto:hello@infraconf.africa">hello@infraconf.africa</a>
+    </div>
+
+  </div>
+
+</body>
+</html>

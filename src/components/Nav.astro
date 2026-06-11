@@ -1,12 +1,14 @@
 ---
 import Logo from './Logo.astro';
 
+const base = import.meta.env.BASE_URL;
+
 const navLinks = [
-  { href: '/#tracks',          label: 'Tracks' },
-  { href: '/#programme',       label: 'Programme' },
-  { href: '/#sponsors',        label: 'Sponsors' },
-  { href: '/blog',             label: 'Blog' },
-  { href: '/code-of-conduct',  label: 'CoC' },
+  { href: `${base}#tracks`,          label: 'Tracks' },
+  { href: `${base}#programme`,       label: 'Programme' },
+  { href: `${base}#sponsors`,        label: 'Sponsors' },
+  { href: `${base}blog`,             label: 'Blog' },
+  { href: `${base}code-of-conduct`,  label: 'CoC' },
 ];
 
 const pathname = Astro.url.pathname;
@@ -16,7 +18,7 @@ const pathname = Astro.url.pathname;
   <div class="container">
     <div class="nav__inner">
       <!-- Logo -->
-      <a href="/" class="nav__logo" aria-label="InfraConf Africa home">
+      <a href={base} class="nav__logo" aria-label="InfraConf Africa home">
         <Logo size={28} variant="dark" />
         <div>
           <div class="nav__name">

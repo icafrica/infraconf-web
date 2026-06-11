@@ -6,20 +6,29 @@
   <div class="container">
     <div class="section__header">
       <span class="label label--light">04 — CFP</span>
-      <hr class="rule-forest">
+      <hr class="rule-forest" />
       <h2 class="label label--light" id="cfp-heading">Call for papers</h2>
     </div>
 
     <div class="grid-12 reveal">
       <div style="grid-column: 1 / 7;">
-        <h2 class="heading-1 text-white" style="margin-bottom: var(--space-md);">
-          We want<br>
-          <em class="text-mint" style="font-family:var(--serif); font-style:italic;">practitioners.</em>
+        <h2
+          class="heading-1 text-white"
+          style="margin-bottom: var(--space-md);"
+        >
+          We want<br />
+          <em
+            class="text-mint"
+            style="font-family:var(--serif); font-style:italic;"
+            >practitioners.</em
+          >
         </h2>
-        <p style="font-size:1rem; font-weight:300; color:rgba(255,255,255,0.5); line-height:1.75; max-width:44ch;">
-          People who have done the work, hit the walls, found the solutions,
-          and can share those lessons in a concrete, actionable way. You do not
-          need to be famous. You need to have something real to say.
+        <p
+          style="font-size:1rem; font-weight:300; color:rgba(255,255,255,0.5); line-height:1.75; max-width:44ch;"
+        >
+          People who have done the work, hit the walls, found the solutions, and
+          can share those lessons in a concrete, actionable way. You do not need
+          to be famous. You need to have something real to say.
         </p>
 
         <div class="cfp__timeline">
@@ -33,7 +42,7 @@
           </div>
           <div class="cfp__row">
             <span>Notifications</span>
-            <span class="cfp__date">August 22, 2026</span>
+            <span class="cfp__date">September 15, 2026</span>
           </div>
           <div class="cfp__row">
             <span>Submit via</span>
@@ -44,7 +53,12 @@
 
       <div style="grid-column: 8 / 13;">
         <div class="cfp__card">
-          <div class="label label--light" style="margin-bottom:var(--space-xs);">We especially want</div>
+          <div
+            class="label label--light"
+            style="margin-bottom:var(--space-xs);"
+          >
+            We especially want
+          </div>
           <ul class="cfp__list">
             <li>First-time speakers — we actively support you</li>
             <li>Africa-based engineers with local infra stories</li>
@@ -53,20 +67,44 @@
             <li>Open-source contributors and maintainers</li>
           </ul>
 
-          <div style="height:1px; background:var(--mid); margin:var(--space-sm) 0;"></div>
+          <div
+            style="height:1px; background:var(--mid); margin:var(--space-sm) 0;"
+          >
+          </div>
 
-          <div class="label" style="margin-bottom:var(--space-xs); color:rgba(255,100,100,0.6);">We will decline</div>
+          <div
+            class="label"
+            style="margin-bottom:var(--space-xs); color:rgba(255,100,100,0.6);"
+          >
+            We will decline
+          </div>
           <ul class="cfp__list cfp__list--decline">
             <li>Vendor sales pitches disguised as talks</li>
             <li>Talks with no concrete takeaways</li>
             <li>General intro content without depth</li>
           </ul>
 
-          <a href="https://sessionize.com/infraconf-africa-2026/" class="btn btn--primary" style="margin-top:var(--space-md); width:100%; justify-content:center;" target="_blank" rel="noopener">
+          <a
+            href="https://sessionize.com/infraconf-africa-2026/"
+            class="btn btn--primary"
+            style="margin-top:var(--space-md); width:100%; justify-content:center;"
+            target="_blank"
+            rel="noopener"
+          >
             Submit your talk
-            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
-              <path d="M2 7h10M7 2l5 5-5 5" stroke="currentColor" stroke-width="1.5"
-                    stroke-linecap="round" stroke-linejoin="round"/>
+            <svg
+              width="14"
+              height="14"
+              viewBox="0 0 14 14"
+              fill="none"
+              aria-hidden="true"
+            >
+              <path
+                d="M2 7h10M7 2l5 5-5 5"
+                stroke="currentColor"
+                stroke-width="1.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"></path>
             </svg>
           </a>
         </div>
@@ -92,7 +130,7 @@
     justify-content: space-between;
     align-items: center;
     font-size: 0.9rem;
-    color: rgba(255,255,255,0.7);
+    color: rgba(255, 255, 255, 0.7);
   }
 
   .cfp__date {
@@ -121,23 +159,32 @@
     grid-template-columns: 16px 1fr;
     gap: 10px;
     font-size: 0.875rem;
-    color: rgba(255,255,255,0.65);
+    color: rgba(255, 255, 255, 0.65);
     font-weight: 300;
     line-height: 1.45;
   }
   .cfp__list li::before {
-    content: '—';
+    content: "—";
     font-family: var(--mono);
     color: var(--mint);
     font-size: 0.7rem;
     padding-top: 2px;
   }
 
-  .cfp__list--decline li { color: rgba(255,255,255,0.3); }
-  .cfp__list--decline li::before { content: '×'; color: rgba(255,100,100,0.4); }
+  .cfp__list--decline li {
+    color: rgba(255, 255, 255, 0.3);
+  }
+  .cfp__list--decline li::before {
+    content: "×";
+    color: rgba(255, 100, 100, 0.4);
+  }
 
   @media (max-width: 900px) {
-    .grid-12 > div:first-child { grid-column: 1 / -1 !important; }
-    .grid-12 > div:last-child  { grid-column: 1 / -1 !important; }
+    .grid-12 > div:first-child {
+      grid-column: 1 / -1 !important;
+    }
+    .grid-12 > div:last-child {
+      grid-column: 1 / -1 !important;
+    }
   }
 </style>

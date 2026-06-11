@@ -1,5 +1,6 @@
 ---
 // Hero section component
+const base = import.meta.env.BASE_URL;
 ---
 
 <header class="hero" role="banner">
@@ -58,7 +59,7 @@
                     stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
           </a>
-          <a href="mailto:hello@infraconf.africa?subject=InfraConf Africa 2026 — Notify me" class="btn btn--ghost">Get notified</a>
+          <a href={`${base}register`} class="btn btn--ghost">Apply for a pass</a>
         </div>
       </div>
 
@@ -71,10 +72,6 @@
         <div class="hero__meta-item">
           <div class="label label--light">Format</div>
           <div class="hero__meta-val">Fully virtual</div>
-        </div>
-        <div class="hero__meta-item">
-          <div class="label label--light">Tracks</div>
-          <div class="hero__meta-val">6 tracks</div>
         </div>
         <div class="hero__meta-item">
           <div class="label label--light">CFP closes</div>
@@ -102,10 +99,6 @@
       <div class="hero__stat">
         <div class="hero__stat-num" style="color:var(--amber);">0</div>
         <div class="hero__stat-desc">Dedicated infra conferences in Africa — until now</div>
-      </div>
-      <div class="hero__stat">
-        <div class="hero__stat-num">12<span style="font-size:1rem; opacity:0.5;">–16</span></div>
-        <div class="hero__stat-desc">Talks across 6 tracks</div>
       </div>
       <div class="hero__stat">
         <div class="hero__stat-num">1<span style="font-size:1rem; color:var(--amber)">st</span></div>
