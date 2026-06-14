@@ -13,11 +13,19 @@ interface Props {
 const {
   title,
   description = "Africa's first virtual conference dedicated strictly to infrastructure engineering — platform engineering, DevOps, SRE, and cloud infrastructure.",
-  ogImage = '/og-image.png',
+  ogImage,
   noIndex = false,
 } = Astro.props;
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+
+// og:image must be an absolute URL for social crawlers (Twitter, LinkedIn, Slack).
+// Build it from Astro.site so it resolves correctly regardless of base path.
+const siteOrigin = Astro.site ? Astro.site.origin : 'https://infraconf.africa';
+const baseNoTrail = base.replace(/\/$/, '');
+const ogImageAbsolute = ogImage
+  ? (ogImage.startsWith('http') ? ogImage : `${siteOrigin}${baseNoTrail}/${ogImage.replace(/^\//, '')}`)
+  : `${siteOrigin}${baseNoTrail}/og-image.png`;
 ---
 
 <!doctype html>
@@ -39,7 +47,9 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
   <meta property="og:url" content={canonicalURL} />
   <meta property="og:title" content={title} />
   <meta property="og:description" content={description} />
-  <meta property="og:image" content={ogImage} />
+  <meta property="og:image" content={ogImageAbsolute} />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
   <meta property="og:site_name" content="InfraConf Africa" />
 
   <!-- Twitter Card -->
@@ -47,7 +57,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
   <meta name="twitter:site" content="@infraconfafrica" />
   <meta name="twitter:title" content={title} />
   <meta name="twitter:description" content={description} />
-  <meta name="twitter:image" content={ogImage} />
+  <meta name="twitter:image" content={ogImageAbsolute} />
 
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
