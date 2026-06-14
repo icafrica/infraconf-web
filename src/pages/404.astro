@@ -1,0 +1,186 @@
+---
+// src/pages/404.astro
+// This page serves two purposes:
+// 1. GitHub Pages routing fix – GitHub Pages serves this for every unmatched URL.
+//    The script below captures the current URL, converts it to a query param, and
+//    redirects to the root so the app can restore the correct path.
+// 2. Cloudflare Pages / genuine 404 – shows a friendly "page not found" UI.
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Page Not Found – InfraConf Africa</title>
+    <meta name="robots" content="noindex" />
+    <style>
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      :root {
+        --bg: #0d1117;
+        --surface: #161b22;
+        --border: #30363d;
+        --accent: #58a6ff;
+        --text: #e6edf3;
+        --muted: #8b949e;
+      }
+
+      html,
+      body {
+        height: 100%;
+      }
+
+      body {
+        background: var(--bg);
+        color: var(--text);
+        font-family:
+          'Inter',
+          system-ui,
+          -apple-system,
+          sans-serif;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 100vh;
+        padding: 2rem;
+      }
+
+      .container {
+        text-align: center;
+        max-width: 480px;
+      }
+
+      .code {
+        font-size: 7rem;
+        font-weight: 800;
+        line-height: 1;
+        background: linear-gradient(135deg, #58a6ff 0%, #bc8cff 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        margin-bottom: 1rem;
+      }
+
+      h1 {
+        font-size: 1.5rem;
+        font-weight: 600;
+        margin-bottom: 0.75rem;
+      }
+
+      p {
+        color: var(--muted);
+        line-height: 1.6;
+        margin-bottom: 2rem;
+      }
+
+      .actions {
+        display: flex;
+        gap: 0.75rem;
+        justify-content: center;
+        flex-wrap: wrap;
+      }
+
+      a {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.4rem;
+        padding: 0.6rem 1.25rem;
+        border-radius: 0.5rem;
+        font-size: 0.9rem;
+        font-weight: 500;
+        text-decoration: none;
+        transition: opacity 0.2s;
+      }
+
+      a:hover {
+        opacity: 0.8;
+      }
+
+      .btn-primary {
+        background: var(--accent);
+        color: #0d1117;
+      }
+
+      .btn-secondary {
+        background: transparent;
+        border: 1px solid var(--border);
+        color: var(--text);
+      }
+
+      #redirect-notice {
+        margin-top: 1.5rem;
+        font-size: 0.8rem;
+        color: var(--muted);
+        display: none;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="code">404</div>
+      <h1>Page not found</h1>
+      <p>
+        The page you're looking for doesn't exist or may have been moved.
+      </p>
+      <div class="actions">
+        <a href="/" class="btn-primary">← Go home</a>
+        <a href="/blog" class="btn-secondary">Browse blog</a>
+      </div>
+      <p id="redirect-notice">Redirecting you to the right place…</p>
+    </div>
+
+    <!--
+      GitHub Pages SPA routing fix.
+      When GitHub Pages can't find a file it serves this 404.html instead.
+      We detect that case (path is not literally "/404") and bounce the user
+      back to the root, encoding the original URL so the app can restore it.
+
+      Pattern inspired by: https://github.com/rafgraph/spa-github-pages
+    -->
+    <script>
+      (function () {
+        // Only run the redirect trick when GitHub Pages served us for an unknown path.
+        // If the user actually navigated to /404, do nothing.
+        var location = window.location;
+        var pathname = location.pathname;
+
+        // Skip if we're genuinely on /404
+        if (pathname === '/404' || pathname === '/404/') return;
+
+        // Skip if running locally (not on github.io or the custom domain via GH Pages)
+        // We detect this by checking if there's an actual path that's not the homepage.
+        if (pathname === '/' || pathname === '') return;
+
+        // Show the redirect notice so the user knows what's happening
+        var notice = document.getElementById('redirect-notice');
+        if (notice) notice.style.display = 'block';
+
+        // Encode the full intended URL as a query param and redirect to root.
+        // index.astro's inline script (added separately) will decode and push
+        // the correct history entry so back-navigation works.
+        var segmentCount = 0; // no base path since we're on a custom domain
+        var query =
+          '?p=' +
+          encodeURIComponent(
+            '/' +
+              pathname
+                .slice(1)
+                .split('/')
+                .slice(segmentCount)
+                .join('/'),
+          ) +
+          (location.search ? '&q=' + encodeURIComponent(location.search.slice(1)) : '') +
+          location.hash;
+
+        location.replace(location.protocol + '//' + location.host + '/' + query);
+      })();
+    </script>
+  </body>
+</html>
