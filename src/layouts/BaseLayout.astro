@@ -20,8 +20,9 @@ const {
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 
 // og:image must be an absolute URL for social crawlers (Twitter, LinkedIn, Slack).
-// Build it from Astro.site so it resolves correctly regardless of base path.
-const siteOrigin = Astro.site ? Astro.site.origin : 'https://infraconf.africa';
+// Use canonicalURL.origin so it matches whatever host Astro was built for
+// (https://icafrica.github.io when --site is set, https://infraconf.africa otherwise).
+const siteOrigin = canonicalURL.origin;
 const baseNoTrail = base.replace(/\/$/, '');
 const ogImageAbsolute = ogImage
   ? (ogImage.startsWith('http') ? ogImage : `${siteOrigin}${baseNoTrail}/${ogImage.replace(/^\//, '')}`)

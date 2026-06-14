@@ -85,19 +85,28 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
 
   <Footer />
 
-  {/* GitHub Pages SPA routing – restore path from 404 redirect */}
-  <script>
+  {/* GitHub Pages deep-link fix – the 404.astro page redirects to here with ?p=/intended/path */}
+  <script define:vars={{ base: base.replace(/\/?$/, '/') }}>
     (function () {
       var search = window.location.search;
       if (!search) return;
       var params = new URLSearchParams(search);
       var p = params.get('p');
       if (!p) return;
+
+      // Build the full intended URL: base + sub-path (strip leading slash from p to avoid double-slash)
+      var baseNoTrail = base.replace(/\/$/, '');
+      var subPath = p.replace(/^\//, '');
+      var targetUrl = window.location.protocol + '//' + window.location.host
+        + baseNoTrail + '/' + subPath;
+
+      // Add back query string and hash if present
       var q = params.get('q');
-      var hash = window.location.hash;
-      // Reconstruct the intended URL and replace the current history entry
-      var newUrl = p + (q ? '?' + q : '') + (hash || '');
-      window.history.replaceState(null, '', newUrl);
+      if (q) targetUrl += '?' + q;
+      targetUrl += window.location.hash;
+
+      // Navigate to the actual pre-rendered page (not just a history trick)
+      window.location.replace(targetUrl);
     })();
   </script>
 </BaseLayout>
