@@ -1,4 +1,4 @@
 # Cloudflare Pages – static Astro site routing
 # Astro SSG generates individual HTML files per route, so direct file access works.
-# The catch-all below serves a 404 page for truly unknown URLs.
-/404 404
+# Catch-all 404 fallback for any URL that doesn't match a real file.
+/* /404.html 404
