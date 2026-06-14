@@ -101,6 +101,6 @@ They applied.
 
 ---
 
-*InfraConf Africa 2026 — Fully virtual. November 2026. Free to attend.*
+*InfraConf Africa 2026 — Fully virtual. 21 November 2026. Free to attend.*
 
 *[Submit your talk →](https://sessionize.com/infraconf-africa-2026/)*

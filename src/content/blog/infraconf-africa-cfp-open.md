@@ -1,6 +1,6 @@
 ---
 title: "InfraConf Africa is Live — CFP Now Open"
-description: "We're thrilled to announce that InfraConf Africa 2026 is official. Africa's first dedicated infrastructure engineering conference. Virtual. Free. November 2026."
+description: "We're thrilled to announce that InfraConf Africa 2026 is official. Africa's first dedicated infrastructure engineering conference. Virtual. Free. 21 November 2026."
 pubDate: 2026-06-01
 author: "InfraConf Africa Team"
 tags: ["announcement", "cfp", "community"]

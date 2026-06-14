@@ -42,4 +42,4 @@ If you've built for these constraints, we want to hear from you. Not the theory 
 
 ---
 
-*InfraConf Africa 2026 — Virtual, November 2026. Free to attend.*
+*InfraConf Africa 2026 — Virtual, 21 November 2026. Free to attend.*
