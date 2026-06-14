@@ -67,13 +67,13 @@ jobs:
         run: ${{ steps.detect-package-manager.outputs.manager }} ${{ steps.detect-package-manager.outputs.command }}
         working-directory: ${{ env.BUILD_PATH }}
       - name: Build with Astro
-        # Do NOT pass --site or --base from configure-pages when using a custom domain.
-        # Astro reads the correct site (https://infraconf.africa) from astro.config.mjs.
-        run: ${{ steps.detect-package-manager.outputs.runner }} astro build
+        # configure-pages reads GitHub Pages settings (incl. custom domain) and outputs
+        # the correct --site and --base so CSS/JS asset paths resolve on the live URL.
+        run: |
+          ${{ steps.detect-package-manager.outputs.runner }} astro build \
+            --site "${{ steps.pages.outputs.origin }}" \
+            --base "${{ steps.pages.outputs.base_path }}"
         working-directory: ${{ env.BUILD_PATH }}
-      - name: Create CNAME for custom domain
-        # Preserves the custom domain mapping so GitHub Pages doesn't reset it on deploy.
-        run: echo "infraconf.africa" > ${{ env.BUILD_PATH }}/dist/CNAME
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
