@@ -1,10 +1,10 @@
 ---
 // src/pages/404.astro
-// This page serves two purposes:
-// 1. GitHub Pages routing fix – GitHub Pages serves this for every unmatched URL.
-//    The script below captures the current URL, converts it to a query param, and
-//    redirects to the root so the app can restore the correct path.
+// 1. GitHub Pages deep-link fix – GitHub Pages serves this for every unmatched URL.
+//    The script bounces the user back to the base root with ?p= so index.astro
+//    can restore the correct path via history.replaceState.
 // 2. Cloudflare Pages / genuine 404 – shows a friendly "page not found" UI.
+const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
 ---
 
 <!doctype html>
@@ -15,36 +15,22 @@
     <title>Page Not Found – InfraConf Africa</title>
     <meta name="robots" content="noindex" />
     <style>
-      *,
-      *::before,
-      *::after {
-        box-sizing: border-box;
-        margin: 0;
-        padding: 0;
-      }
+      *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
       :root {
         --bg: #0d1117;
-        --surface: #161b22;
         --border: #30363d;
         --accent: #58a6ff;
         --text: #e6edf3;
         --muted: #8b949e;
       }
 
-      html,
-      body {
-        height: 100%;
-      }
+      html, body { height: 100%; }
 
       body {
         background: var(--bg);
         color: var(--text);
-        font-family:
-          'Inter',
-          system-ui,
-          -apple-system,
-          sans-serif;
+        font-family: 'Inter', system-ui, -apple-system, sans-serif;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -52,10 +38,7 @@
         padding: 2rem;
       }
 
-      .container {
-        text-align: center;
-        max-width: 480px;
-      }
+      .container { text-align: center; max-width: 480px; }
 
       .code {
         font-size: 7rem;
@@ -68,24 +51,10 @@
         margin-bottom: 1rem;
       }
 
-      h1 {
-        font-size: 1.5rem;
-        font-weight: 600;
-        margin-bottom: 0.75rem;
-      }
+      h1 { font-size: 1.5rem; font-weight: 600; margin-bottom: 0.75rem; }
+      p  { color: var(--muted); line-height: 1.6; margin-bottom: 2rem; }
 
-      p {
-        color: var(--muted);
-        line-height: 1.6;
-        margin-bottom: 2rem;
-      }
-
-      .actions {
-        display: flex;
-        gap: 0.75rem;
-        justify-content: center;
-        flex-wrap: wrap;
-      }
+      .actions { display: flex; gap: 0.75rem; justify-content: center; flex-wrap: wrap; }
 
       a {
         display: inline-flex;
@@ -98,88 +67,69 @@
         text-decoration: none;
         transition: opacity 0.2s;
       }
+      a:hover { opacity: 0.8; }
 
-      a:hover {
-        opacity: 0.8;
-      }
+      .btn-primary   { background: var(--accent); color: #0d1117; }
+      .btn-secondary { background: transparent; border: 1px solid var(--border); color: var(--text); }
 
-      .btn-primary {
-        background: var(--accent);
-        color: #0d1117;
-      }
-
-      .btn-secondary {
-        background: transparent;
-        border: 1px solid var(--border);
-        color: var(--text);
-      }
-
-      #redirect-notice {
-        margin-top: 1.5rem;
-        font-size: 0.8rem;
-        color: var(--muted);
-        display: none;
-      }
+      #redirect-notice { margin-top: 1.5rem; font-size: 0.8rem; color: var(--muted); display: none; }
     </style>
   </head>
   <body>
     <div class="container">
       <div class="code">404</div>
       <h1>Page not found</h1>
-      <p>
-        The page you're looking for doesn't exist or may have been moved.
-      </p>
+      <p>The page you're looking for doesn't exist or may have been moved.</p>
       <div class="actions">
-        <a href="/" class="btn-primary">← Go home</a>
-        <a href="/blog" class="btn-secondary">Browse blog</a>
+        <a href={base} class="btn-primary">← Go home</a>
+        <a href={`${base}blog`} class="btn-secondary">Browse blog</a>
       </div>
       <p id="redirect-notice">Redirecting you to the right place…</p>
     </div>
 
     <!--
-      GitHub Pages SPA routing fix.
-      When GitHub Pages can't find a file it serves this 404.html instead.
-      We detect that case (path is not literally "/404") and bounce the user
-      back to the root, encoding the original URL so the app can restore it.
-
-      Pattern inspired by: https://github.com/rafgraph/spa-github-pages
+      GitHub Pages deep-link fix.
+      When GH Pages can't find /infraconf-web/blog it serves this 404.html.
+      We strip the base prefix (/infraconf-web) from the pathname to get the
+      sub-path (/blog), then redirect to the base root with ?p=/blog so that
+      index.astro's restore script can do history.replaceState to /infraconf-web/blog.
     -->
-    <script>
+    <script define:vars={{ base }}>
       (function () {
-        // Only run the redirect trick when GitHub Pages served us for an unknown path.
-        // If the user actually navigated to /404, do nothing.
-        var location = window.location;
-        var pathname = location.pathname;
+        var loc      = window.location;
+        var pathname = loc.pathname;
 
-        // Skip if we're genuinely on /404
-        if (pathname === '/404' || pathname === '/404/') return;
+        // base without trailing slash, e.g. "/infraconf-web" or ""
+        var baseRoot = base.replace(/\/$/, '');
 
-        // Skip if running locally (not on github.io or the custom domain via GH Pages)
-        // We detect this by checking if there's an actual path that's not the homepage.
-        if (pathname === '/' || pathname === '') return;
+        // If we're literally on the /404 page, just show the UI
+        if (pathname === baseRoot + '/404' || pathname === baseRoot + '/404/') return;
 
-        // Show the redirect notice so the user knows what's happening
+        // Only redirect when the path starts with our base (i.e. we're on the right site)
+        var underBase = baseRoot === ''
+          ? (pathname !== '/' && pathname !== '')
+          : pathname.startsWith(baseRoot + '/') || pathname === baseRoot;
+
+        if (!underBase) return;
+
+        // Strip base to get the intended sub-path, e.g. /blog
+        var subPath = pathname.startsWith(baseRoot)
+          ? pathname.slice(baseRoot.length) || '/'
+          : pathname;
+        if (!subPath.startsWith('/')) subPath = '/' + subPath;
+
+        // Don't redirect for genuinely home-level paths
+        if (subPath === '/' || subPath === '') return;
+
         var notice = document.getElementById('redirect-notice');
         if (notice) notice.style.display = 'block';
 
-        // Encode the full intended URL as a query param and redirect to root.
-        // index.astro's inline script (added separately) will decode and push
-        // the correct history entry so back-navigation works.
-        var segmentCount = 0; // no base path since we're on a custom domain
-        var query =
-          '?p=' +
-          encodeURIComponent(
-            '/' +
-              pathname
-                .slice(1)
-                .split('/')
-                .slice(segmentCount)
-                .join('/'),
-          ) +
-          (location.search ? '&q=' + encodeURIComponent(location.search.slice(1)) : '') +
-          location.hash;
+        var query = '?p=' + encodeURIComponent(subPath)
+          + (loc.search ? '&q=' + encodeURIComponent(loc.search.slice(1)) : '')
+          + loc.hash;
 
-        location.replace(location.protocol + '//' + location.host + '/' + query);
+        // Go to the base root + query so index.astro can restore the path
+        loc.replace(loc.protocol + '//' + loc.host + baseRoot + '/' + query);
       })();
     </script>
   </body>

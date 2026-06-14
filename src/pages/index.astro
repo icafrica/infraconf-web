@@ -16,7 +16,7 @@ const recentPosts = allPosts
   .sort((a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime())
   .slice(0, 3);
 
-const base = import.meta.env.BASE_URL;
+const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
 ---
 
 <BaseLayout title="InfraConf Africa 2026 — Infrastructure Engineering Conference">
@@ -76,7 +76,7 @@ const base = import.meta.env.BASE_URL;
           <em>Attend free.</em>
         </h2>
         <div class="cta-band__actions">
-          <a href="/register" class="btn btn--forest">Apply for a pass</a>
+          <a href={`${base}register`} class="btn btn--forest">Apply for a pass</a>
           <a href="https://sessionize.com/infraconf-africa-2026/" class="btn btn--outline-forest" target="_blank" rel="noopener">Submit a talk</a>
         </div>
       </div>
