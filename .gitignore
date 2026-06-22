@@ -22,3 +22,5 @@ pnpm-debug.log*
 
 # jetbrains setting folder
 .idea/
+flyer-generator.html
+html2canvas.min.js

@@ -1,5 +1,5 @@
 ---
-// CFP Section
+const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
 ---
 
 <section class="section section--deep" id="cfp" aria-labelledby="cfp-heading">
@@ -46,7 +46,7 @@
           </div>
           <div class="cfp__row">
             <span>Submit via</span>
-            <span class="cfp__date">Sessionize</span>
+            <span class="cfp__date">Website Form</span>
           </div>
         </div>
       </div>
@@ -85,11 +85,9 @@
           </ul>
 
           <a
-            href="https://sessionize.com/infraconf-africa-2026/"
+            href={`${base}cfp`}
             class="btn btn--primary"
             style="margin-top:var(--space-md); width:100%; justify-content:center;"
-            target="_blank"
-            rel="noopener"
           >
             Submit your talk
             <svg

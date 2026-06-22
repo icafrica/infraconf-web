@@ -42,7 +42,7 @@ const pathname = Astro.url.pathname;
           </li>
         ))}
         <li>
-          <a href="https://sessionize.com/infraconf-africa-2026/" class="nav__cta" target="_blank" rel="noopener">Submit a talk</a>
+          <a href={`${base}cfp`} class="nav__cta">Submit a talk</a>
         </li>
       </ul>
 
@@ -59,7 +59,7 @@ const pathname = Astro.url.pathname;
       {navLinks.map(({ href, label }) => (
         <li><a href={href} class="nav__mobile-link">{label}</a></li>
       ))}
-      <li><a href="https://sessionize.com/infraconf-africa-2026/" class="btn btn--primary" style="margin-top:var(--space-sm); display:inline-flex;" target="_blank" rel="noopener">Submit a talk</a></li>
+      <li><a href={`${base}cfp`} class="btn btn--primary" style="margin-top:var(--space-sm); display:inline-flex;">Submit a talk</a></li>
     </ul>
   </div>
 </nav>

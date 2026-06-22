@@ -8,6 +8,7 @@ const allTalks = await getCollection('talks');
 const confirmedTalks = allTalks.filter(t => t.data.confirmed);
 
 const tracks = [...new Set(allTalks.map(t => t.data.track))].sort();
+const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
 ---
 
 <BaseLayout
@@ -25,16 +26,18 @@ const tracks = [...new Set(allTalks.map(t => t.data.track))].sort();
           Practitioner-level talks across 6 tracks. Deep technical content, no hype.
           Full programme confirmed after CFP closes August 15.
         </p>
-        <div style="display:flex; gap:var(--space-md); margin-top:var(--space-lg);">
-          <div>
-            <div style="font-family:var(--mono); font-size:2rem; color:var(--mint);">{confirmedTalks.length}</div>
-            <div style="font-size:0.8rem; color:rgba(255,255,255,0.4);">talks confirmed</div>
+        {confirmedTalks.length > 1 && (
+          <div style="display:flex; gap:var(--space-md); margin-top:var(--space-lg);">
+            <div>
+              <div style="font-family:var(--mono); font-size:2rem; color:var(--mint);">{confirmedTalks.length}</div>
+              <div style="font-size:0.8rem; color:rgba(255,255,255,0.4);">talks confirmed</div>
+            </div>
+            <div>
+              <div style="font-family:var(--mono); font-size:2rem; color:var(--amber);">{tracks.length}</div>
+              <div style="font-size:0.8rem; color:rgba(255,255,255,0.4);">tracks</div>
+            </div>
           </div>
-          <div>
-            <div style="font-family:var(--mono); font-size:2rem; color:var(--amber);">{tracks.length}</div>
-            <div style="font-size:0.8rem; color:rgba(255,255,255,0.4);">tracks</div>
-          </div>
-        </div>
+        )}
       </div>
     </header>
 
@@ -68,7 +71,7 @@ const tracks = [...new Set(allTalks.map(t => t.data.track))].sort();
           <div style="text-align:center; padding:var(--space-xl) 0; border:1px solid var(--rule);">
             <p class="heading-2" style="color:var(--muted); margin-bottom:var(--space-sm);">CFP is open</p>
             <p style="color:var(--muted); font-size:0.9rem; margin-bottom:var(--space-md);">Talks will be listed here once confirmed. CFP closes August 15, 2026.</p>
-            <a href="https://sessionize.com/infraconf-africa-2026/" class="btn btn--primary" target="_blank" rel="noopener">Submit your talk →</a>
+            <a href={`${base}cfp`} class="btn btn--primary">Submit your talk →</a>
           </div>
         )}
       </div>

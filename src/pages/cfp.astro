@@ -1,0 +1,702 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+import InfraConfAfricaArt from '../components/InfraConfAfricaArt.astro';
+
+// INSTRUCTIONS FOR DEVELOPER / ORGANISER:
+// 1. Create a Google Form with fields: Name, Email, Bio, Title, Description, Format, Track, Level, Previous Talks.
+// 2. Click "Get pre-filled link", enter test values, and hit submit.
+// 3. Inspect the form action URL and entry IDs from the pre-filled page source.
+// 4. Update the `formUrl` and the corresponding `entry.xxxx` keys inside the script tag below.
+
+const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
+---
+
+<BaseLayout title="Call for Speakers — InfraConf Africa 2026">
+  <Nav />
+
+  <!-- Nav spacer -->
+  <div style="height: 64px;"></div>
+
+  <section class="section section--dark cfp-section" aria-labelledby="cfp-title">
+    <!-- Geometric pattern overlay to match Hero styling -->
+    <div class="cfp-section__pattern" aria-hidden="true">
+      <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+        <pattern id="kente-cfp" x="0" y="0" width="60" height="60" patternUnits="userSpaceOnUse">
+          <rect x="0" y="0" width="60" height="4" fill="rgba(127,255,197,0.02)"/>
+          <rect x="0" y="28" width="60" height="4" fill="rgba(127,255,197,0.01)"/>
+          <rect x="0" y="0" width="4" height="60" fill="rgba(127,255,197,0.01)"/>
+          <rect x="12" y="12" width="8" height="8" transform="rotate(45 16 16)" fill="rgba(232,160,48,0.04)"/>
+        </pattern>
+        <rect width="100%" height="100%" fill="url(#kente-cfp)"/>
+      </svg>
+    </div>
+
+    <div class="container container--form">
+      <div class="cfp-header reveal">
+        <span class="label label--light">Call for Speakers</span>
+        <h1 class="heading-1 text-white" id="cfp-title" style="margin-top: 10px;">Submit Your Session</h1>
+        <p class="cfp-subtitle">
+          InfraConf Africa invites infrastructure engineers, platform architects, SREs, DevOps practitioners, security leads, and open-source maintainers to submit talks for our inaugural conference.
+        </p>
+      </div>
+
+      <div class="cfp-grid">
+        <!-- Sidebar: Themes & Guidelines -->
+        <div class="cfp-sidebar reveal">
+          <div class="cfp-info-card">
+            <h2 class="label label--light" style="margin-bottom:var(--space-sm);">Important Dates</h2>
+            <ul class="cfp-meta-list">
+              <li><strong>CFP Opens:</strong> July 1, 2026</li>
+              <li><strong>CFP Closes:</strong> August 15, 2026 (11:59 PM UTC+1)</li>
+              <li><strong>Event Date:</strong> November 21, 2026 (Online)</li>
+              <li><strong>Speaker Ticket:</strong> Free</li>
+            </ul>
+          </div>
+
+          <div class="cfp-info-card">
+            <h2 class="label label--light" style="margin-bottom:var(--space-sm);">Submission Guidelines</h2>
+            <ul class="cfp-guidelines-list">
+              <li>Sessions must be strictly technical, practical, and focused on infrastructure engineering.</li>
+              <li>Marketing, sales, or commercial product pitches will be declined.</li>
+              <li>Demos, real-world case studies, and hard-earned production lessons are highly preferred.</li>
+              <li>First-time speakers are actively welcomed and supported with slide review and dry-runs.</li>
+            </ul>
+          </div>
+          
+          <p style="font-size: 0.8rem; color: rgba(255,255,255,0.4); line-height: 1.6; font-family: var(--mono);">
+            Questions? Contact the program committee at <a href="mailto:hello@infraconf.africa" style="color: var(--mint); text-decoration: underline;">hello@infraconf.africa</a> or <a href="mailto:infraconfafrica@gmail.com" style="color: var(--mint); text-decoration: underline;">infraconfafrica@gmail.com</a>.
+          </p>
+        </div>
+
+        <!-- Main Submission Form -->
+        <div class="form-wrapper">
+          <div id="form-container" class="form-card reveal">
+            <form id="cfp-form" novalidate class="form-element">
+              
+              <!-- Speaker Info Heading -->
+              <h3 class="form-section-title">1. Speaker Profile</h3>
+              <div class="form-grid">
+                <div class="form-group">
+                  <label for="speaker-name" class="form-label">Full Name</label>
+                  <input 
+                    type="text" 
+                    id="speaker-name" 
+                    name="name" 
+                    required 
+                    autocomplete="name" 
+                    placeholder="e.g. Rasheed Taiwo" 
+                    class="form-input"
+                    aria-describedby="speaker-name-error"
+                  />
+                  <span class="form-error" id="speaker-name-error" aria-live="polite"></span>
+                </div>
+
+                <div class="form-group">
+                  <label for="speaker-email" class="form-label">Email Address</label>
+                  <input 
+                    type="email" 
+                    id="speaker-email" 
+                    name="email" 
+                    required 
+                    autocomplete="email" 
+                    placeholder="e.g. rasheed@infra.org" 
+                    class="form-input"
+                    aria-describedby="speaker-email-error"
+                  />
+                  <span class="form-error" id="speaker-email-error" aria-live="polite"></span>
+                </div>
+
+                <div class="form-group" style="grid-column: 1 / -1;">
+                  <label for="speaker-bio" class="form-label">Speaker Biography <span class="form-label-opt">(A short paragraph about your technical background)</span></label>
+                  <textarea 
+                    id="speaker-bio" 
+                    name="bio" 
+                    rows="3"
+                    placeholder="e.g. Platform Engineer focused on scalable Kubernetes ingress, open-source contributor, and builder of developer tools." 
+                    class="form-input form-input--textarea"
+                    required
+                    aria-describedby="speaker-bio-error"
+                  ></textarea>
+                  <span class="form-error" id="speaker-bio-error" aria-live="polite"></span>
+                </div>
+              </div>
+
+              <!-- Session Info Heading -->
+              <h3 class="form-section-title" style="margin-top:var(--space-md); border-top:1px solid var(--mid); padding-top:var(--space-md);">2. Session Details</h3>
+              <div class="form-grid">
+                <div class="form-group" style="grid-column: 1 / -1;">
+                  <label for="session-title" class="form-label">Session Title</label>
+                  <input 
+                    type="text" 
+                    id="session-title" 
+                    name="title" 
+                    required 
+                    placeholder="e.g. Scaling Database Clusters with Resilient Async Queues" 
+                    class="form-input"
+                    aria-describedby="session-title-error"
+                  />
+                  <span class="form-error" id="session-title-error" aria-live="polite"></span>
+                </div>
+
+                <div class="form-group" style="grid-column: 1 / -1;">
+                  <label for="session-desc" class="form-label">Session Description / Abstract <span class="form-label-opt">(Detail the technical core, lessons learned, and why engineers must attend)</span></label>
+                  <textarea 
+                    id="session-desc" 
+                    name="description" 
+                    rows="5"
+                    placeholder="Provide a detailed outline of your talk. Mention any live demos, tools used, and key takeaways." 
+                    class="form-input form-input--textarea"
+                    required
+                    aria-describedby="session-desc-error"
+                  ></textarea>
+                  <span class="form-error" id="session-desc-error" aria-live="polite"></span>
+                </div>
+
+                <div class="form-group">
+                  <label for="session-format" class="form-label">Talk Format</label>
+                  <select id="session-format" name="format" class="form-select" required>
+                    <option value="" disabled selected>Select talk duration/format</option>
+                    <option value="30-minute technical talk">30-minute Technical Talk</option>
+                    <option value="15-minute lightning talk">15-minute Lightning Talk</option>
+                    <option value="Hands-on workshop">Hands-on Technical Workshop</option>
+                    <option value="Case study presentation">Case Study Presentation</option>
+                  </select>
+                  <span class="form-error" id="session-format-error" aria-live="polite"></span>
+                </div>
+
+                <div class="form-group">
+                  <label for="session-track" class="form-label">Main Track</label>
+                  <select id="session-track" name="track" class="form-select" required>
+                    <option value="" disabled selected>Select matching theme/track</option>
+                    <option value="Platform Engineering & IDPs">Platform Engineering &amp; IDPs</option>
+                    <option value="Cloud Infrastructure & IaC">Cloud Infrastructure &amp; IaC</option>
+                    <option value="Kubernetes & Cloud Native Systems">Kubernetes &amp; Cloud Native</option>
+                    <option value="Reliability Engineering & SRE">Reliability Engineering &amp; SRE</option>
+                    <option value="Observability & Monitoring">Observability &amp; Monitoring</option>
+                    <option value="Infrastructure Security & Compliance">Infrastructure Security &amp; Compliance</option>
+                    <option value="AI Infrastructure & MLOps">AI Infrastructure &amp; MLOps</option>
+                    <option value="Building Infrastructure for African Scale">Infrastructure for African Scale</option>
+                  </select>
+                  <span class="form-error" id="session-track-error" aria-live="polite"></span>
+                </div>
+
+                <div class="form-group">
+                  <label for="session-level" class="form-label">Skill Level</label>
+                  <select id="session-level" name="level" class="form-select" required>
+                    <option value="" disabled selected>Select target depth</option>
+                    <option value="Beginner">Beginner (Introductory / High level)</option>
+                    <option value="Intermediate">Intermediate (Real-world usage / Implementation)</option>
+                    <option value="Advanced">Advanced (Deep technical / Internals / System level)</option>
+                  </select>
+                  <span class="form-error" id="session-level-error" aria-live="polite"></span>
+                </div>
+
+                <div class="form-group">
+                  <label for="session-links" class="form-label">Previous Talk Links <span class="form-label-opt">(Optional)</span></label>
+                  <input 
+                    type="text" 
+                    id="session-links" 
+                    name="links" 
+                    placeholder="e.g. Speaker profile, video links, or slide links" 
+                    class="form-input"
+                  />
+                </div>
+              </div>
+
+              <!-- Footer with Privacy Policy disclaimer -->
+              <div class="form-footer-wrapper">
+                <div class="form-footer">
+                  <button type="submit" class="btn btn--primary btn--submit" id="btn-submit">
+                    <span>Submit Session Proposal</span>
+                    <svg class="submit-arrow" width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+                      <path d="M2 7h10M7 2l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    <div class="submit-spinner" aria-hidden="true" hidden></div>
+                  </button>
+                </div>
+                <p class="form-disclaimer">
+                  By submitting a talk proposal, you agree to our <a href={`${base}privacy`} class="form-privacy-link">Privacy Policy</a> and consent to having your name and bio published if selected.
+                </p>
+              </div>
+            </form>
+          </div>
+
+          <!-- Success Screen -->
+          <div id="success-container" class="form-card form-card--success" hidden>
+            <div class="success-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <polyline points="20 6 9 17 4 12" stroke-linecap="round" stroke-linejoin="round"></polyline>
+              </svg>
+            </div>
+            <span class="label label--light" style="color: var(--mint);">Submission Received</span>
+            <h2 class="heading-1 text-white" style="margin-top: 10px; margin-bottom: var(--space-sm);">Proposal Under Review</h2>
+            <p class="form-subtitle" style="max-width: 54ch; margin: 0 auto var(--space-md);">
+              Thank you for submitting, <strong id="success-speaker" class="text-mint"></strong>! Your proposal <em id="success-title" class="text-white"></em> is now in our program review queue. Organizing updates and notification decisions will be sent to <strong id="success-email" class="text-mint"></strong> on or before September 15, 2026.
+            </p>
+
+            <div class="success-actions">
+              <a href={base} class="btn btn--primary">Return Home</a>
+              <a href={`${base}talks`} class="btn btn--ghost">View other talks</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <Footer />
+</BaseLayout>
+
+<script>
+  const form = document.getElementById('cfp-form') as HTMLFormElement;
+  const formContainer = document.getElementById('form-container') as HTMLElement;
+  const successContainer = document.getElementById('success-container') as HTMLElement;
+  const submitBtn = document.getElementById('btn-submit') as HTMLButtonElement;
+  const successSpeaker = document.getElementById('success-speaker') as HTMLElement;
+  const successTitle = document.getElementById('success-title') as HTMLElement;
+  const successEmail = document.getElementById('success-email') as HTMLElement;
+
+  const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+
+  const validateField = (input: HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement, errorEl: HTMLElement) => {
+    if (!input.value.trim()) {
+      errorEl.textContent = 'This field is required.';
+      input.classList.add('form-input--invalid');
+      return false;
+    }
+    
+    if (input.type === 'email' && !emailRegex.test(input.value)) {
+      errorEl.textContent = 'Please enter a valid email address.';
+      input.classList.add('form-input--invalid');
+      return false;
+    }
+
+    errorEl.textContent = '';
+    input.classList.remove('form-input--invalid');
+    return true;
+  };
+
+  // Real-time validation
+  const speakerName = document.getElementById('speaker-name') as HTMLInputElement;
+  const speakerEmail = document.getElementById('speaker-email') as HTMLInputElement;
+  const speakerBio = document.getElementById('speaker-bio') as HTMLTextAreaElement;
+  const sessionTitle = document.getElementById('session-title') as HTMLInputElement;
+  const sessionDesc = document.getElementById('session-desc') as HTMLTextAreaElement;
+  const sessionFormat = document.getElementById('session-format') as HTMLSelectElement;
+  const sessionTrack = document.getElementById('session-track') as HTMLSelectElement;
+  const sessionLevel = document.getElementById('session-level') as HTMLSelectElement;
+
+  speakerName?.addEventListener('input', () => validateField(speakerName, document.getElementById('speaker-name-error')!));
+  speakerEmail?.addEventListener('input', () => validateField(speakerEmail, document.getElementById('speaker-email-error')!));
+  speakerBio?.addEventListener('input', () => validateField(speakerBio, document.getElementById('speaker-bio-error')!));
+  sessionTitle?.addEventListener('input', () => validateField(sessionTitle, document.getElementById('session-title-error')!));
+  sessionDesc?.addEventListener('input', () => validateField(sessionDesc, document.getElementById('session-desc-error')!));
+  sessionFormat?.addEventListener('change', () => validateField(sessionFormat, document.getElementById('session-format-error')!));
+  sessionTrack?.addEventListener('change', () => validateField(sessionTrack, document.getElementById('session-track-error')!));
+  sessionLevel?.addEventListener('change', () => validateField(sessionLevel, document.getElementById('session-level-error')!));
+
+  form?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    const isNameValid = validateField(speakerName, document.getElementById('speaker-name-error')!);
+    const isEmailValid = validateField(speakerEmail, document.getElementById('speaker-email-error')!);
+    const isBioValid = validateField(speakerBio, document.getElementById('speaker-bio-error')!);
+    const isTitleValid = validateField(sessionTitle, document.getElementById('session-title-error')!);
+    const isDescValid = validateField(sessionDesc, document.getElementById('session-desc-error')!);
+    const isFormatValid = validateField(sessionFormat, document.getElementById('session-format-error')!);
+    const isTrackValid = validateField(sessionTrack, document.getElementById('session-track-error')!);
+    const isLevelValid = validateField(sessionLevel, document.getElementById('session-level-error')!);
+
+    if (!isNameValid || !isEmailValid || !isBioValid || !isTitleValid || !isDescValid || !isFormatValid || !isTrackValid || !isLevelValid) {
+      const firstInvalid = document.querySelector('.form-input--invalid, .form-select.form-input--invalid, .form-input--textarea.form-input--invalid');
+      firstInvalid?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      return;
+    }
+
+    // Button loading state
+    const textSpan = submitBtn.querySelector('span')!;
+    const arrowSvg = submitBtn.querySelector('.submit-arrow') as HTMLElement;
+    const spinner = submitBtn.querySelector('.submit-spinner') as HTMLElement;
+
+    submitBtn.disabled = true;
+    textSpan.textContent = 'Submitting Proposal...';
+    arrowSvg.style.display = 'none';
+    spinner.removeAttribute('hidden');
+
+    const formData = {
+      name: speakerName.value.trim(),
+      email: speakerEmail.value.trim(),
+      bio: speakerBio.value.trim(),
+      title: sessionTitle.value.trim(),
+      description: sessionDesc.value.trim(),
+      format: sessionFormat.value,
+      track: sessionTrack.value,
+      level: sessionLevel.value,
+      links: (document.getElementById('session-links') as HTMLInputElement).value.trim(),
+      timestamp: new Date().toISOString()
+    };
+
+    // Save locally
+    try {
+      const proposals = JSON.parse(localStorage.getItem('infraconf_proposals') || '[]');
+      proposals.push(formData);
+      localStorage.setItem('infraconf_proposals', JSON.stringify(proposals));
+    } catch (err) {
+      console.error('LocalStorage backup error:', err);
+    }
+
+    // Connect to Google Form (organiser: swap with your form URL and field entry IDs)
+    const formUrl = 'https://docs.google.com/forms/u/2/d/17AWjIHCOnzfCEl6S_kSvDEqdVMOl7tZO8hn22D7lyls/formResponse';
+    const submissionBody = new URLSearchParams();
+
+    // Mapping fields. Organiser: replace entry keys below with your exact google form IDs
+    submissionBody.append('entry.1941203368', `CFP SPEAKER: ${formData.name}`);
+    submissionBody.append('entry.1253437776', formData.email);
+    submissionBody.append('entry.205482783', `CFP FORMAT: ${formData.format} | TRACK: ${formData.track} | LEVEL: ${formData.level}`);
+    submissionBody.append('entry.915779055', `CFP LINKS: ${formData.links || 'None'}`);
+    submissionBody.append('entry.1139641430', `CFP BIO: ${formData.bio}`);
+    submissionBody.append('entry.1421227106', `CFP TALK TITLE: ${formData.title} \n\nCFP ABSTRACT: ${formData.description}`);
+
+    try {
+      await fetch(formUrl, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded'
+        },
+        body: submissionBody.toString()
+      });
+    } catch (error) {
+      console.error('Google Form CFP backup submission failed:', error);
+    }
+
+    // Render success state
+    if (successSpeaker) successSpeaker.textContent = formData.name;
+    if (successTitle) successTitle.textContent = `"${formData.title}"`;
+    if (successEmail) successEmail.textContent = formData.email;
+
+    formContainer.style.opacity = '0';
+    formContainer.style.transform = 'translateY(-10px)';
+    
+    setTimeout(() => {
+      formContainer.setAttribute('hidden', '');
+      successContainer.removeAttribute('hidden');
+      successContainer.style.opacity = '1';
+      successContainer.style.transform = 'none';
+      successContainer.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }, 300);
+  });
+</script>
+
+<style>
+  .cfp-section {
+    position: relative;
+    overflow: hidden;
+    min-height: calc(100svh - 64px - 300px);
+    display: flex;
+    align-items: center;
+    padding-block: var(--space-lg);
+  }
+
+  .cfp-section__pattern {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+  }
+
+  .container--form {
+    max-width: 1040px;
+    position: relative;
+    z-index: 2;
+  }
+
+  .cfp-header {
+    margin-bottom: var(--space-lg);
+    text-align: center;
+    max-width: 64ch;
+    margin-inline: auto;
+  }
+
+  .cfp-subtitle {
+    font-size: 0.95rem;
+    font-weight: 300;
+    color: rgba(255, 255, 255, 0.5);
+    line-height: 1.7;
+    margin-top: var(--space-sm);
+  }
+
+  .cfp-grid {
+    display: grid;
+    grid-template-columns: 320px 1fr;
+    gap: var(--space-lg);
+    align-items: start;
+  }
+
+  /* Sidebar info details */
+  .cfp-sidebar {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+  }
+
+  .cfp-info-card {
+    border: 1px solid var(--mid);
+    background: rgba(15, 43, 31, 0.4);
+    padding: var(--space-sm) var(--space-md);
+    backdrop-filter: blur(10px);
+    border-radius: 2px;
+  }
+
+  .cfp-meta-list,
+  .cfp-guidelines-list {
+    margin-top: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .cfp-meta-list li,
+  .cfp-guidelines-list li {
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.7);
+    line-height: 1.5;
+  }
+
+  .cfp-meta-list li strong {
+    color: var(--mint);
+  }
+
+  .cfp-guidelines-list li {
+    display: grid;
+    grid-template-columns: 16px 1fr;
+    gap: 6px;
+  }
+  .cfp-guidelines-list li::before {
+    content: '—';
+    font-family: var(--mono);
+    color: var(--mint);
+    font-size: 0.7rem;
+    padding-top: 1px;
+  }
+
+  /* Form details wrapper */
+  .form-wrapper {
+    position: relative;
+    width: 100%;
+  }
+
+  .form-card {
+    background: rgba(15, 43, 31, 0.7);
+    border: 1px solid var(--mid);
+    padding: var(--space-md);
+    backdrop-filter: blur(20px);
+    border-radius: 4px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+  }
+
+  .form-section-title {
+    font-family: var(--serif);
+    font-size: 1.25rem;
+    color: var(--mint);
+    margin-bottom: var(--space-sm);
+    font-weight: 500;
+  }
+
+  .form-element {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+  }
+
+  .form-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px 18px;
+  }
+
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .form-label {
+    font-family: var(--mono);
+    font-size: 0.65rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.8);
+  }
+
+  .form-label-opt {
+    color: rgba(255, 255, 255, 0.45);
+    text-transform: none;
+    font-family: var(--sans);
+    font-size: 0.72rem;
+  }
+
+  .form-input,
+  .form-select {
+    width: 100%;
+    background: rgba(29, 76, 55, 0.3);
+    border: 1px solid var(--mid);
+    padding: 10px 14px;
+    font-size: 0.9rem;
+    color: var(--white);
+    font-family: var(--sans);
+    border-radius: 2px;
+    transition: border-color 0.2s, box-shadow 0.2s;
+  }
+
+  .form-input--textarea {
+    resize: vertical;
+    font-family: var(--sans);
+    line-height: 1.5;
+  }
+
+  .form-input:focus,
+  .form-select:focus {
+    outline: none;
+    border-color: var(--mint);
+    box-shadow: 0 0 0 1px var(--mint);
+  }
+
+  .form-input--invalid {
+    border-color: rgba(255, 100, 100, 0.6) !important;
+    box-shadow: 0 0 0 1px rgba(255, 100, 100, 0.4) !important;
+  }
+
+  .form-select {
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%237FFFC5' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 14px center;
+    background-size: 11px;
+    padding-right: 36px;
+  }
+
+  .form-select option {
+    background: var(--deep);
+    color: var(--white);
+  }
+
+  .form-error {
+    font-size: 0.75rem;
+    color: rgba(255, 100, 100, 0.85);
+    min-height: 14px;
+  }
+
+  .form-footer-wrapper {
+    border-top: 1px solid var(--mid);
+    padding-top: var(--space-md);
+    margin-top: 12px;
+  }
+
+  .form-footer {
+    display: flex;
+    justify-content: center;
+  }
+
+  .btn--submit {
+    width: 100%;
+    justify-content: center;
+    font-weight: 600;
+    letter-spacing: 0.03em;
+  }
+
+  .submit-spinner {
+    width: 16px;
+    height: 16px;
+    border: 2px solid var(--forest);
+    border-top: 2px solid transparent;
+    border-radius: 50%;
+    animation: rotate-spinner 0.8s linear infinite;
+  }
+
+  @keyframes rotate-spinner {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+
+  /* Success Card Styling */
+  .form-card--success {
+    text-align: center;
+    opacity: 0;
+    transform: translateY(10px);
+    padding: var(--space-lg) var(--space-md);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+  }
+
+  .success-icon {
+    width: 64px;
+    height: 64px;
+    background: rgba(127, 255, 197, 0.1);
+    border: 1px solid var(--mint);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--mint);
+    margin: 0 auto var(--space-md);
+  }
+
+  .success-icon svg {
+    width: 28px;
+    height: 28px;
+  }
+
+  .success-actions {
+    display: flex;
+    gap: var(--space-sm);
+    justify-content: center;
+    margin-top: var(--space-lg);
+  }
+
+  .form-disclaimer {
+    font-size: 0.75rem;
+    color: rgba(255, 255, 255, 0.45);
+    text-align: center;
+    line-height: 1.5;
+    margin-top: 14px;
+    max-width: 54ch;
+    margin-inline: auto;
+  }
+
+  .form-privacy-link {
+    color: var(--mint);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+  .form-privacy-link:hover {
+    color: var(--white);
+  }
+
+  @media (max-width: 900px) {
+    .cfp-grid {
+      grid-template-columns: 1fr;
+      gap: var(--space-md);
+    }
+    .cfp-sidebar {
+      order: 2;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .form-grid {
+      grid-template-columns: 1fr;
+    }
+    .form-card {
+      padding: var(--space-md) var(--space-sm);
+    }
+    .success-actions {
+      flex-direction: column;
+    }
+    .success-actions a {
+      width: 100%;
+      justify-content: center;
+    }
+  }
+</style>

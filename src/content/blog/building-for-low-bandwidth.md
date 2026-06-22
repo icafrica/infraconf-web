@@ -38,7 +38,7 @@ If your upstream service is unreliable (and sometimes it is, because the infrast
 
 If you've built for these constraints, we want to hear from you. Not the theory — the actual war stories. The time the power went out mid-transaction. The latency budget you blew on a third-party API. The monitoring setup you built when CloudWatch didn't exist in your region.
 
-**[Submit your talk →](https://sessionize.com/infraconf-africa-2026/)**
+**[Submit your talk →](/infraconf-web/cfp)**
 
 ---
 

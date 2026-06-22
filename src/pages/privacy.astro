@@ -1,0 +1,171 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<BaseLayout
+  title="Privacy Policy — InfraConf Africa 2026"
+  description="InfraConf Africa is committed to protecting the privacy of our participants and engineers. Read our GDPR and NDPR-compliant privacy policy."
+>
+  <Nav />
+  <div style="height: 64px;"></div>
+
+  <main class="privacy-page">
+    <div class="container">
+
+      <div class="privacy-header">
+        <span class="label">Legal</span>
+        <h1 class="heading-1 privacy-title">Privacy Policy</h1>
+        <p class="privacy-lead">
+          InfraConf Africa respects your privacy. We are committed to protecting the personal data
+          of the engineers, practitioners, and sponsors who interact with our platform.
+        </p>
+        <div class="privacy-meta">
+          <span>Effective: 21 November 2026</span>
+          <span>·</span>
+          <span>Compliant with GDPR &amp; NDPR (Nigeria)</span>
+          <span>·</span>
+          <a href="mailto:privacy@infraconf.africa">Contact: privacy@infraconf.africa</a>
+        </div>
+      </div>
+
+      <div class="privacy-body prose">
+
+        <h2>1. Data We Collect</h2>
+        <p>
+          To facilitate invitation-only curation and issue free conference passes, we collect personal details during the registration process. This includes:
+        </p>
+        <ul>
+          <li><strong>Identity Data:</strong> Full name.</li>
+          <li><strong>Contact Data:</strong> Email address.</li>
+          <li><strong>Professional Data:</strong> Job title/role, company name (optional).</li>
+          <li><strong>Geographic Data:</strong> Country/region.</li>
+          <li><strong>Technical Data:</strong> Track preferences and specific infrastructure challenges you are currently solving.</li>
+        </ul>
+
+        <h2>2. Why We Collect This Data</h2>
+        <p>
+          We process your personal information based on your explicit consent and our legitimate interest in hosting a focused, high-signal event. We use the data to:
+        </p>
+        <ul>
+          <li>Review and approve registration requests to maintain a practitioner-first audience.</li>
+          <li>Generate and issue your custom, downloadable conference pass.</li>
+          <li>Send crucial event updates, links, and streaming platform credentials.</li>
+          <li>Anonymize and aggregate track preferences to optimize scheduling and session topics.</li>
+        </ul>
+
+        <h2>3. Data Storage &amp; Security</h2>
+        <p>
+          Your data is stored securely. We take appropriate technical and organizational measures to safeguard against unauthorized access, alteration, disclosure, or destruction of your personal data.
+        </p>
+        <p>
+          We do not sell, trade, or rent your personal information to third parties. For event backups, registration data is securely piped to Google Forms and stored in encrypted spreadsheet archives.
+        </p>
+
+        <h2>4. Sponsor Data Sharing</h2>
+        <p>
+          InfraConf Africa is completely free to attend for all virtual participants because of our partners. We do <strong>not</strong> share your contact details or application data with sponsors unless you explicitly opt-in (e.g. by scanning a sponsor badge, requesting prospectus follow-ups, or choosing to share details during specific workshops).
+        </p>
+
+        <h2>5. Your Rights (GDPR &amp; NDPR)</h2>
+        <p>
+          Under the General Data Protection Regulation (GDPR) and the Nigeria Data Protection Regulation (NDPR), you have clear rights regarding your personal data:
+        </p>
+        <ul>
+          <li><strong>Right to Access:</strong> You can request a copy of the personal data we hold about you.</li>
+          <li><strong>Right to Rectification:</strong> You can ask us to correct incomplete or inaccurate data.</li>
+          <li><strong>Right to Erasure (Right to be Forgotten):</strong> You can request that we delete your registration details at any time before or after the event.</li>
+          <li><strong>Right to Withdraw Consent:</strong> Where processing is based on consent, you may withdraw it at any time.</li>
+        </ul>
+
+        <h2>6. Changes to this Policy</h2>
+        <p>
+          We may update this Privacy Policy from time to time to reflect organizational changes or evolving legal requirements. Any modifications will be posted here with an updated effective date.
+        </p>
+
+        <div class="privacy-contact-box">
+          <div class="privacy-contact-label">Data Privacy Request</div>
+          <p>
+            To exercise any of your data rights, request complete erasure of your information,
+            or ask questions about our privacy practices, please contact our data team.
+          </p>
+          <a href="mailto:privacy@infraconf.africa" class="btn btn--forest">
+            privacy@infraconf.africa
+          </a>
+        </div>
+
+      </div>
+    </div>
+  </main>
+
+  <Footer />
+</BaseLayout>
+
+<style>
+  .privacy-page {
+    background: var(--cream);
+    padding-bottom: var(--space-xl);
+  }
+
+  .privacy-header {
+    padding: var(--space-xl) 0 var(--space-lg);
+    border-bottom: 1px solid var(--rule);
+    margin-bottom: var(--space-lg);
+  }
+
+  .privacy-header .label {
+    display: block;
+    margin-bottom: var(--space-sm);
+  }
+
+  .privacy-title {
+    margin-bottom: var(--space-sm);
+    color: var(--forest);
+  }
+
+  .privacy-lead {
+    font-size: 1.1rem;
+    font-weight: 300;
+    color: var(--muted);
+    max-width: 56ch;
+    line-height: 1.7;
+    margin-bottom: var(--space-md);
+  }
+
+  .privacy-meta {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    color: var(--muted);
+    flex-wrap: wrap;
+  }
+  .privacy-meta a { color: var(--forest); text-decoration: underline; text-underline-offset: 2px; }
+
+  .privacy-body { max-width: 72ch; }
+
+  .privacy-contact-box {
+    background: var(--forest);
+    color: var(--white);
+    padding: var(--space-md);
+    border-radius: 3px;
+    margin-top: var(--space-lg);
+  }
+  .privacy-contact-label {
+    font-family: var(--mono);
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--mint);
+    margin-bottom: var(--space-xs);
+  }
+  .privacy-contact-box p {
+    font-size: 0.9rem;
+    font-weight: 300;
+    color: rgba(255,255,255,0.6);
+    line-height: 1.6;
+    margin-bottom: var(--space-md);
+  }
+</style>

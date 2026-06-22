@@ -1,4 +1,6 @@
 ---
+const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
+
 const tiers = [
   {
     badge: 'Community Partner',
@@ -8,9 +10,9 @@ const tiers = [
     benefits: [
       'Logo on website, event page & stream overlays',
       'Social mention at announcement & post-event wrap-up',
-      'Job listing on conference board for 3 months',
       'Named in opening keynote acknowledgements',
-      '2 complimentary virtual passes for your team',
+      '1 complimentary pass to the paid physical edition',
+      'Featured slot in the pre-event community newsletter',
     ],
   },
   {
@@ -21,11 +23,11 @@ const tiers = [
     benefits: [
       'Prominent logo placement across all event materials & overlays',
       '5-min lightning talk slot during the main programme',
-      'Job listings on conference board for 6 months',
       'Recognised in both opening & closing keynotes',
       'Post-event attendee insights report (opt-in data)',
       'First-look opportunity for 2027 in-person conference',
-      '2 complimentary workshop passes for your engineers',
+      '3 complimentary workshop passes for your engineers',
+      '3 complimentary passes to the paid physical edition',
     ],
   },
   {
@@ -38,7 +40,7 @@ const tiers = [
       'Logo on website & featured in our "Tools We Love" spotlight',
       'Dedicated social post introducing your tool to the community',
       'Authentic grassroots advocacy from practitioners',
-      '1 complimentary virtual pass for your team',
+      '1 complimentary pass to the paid physical edition',
     ],
   },
 ];
@@ -58,6 +60,16 @@ const tiers = [
         the African infrastructure community choose to back it. If that sounds like your organisation,
         we'd love to talk — reach out and we'll send you our full partnership prospectus.
       </p>
+    </div>
+
+    <!-- Sponsors Showcase Section -->
+    <div class="sponsors-showcase reveal">
+      <h3 class="sponsors-showcase__title">Supported by</h3>
+      <div class="sponsors-grid">
+        <a href="https://icafrica.github.io/theinfra/" target="_blank" rel="noopener" class="sponsor-logo-link" aria-label="theinfra logo">
+          <img src={`${base}theinfra-logo.svg`} alt="theinfra Logo" class="sponsor-logo" />
+        </a>
+      </div>
     </div>
 
     <div class="tiers reveal">
@@ -107,7 +119,7 @@ const tiers = [
 
   .sponsor-intro {
     max-width: 72ch;
-    margin: 0 auto var(--space-lg);
+    margin: 0 auto var(--space-md);
     text-align: center;
   }
   .sponsor-intro__text {
@@ -115,6 +127,62 @@ const tiers = [
     font-weight: 300;
     color: var(--muted);
     line-height: 1.8;
+  }
+
+  /* Sponsors Showcase */
+  .sponsors-showcase {
+    margin-bottom: var(--space-lg);
+    text-align: center;
+  }
+  .sponsors-showcase__title {
+    font-family: var(--mono);
+    font-size: 0.65rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: var(--space-sm);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+  }
+  .sponsors-showcase__title::before,
+  .sponsors-showcase__title::after {
+    content: '';
+    display: block;
+    width: 32px;
+    height: 1px;
+    background: var(--rule);
+  }
+  .sponsors-grid {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: var(--space-sm);
+    flex-wrap: wrap;
+  }
+  .sponsor-logo-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 20px;
+    background: var(--deep);
+    border: 1px solid var(--mid);
+    border-radius: 3px;
+    transition: all 0.25s ease;
+    height: 48px;
+  }
+  .sponsor-logo-link:hover {
+    background: var(--forest);
+    border-color: var(--mint);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(15, 43, 31, 0.15);
+  }
+  .sponsor-logo {
+    height: 100%;
+    width: auto;
+    max-height: 28px;
+    display: block;
   }
 
   .tiers {

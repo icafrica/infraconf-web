@@ -29,4 +29,4 @@ The CFP is now open. We want practitioners — people who have hit real walls an
 
 Deadline: **August 15, 2026**
 
-[Submit your talk →](https://sessionize.com/infraconf-africa-2026/)
+[Submit your talk →](/infraconf-web/cfp)
