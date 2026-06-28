@@ -225,14 +225,12 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
   .hero__bottom {
     border-top: 1px solid var(--mid);
     padding: var(--space-sm) 0;
-    display: flex;
-    gap: var(--space-lg);
-    overflow-x: auto;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--space-md);
     opacity: 0;
     animation: fadeIn 0.7s 0.8s ease forwards;
   }
-
-  .hero__stat { flex-shrink: 0; }
 
   .hero__stat-num {
     font-family: var(--mono);
@@ -257,14 +255,8 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
       display: grid;
       grid-template-columns: repeat(2, 1fr);
     }
-  }
-
-  @media (max-width: 600px) {
     .hero__bottom {
-      display: grid;
       grid-template-columns: repeat(2, 1fr);
-      gap: var(--space-md);
-      overflow-x: visible;
     }
   }
 </style>
