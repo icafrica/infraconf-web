@@ -43,6 +43,13 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
 
     <div class="section">
       <div class="container">
+        <!-- Pre-CFP announcement banner -->
+        <div style="background:rgba(232, 160, 48, 0.08); border: 1px solid rgba(232, 160, 48, 0.25); padding: var(--space-md); margin-bottom: var(--space-lg); border-radius: 2px;">
+          <span class="label" style="color:var(--amber); display:inline-block; margin-bottom:4px;">Program Note</span>
+          <p style="font-size: 0.9rem; color: var(--muted); margin: 0; line-height: 1.5;">
+            Our Call for Speakers is active! The full session schedule will be announced after the CFP closes on <strong>August 15, 2026</strong>.
+          </p>
+        </div>
         {tracks.length > 0 ? tracks.map(track => {
           const trackTalks = allTalks.filter(t => t.data.track === track);
           return (

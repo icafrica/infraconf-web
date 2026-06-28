@@ -72,7 +72,27 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
 
         <!-- Main Submission Form -->
         <div class="form-wrapper">
-          <div id="form-container" class="form-card reveal">
+          <!-- CFP Gated/Not Open State -->
+          <div id="gated-container" class="form-card reveal" style="display: none; text-align: center; padding: var(--space-xl) var(--space-md);">
+            <div class="gated-icon" style="width: 64px; height: 64px; background: rgba(232, 160, 48, 0.1); border: 1px solid var(--amber); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--amber); margin: 0 auto var(--space-md);" aria-hidden="true">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                <line x1="16" y1="2" x2="16" y2="6"></line>
+                <line x1="8" y1="2" x2="8" y2="6"></line>
+                <line x1="3" y1="10" x2="21" y2="10"></line>
+              </svg>
+            </div>
+            <span class="label label--light" style="color: var(--amber);">CFP Opening Soon</span>
+            <h2 class="heading-1 text-white" style="margin-top: 10px; margin-bottom: var(--space-sm);">Submissions Open July 1</h2>
+            <p class="form-subtitle" id="countdown-text" style="max-width: 50ch; margin: 0 auto var(--space-md); color: rgba(255,255,255,0.6); line-height: 1.6;">
+              The Call for Speakers opens in 3 days. Prepare your platform engineering, SRE, and cloud infrastructure talk proposals!
+            </p>
+            <div style="margin-top: var(--space-lg);">
+              <a href={base} class="btn btn--outline-forest" id="btn-return-home-gated">Return Home</a>
+            </div>
+          </div>
+
+          <div id="form-container" class="form-card reveal" style="display: none;">
             <form id="cfp-form" novalidate class="form-element">
               
               <!-- Speaker Info Heading -->
@@ -237,7 +257,7 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
             </p>
 
             <div class="success-actions">
-              <a href={base} class="btn btn--primary">Return Home</a>
+              <a href={base} class="btn btn--primary" id="btn-return-home-success">Return Home</a>
               <a href={`${base}talks`} class="btn btn--ghost">View other talks</a>
             </div>
           </div>
@@ -257,6 +277,63 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
   const successSpeaker = document.getElementById('success-speaker') as HTMLElement;
   const successTitle = document.getElementById('success-title') as HTMLElement;
   const successEmail = document.getElementById('success-email') as HTMLElement;
+
+  // Target date for CFP: July 1, 2026 00:00 WAT (UTC+1)
+  const targetDate = new Date('2026-07-01T00:00:00+01:00');
+  const gatedContainer = document.getElementById('gated-container') as HTMLElement;
+  const countdownText = document.getElementById('countdown-text') as HTMLElement;
+
+  const updateCountdown = () => {
+    const now = new Date();
+    const diff = targetDate.getTime() - now.getTime();
+
+    if (diff <= 0) {
+      if (gatedContainer) gatedContainer.style.display = 'none';
+      if (formContainer) formContainer.style.display = 'block';
+      return true; // CFP is open
+    } else {
+      if (gatedContainer) gatedContainer.style.display = 'block';
+      if (formContainer) formContainer.style.display = 'none';
+
+      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+      let timeString = '';
+      if (days > 0) {
+        timeString = `${days} day${days > 1 ? 's' : ''} and ${hours} hour${hours !== 1 ? 's' : ''}`;
+      } else if (hours > 0) {
+        timeString = `${hours} hour${hours > 1 ? 's' : ''} and ${minutes} minute${minutes !== 1 ? 's' : ''}`;
+      } else {
+        timeString = `${minutes} minute${minutes > 1 ? 's' : ''} and ${seconds} second${seconds !== 1 ? 's' : ''}`;
+      }
+
+      if (countdownText) {
+        countdownText.innerHTML = `The Call for Speakers opens in <strong class="text-mint">${timeString}</strong>.<br>Prepare your platform engineering, SRE, and cloud infrastructure talk proposals!`;
+      }
+      return false; // CFP is still gated
+    }
+  };
+
+  const isCFPOpen = updateCountdown();
+  if (!isCFPOpen) {
+    const interval = setInterval(() => {
+      const openNow = updateCountdown();
+      if (openNow) {
+        clearInterval(interval);
+      }
+    }, 1000);
+  }
+
+  // Rewrite Return Home links dynamically if hosted on github.io
+  const returnHomeGated = document.getElementById('btn-return-home-gated') as HTMLAnchorElement;
+  const returnHomeSuccess = document.getElementById('btn-return-home-success') as HTMLAnchorElement;
+  [returnHomeGated, returnHomeSuccess].forEach(btn => {
+    if (btn && window.location.hostname.includes('github.io')) {
+      btn.href = window.location.origin + '/infraconf-web/';
+    }
+  });
 
   const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 

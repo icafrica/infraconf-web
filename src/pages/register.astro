@@ -268,7 +268,7 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
                 <path d="M2 7h10M7 2l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
               </svg>
             </a>
-            <a href={base} class="btn btn--ghost">Return Home</a>
+            <a href={base} class="btn btn--ghost" id="btn-return-home-register">Return Home</a>
           </div>
         </div>
       </div>
@@ -490,6 +490,12 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
       downloadBtn.querySelector('span')!.textContent = originalText;
     }
   });
+
+  // Rewrite Return Home links dynamically if hosted on github.io
+  const returnHomeRegister = document.getElementById('btn-return-home-register') as HTMLAnchorElement;
+  if (returnHomeRegister && window.location.hostname.includes('github.io')) {
+    returnHomeRegister.href = window.location.origin + '/infraconf-web/';
+  }
 </script>
 
 <style>
