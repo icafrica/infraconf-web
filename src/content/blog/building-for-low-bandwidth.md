@@ -2,7 +2,7 @@
 title: "Building for Low-Bandwidth: Infrastructure Lessons from the Continent"
 description: "What happens when your p99 latency baseline is 400ms and your users are on 2G? African engineers have been solving these problems for years. Here's what we've learned."
 pubDate: 2026-06-03
-author: "Taiwo Rasheed"
+author: "InfraConf Africa Team"
 tags: ["infrastructure", "africa", "performance", "low-bandwidth"]
 ---
 

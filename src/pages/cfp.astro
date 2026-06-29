@@ -425,16 +425,21 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
     }
 
     // Connect to Google Form (organiser: swap with your form URL and field entry IDs)
-    const formUrl = 'https://docs.google.com/forms/u/2/d/17AWjIHCOnzfCEl6S_kSvDEqdVMOl7tZO8hn22D7lyls/formResponse';
+    const formUrl = 'https://docs.google.com/forms/d/1yfvaEGOIfqZ6hRT3j9wSIqpAriHrX5YwAUXbZR-uQKY/formResponse';
     const submissionBody = new URLSearchParams();
 
     // Mapping fields. Organiser: replace entry keys below with your exact google form IDs
-    submissionBody.append('entry.1941203368', `CFP SPEAKER: ${formData.name}`);
-    submissionBody.append('entry.1253437776', formData.email);
-    submissionBody.append('entry.205482783', `CFP FORMAT: ${formData.format} | TRACK: ${formData.track} | LEVEL: ${formData.level}`);
-    submissionBody.append('entry.915779055', `CFP LINKS: ${formData.links || 'None'}`);
-    submissionBody.append('entry.1139641430', `CFP BIO: ${formData.bio}`);
-    submissionBody.append('entry.1421227106', `CFP TALK TITLE: ${formData.title} \n\nCFP ABSTRACT: ${formData.description}`);
+    submissionBody.append('entry.1330495657', formData.name);
+    submissionBody.append('entry.2138081617', formData.email);
+    submissionBody.append('entry.977616262', formData.bio);
+    submissionBody.append('entry.2071894119', formData.title);
+    submissionBody.append('entry.15738487', formData.description);
+    submissionBody.append('entry.662889593', formData.format);
+    submissionBody.append('entry.1862466689', formData.format);
+    submissionBody.append('entry.1283578341', formData.format);
+    submissionBody.append('entry.719208939', formData.track);
+    submissionBody.append('entry.1908139600', formData.level);
+    submissionBody.append('entry.851785742', formData.links || 'None');
 
     try {
       await fetch(formUrl, {

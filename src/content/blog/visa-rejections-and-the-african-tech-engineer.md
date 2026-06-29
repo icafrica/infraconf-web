@@ -2,7 +2,7 @@
 title: "Visa Rejections and the African Tech Engineer"
 description: "Every year, African engineers submit visa applications to attend the world's biggest tech conferences. Every year, a significant share are rejected. Here's what that actually looks like — and why InfraConf Africa is virtual by design, not by compromise."
 pubDate: 2026-06-07
-author: "Taiwo Rasheed"
+author: "InfraConf Africa Team"
 tags: ["community", "africa", "conferences", "diversity", "access"]
 ---
 
