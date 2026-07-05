@@ -214,6 +214,17 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
                 </div>
 
                 <div class="form-group">
+                  <label for="talk-level" class="form-label">Session Level</label>
+                  <select id="talk-level" name="talkLevel" class="form-select" required>
+                    <option value="" disabled selected>Select session level</option>
+                    <option value="Level 100">Level 100 (Introductory)</option>
+                    <option value="Level 300">Level 300 (Intermediate / Deep Dive)</option>
+                    <option value="Level 400">Level 400 (Advanced / Expert)</option>
+                  </select>
+                  <span class="form-error" id="talk-level-error" aria-live="polite"></span>
+                </div>
+
+                <div class="form-group">
                   <label for="session-links" class="form-label">Previous Talk Links <span class="form-label-opt">(Optional)</span></label>
                   <input 
                     type="text" 
@@ -364,6 +375,7 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
   const sessionFormat = document.getElementById('session-format') as HTMLSelectElement;
   const sessionTrack = document.getElementById('session-track') as HTMLSelectElement;
   const sessionLevel = document.getElementById('session-level') as HTMLSelectElement;
+  const talkLevel = document.getElementById('talk-level') as HTMLSelectElement;
 
   speakerName?.addEventListener('input', () => validateField(speakerName, document.getElementById('speaker-name-error')!));
   speakerEmail?.addEventListener('input', () => validateField(speakerEmail, document.getElementById('speaker-email-error')!));
@@ -373,6 +385,7 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
   sessionFormat?.addEventListener('change', () => validateField(sessionFormat, document.getElementById('session-format-error')!));
   sessionTrack?.addEventListener('change', () => validateField(sessionTrack, document.getElementById('session-track-error')!));
   sessionLevel?.addEventListener('change', () => validateField(sessionLevel, document.getElementById('session-level-error')!));
+  talkLevel?.addEventListener('change', () => validateField(talkLevel, document.getElementById('talk-level-error')!));
 
   form?.addEventListener('submit', async (e) => {
     e.preventDefault();
@@ -385,8 +398,9 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
     const isFormatValid = validateField(sessionFormat, document.getElementById('session-format-error')!);
     const isTrackValid = validateField(sessionTrack, document.getElementById('session-track-error')!);
     const isLevelValid = validateField(sessionLevel, document.getElementById('session-level-error')!);
+    const isTalkLevelValid = validateField(talkLevel, document.getElementById('talk-level-error')!);
 
-    if (!isNameValid || !isEmailValid || !isBioValid || !isTitleValid || !isDescValid || !isFormatValid || !isTrackValid || !isLevelValid) {
+    if (!isNameValid || !isEmailValid || !isBioValid || !isTitleValid || !isDescValid || !isFormatValid || !isTrackValid || !isLevelValid || !isTalkLevelValid) {
       const firstInvalid = document.querySelector('.form-input--invalid, .form-select.form-input--invalid, .form-input--textarea.form-input--invalid');
       firstInvalid?.scrollIntoView({ behavior: 'smooth', block: 'center' });
       return;
@@ -411,6 +425,7 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
       format: sessionFormat.value,
       track: sessionTrack.value,
       level: sessionLevel.value,
+      talkLevel: talkLevel.value,
       links: (document.getElementById('session-links') as HTMLInputElement).value.trim(),
       timestamp: new Date().toISOString()
     };
@@ -439,6 +454,7 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
     submissionBody.append('entry.1283578341', formData.format);
     submissionBody.append('entry.719208939', formData.track);
     submissionBody.append('entry.1908139600', formData.level);
+    submissionBody.append('entry.919288854', formData.talkLevel);
     submissionBody.append('entry.851785742', formData.links || 'None');
 
     try {
