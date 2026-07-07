@@ -1,0 +1,1076 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+import InfraConfAfricaArt from '../components/InfraConfAfricaArt.astro';
+
+const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
+---
+
+<BaseLayout title="Join the Crew — InfraConf Africa 2026">
+  <Nav />
+
+  <!-- Nav spacer -->
+  <div style="height: 64px;"></div>
+
+  <section class="section section--dark volunteer-section" aria-labelledby="volunteer-heading">
+    <!-- Geometric pattern overlay -->
+    <div class="volunteer-section__pattern" aria-hidden="true">
+      <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+        <pattern id="kente-volunteer" x="0" y="0" width="60" height="60" patternUnits="userSpaceOnUse">
+          <rect x="0" y="0" width="60" height="4" fill="rgba(127,255,197,0.02)"/>
+          <rect x="0" y="28" width="60" height="4" fill="rgba(127,255,197,0.01)"/>
+          <rect x="0" y="0" width="4" height="60" fill="rgba(127,255,197,0.01)"/>
+          <rect x="12" y="12" width="8" height="8" transform="rotate(45 16 16)" fill="rgba(232,160,48,0.04)"/>
+        </pattern>
+        <rect width="100%" height="100%" fill="url(#kente-volunteer)"/>
+      </svg>
+    </div>
+
+    <div class="container container--form">
+      <div class="form-wrapper">
+        <!-- Main Form Screen -->
+        <div id="form-container" class="form-card reveal">
+          <div class="form-header">
+            <span class="label label--light" style="color: var(--amber);">Join the Crew</span>
+            <h1 class="heading-1 text-white" id="volunteer-heading" style="margin-top: 10px;">Shape InfraConf Africa</h1>
+            <p class="form-subtitle">
+              InfraConf Africa is built by the community, for the community. We are looking for passionate individuals to join our organizing crew and help run Africa's premier platform engineering and infrastructure event.
+            </p>
+          </div>
+
+          <!-- Perks / Impact Grid -->
+          <div class="perks-grid">
+            <div class="perk-card">
+              <div class="perk-icon" style="color: var(--amber);">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8zm14 10v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </div>
+              <h3 class="perk-title">Network & Mentorship</h3>
+              <p class="perk-text">Get direct, backstage access to international speakers, industry leads, and tech sponsors.</p>
+            </div>
+            
+            <div class="perk-card">
+              <div class="perk-icon" style="color: var(--mint);">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <polygon points="12 2 2 7 12 12 22 7 12 2"/>
+                  <polyline points="2 17 12 22 22 17"/>
+                  <polyline points="2 12 12 17 22 12"/>
+                </svg>
+              </div>
+              <h3 class="perk-title">Community Leadership</h3>
+              <p class="perk-text">Build your personal brand and resume by driving operations for a large-scale tech conference.</p>
+            </div>
+
+            <div class="perk-card">
+              <div class="perk-icon" style="color: var(--sahara);">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14M22 4L12 14.01l-3-3" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </div>
+              <h3 class="perk-title">Master Virtual Operations</h3>
+              <p class="perk-text">Gain hands-on experience managing stage production, live QA routing, and speaker streams.</p>
+            </div>
+
+            <div class="perk-card">
+              <div class="perk-icon" style="color: var(--terra);">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </div>
+              <h3 class="perk-title">Crew Recognition & Swag</h3>
+              <p class="perk-text">Receive custom limited-edition Crew hoodies, speaker boxes, certificates, and invite-only socials.</p>
+            </div>
+          </div>
+
+          <form id="volunteer-form" novalidate class="form-element" style="border-top: 1px solid var(--mid); padding-top: var(--space-lg);">
+            <div class="form-grid">
+              <div class="form-group">
+                <label for="vol-name" class="form-label">Full Name</label>
+                <input 
+                  type="text" 
+                  id="vol-name" 
+                  name="name" 
+                  required 
+                  autocomplete="name" 
+                  placeholder="e.g. Kofi Agyeman" 
+                  class="form-input"
+                  aria-describedby="vol-name-error"
+                />
+                <span class="form-error" id="vol-name-error" aria-live="polite"></span>
+              </div>
+
+              <div class="form-group">
+                <label for="vol-email" class="form-label">Email Address</label>
+                <input 
+                  type="email" 
+                  id="vol-email" 
+                  name="email" 
+                  required 
+                  autocomplete="email" 
+                  placeholder="e.g. kofi@platform.org" 
+                  class="form-input"
+                  aria-describedby="vol-email-error"
+                />
+                <span class="form-error" id="vol-email-error" aria-live="polite"></span>
+              </div>
+
+              <div class="form-group">
+                <label for="vol-contact" class="form-label">Discord Username / Social Handle</label>
+                <input 
+                  type="text" 
+                  id="vol-contact" 
+                  name="contact" 
+                  required 
+                  placeholder="e.g. kofi_ops#1234 or @kofi_ops" 
+                  class="form-input"
+                  aria-describedby="vol-contact-error"
+                />
+                <span class="form-error" id="vol-contact-error" aria-live="polite"></span>
+              </div>
+
+              <div class="form-group">
+                <label for="vol-role" class="form-label">Your Current Role / Occupation</label>
+                <select id="vol-role" name="role" class="form-select" required>
+                  <option value="" disabled selected>Select your current role</option>
+                  <option value="Platform Engineer">Platform Engineer</option>
+                  <option value="DevOps / Site Reliability Engineer">DevOps / SRE</option>
+                  <option value="Software Engineer">Software Engineer</option>
+                  <option value="Technical Writer / Designer">Technical Writer / Designer</option>
+                  <option value="Student / Aspiring Engineer">Student / Aspiring Engineer</option>
+                  <option value="Community Leader / Event Organizer">Community Leader / Event Organizer</option>
+                  <option value="Other">Other</option>
+                </select>
+                <span class="form-error" id="vol-role-error" aria-live="polite"></span>
+              </div>
+
+              <div class="form-group">
+                <label for="vol-availability" class="form-label">Weekly Availability</label>
+                <select id="vol-availability" name="availability" class="form-select" required>
+                  <option value="" disabled selected>Select hours per week</option>
+                  <option value="Less than 2 hours">Less than 2 hours/week</option>
+                  <option value="2-5 hours">2-5 hours/week</option>
+                  <option value="5+ hours">5+ hours/week</option>
+                  <option value="Only on Conference Day (21 Nov)">Only on Conference Day (21 Nov)</option>
+                </select>
+                <span class="form-error" id="vol-availability-error" aria-live="polite"></span>
+              </div>
+            </div>
+
+            <!-- Custom checkbox selector for areas of contribution -->
+            <div class="form-group form-group--checkboxes">
+              <span class="form-label">Where would you like to contribute? <span class="form-label-opt">(Select all that apply)</span></span>
+              <div class="checkbox-grid">
+                <label class="checkbox-container">
+                  <input type="checkbox" name="specialties" value="Session Moderation & QA" class="checkbox-input" />
+                  <span class="checkbox-box"></span>
+                  <span class="checkbox-label"><strong>Session Moderation &amp; QA:</strong> Introduce speakers, moderate live chat and handle Q&amp;A.</span>
+                </label>
+                <label class="checkbox-container">
+                  <input type="checkbox" name="specialties" value="Tech Support & Speaker Prep" class="checkbox-input" />
+                  <span class="checkbox-box"></span>
+                  <span class="checkbox-label"><strong>Tech Support:</strong> Run mic/setup checks with speakers and troubleshoot AV streams.</span>
+                </label>
+                <label class="checkbox-container">
+                  <input type="checkbox" name="specialties" value="Content & Live Blogging" class="checkbox-input" />
+                  <span class="checkbox-box"></span>
+                  <span class="checkbox-label"><strong>Content &amp; Socials:</strong> Post live highlights, summarize key talks, or draft blog updates.</span>
+                </label>
+                <label class="checkbox-container">
+                  <input type="checkbox" name="specialties" value="Networking & Icebreakers" class="checkbox-input" />
+                  <span class="checkbox-box"></span>
+                  <span class="checkbox-label"><strong>Community &amp; Games:</strong> Run virtual hallway tracks, lead icebreakers and welcome attendees.</span>
+                </label>
+                <label class="checkbox-container">
+                  <input type="checkbox" name="specialties" value="Design & Video Assets" class="checkbox-input" />
+                  <span class="checkbox-box"></span>
+                  <span class="checkbox-label"><strong>Design &amp; Creative:</strong> Assist with slides formatting, social layouts, and basic video highlights.</span>
+                </label>
+              </div>
+              <span class="form-error" id="vol-specialties-error" aria-live="polite"></span>
+            </div>
+
+            <!-- Motivation -->
+            <div class="form-group">
+              <label for="vol-motivation" class="form-label">Why do you want to join the crew? <span class="form-label-opt">(A short, passionate sentence)</span></label>
+              <textarea 
+                id="vol-motivation" 
+                name="motivation" 
+                rows="3"
+                placeholder="e.g. I want to build networks with platform experts across Africa and help facilitate a seamless tech environment." 
+                class="form-input form-input--textarea"
+                required
+              ></textarea>
+              <span class="form-error" id="vol-motivation-error" aria-live="polite"></span>
+            </div>
+
+            <!-- Prior Experience (Optional) -->
+            <div class="form-group">
+              <label for="vol-experience" class="form-label">Prior Experience <span class="form-label-opt">(Optional - have you volunteered before?)</span></label>
+              <textarea 
+                id="vol-experience" 
+                name="experience" 
+                rows="2"
+                placeholder="e.g. Moderated chat rooms for local meetups, helped manage logistics for GDG meetings." 
+                class="form-input form-input--textarea"
+              ></textarea>
+            </div>
+
+            <div class="form-footer-wrapper">
+              <div class="form-footer">
+                <button type="submit" class="btn btn--primary btn--submit" id="btn-submit" style="background: var(--amber); color: var(--deep);">
+                  <span>Submit Crew Application</span>
+                  <svg class="submit-arrow" width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+                    <path d="M2 7h10M7 2l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                  <div class="submit-spinner" aria-hidden="true" hidden></div>
+                </button>
+              </div>
+              <p class="form-disclaimer">
+                By submitting this form, you agree to our <a href={`${base}privacy`} class="form-privacy-link">Privacy Policy</a> and consent to the processing of your data under GDPR and NDPR guidelines.
+              </p>
+            </div>
+          </form>
+        </div>
+
+        <!-- Success Screen -->
+        <div id="success-container" class="form-card form-card--success" hidden>
+          <div class="success-icon" style="background: rgba(232, 160, 48, 0.1); color: var(--amber);" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <polyline points="20 6 9 17 4 12" stroke-linecap="round" stroke-linejoin="round"></polyline>
+            </svg>
+          </div>
+          <span class="label label--light" style="color: var(--amber);">Application Received</span>
+          <h2 class="heading-1 text-white" style="margin-top: 10px; margin-bottom: var(--space-sm);">Crew Application Under Review</h2>
+          <p class="form-subtitle" style="max-width: 54ch; margin: 0 auto var(--space-sm);">
+            Awesome, <strong id="success-name" class="text-mint"></strong>! Your application is in our queue. We'll review your interests and reach out via Discord or email (<strong id="success-email" class="text-mint"></strong>) soon.
+          </p>
+
+          <!-- Shareable Ticket Card Preview (Crew design: warm terracotta/orange) -->
+          <div class="ticket-preview-wrapper">
+            <div id="downloadable-ticket" class="ticket-preview">
+              <!-- Typographic Artwork Background Watermark -->
+              <div class="ticket-preview__watermark" aria-hidden="true">
+                <InfraConfAfricaArt />
+              </div>
+
+              <div class="ticket-preview__top">
+                <div class="ticket-preview__logo">▲</div>
+                <div class="ticket-preview__brand">infraconf</div>
+                <div class="ticket-preview__brand-sub">africa · 2026</div>
+                <div class="ticket-preview__badge">Crew Pass</div>
+              </div>
+              
+              <div class="ticket-preview__separator">
+                <div class="ticket-preview__cutout ticket-preview__cutout--left"></div>
+                <div class="ticket-preview__cutout ticket-preview__cutout--right"></div>
+                <div class="ticket-preview__dash"></div>
+              </div>
+
+              <div class="ticket-preview__body">
+                <div class="ticket-preview__row">
+                  <div>
+                    <div class="ticket-preview__label">Crew Member</div>
+                    <div class="ticket-preview__val" id="ticket-name">Kofi Agyeman</div>
+                  </div>
+                  <div style="text-align: right;">
+                    <div class="ticket-preview__label">Status</div>
+                    <div class="ticket-preview__val" style="color: var(--amber);" id="ticket-status">Candidate</div>
+                  </div>
+                </div>
+
+                <div class="ticket-preview__row">
+                  <div>
+                    <div class="ticket-preview__label">Area of Focus</div>
+                    <div class="ticket-preview__val" id="ticket-focus">Operations</div>
+                  </div>
+                  <div style="text-align: right;">
+                    <div class="ticket-preview__label">Discord</div>
+                    <div class="ticket-preview__val" id="ticket-discord">@kofi_ops</div>
+                  </div>
+                </div>
+
+                <div class="ticket-preview__row" style="margin-bottom: 0;">
+                  <div>
+                    <div class="ticket-preview__label">Date</div>
+                    <div class="ticket-preview__val">21 November 2026</div>
+                  </div>
+                  <div style="text-align: right;">
+                    <div class="ticket-preview__label">Crew Code</div>
+                    <div class="ticket-preview__val font-mono text-amber" id="ticket-pass-id">ICA-CREW-PENDING</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <button type="button" class="btn btn--primary btn--download" id="btn-download-ticket" style="background: var(--amber); color: var(--deep);">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+              <span>Download Crew Pass</span>
+            </button>
+          </div>
+
+          <div class="success-actions">
+            <a href={base} class="btn btn--ghost" id="btn-return-home-register">Return Home</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <Footer />
+</BaseLayout>
+
+<script>
+  const form = document.getElementById('volunteer-form') as HTMLFormElement;
+  const formContainer = document.getElementById('form-container') as HTMLElement;
+  const successContainer = document.getElementById('success-container') as HTMLElement;
+  const submitBtn = document.getElementById('btn-submit') as HTMLButtonElement;
+  const successName = document.getElementById('success-name') as HTMLElement;
+  const successEmail = document.getElementById('success-email') as HTMLElement;
+
+  const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+
+  const validateField = (input: HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement, errorEl: HTMLElement) => {
+    if (!input.value.trim()) {
+      errorEl.textContent = 'This field is required.';
+      input.classList.add('form-input--invalid');
+      return false;
+    }
+    
+    if (input.type === 'email' && !emailRegex.test(input.value)) {
+      errorEl.textContent = 'Please enter a valid email address.';
+      input.classList.add('form-input--invalid');
+      return false;
+    }
+
+    errorEl.textContent = '';
+    input.classList.remove('form-input--invalid');
+    return true;
+  };
+
+  // Inputs
+  const nameInput = document.getElementById('vol-name') as HTMLInputElement;
+  const emailInput = document.getElementById('vol-email') as HTMLInputElement;
+  const contactInput = document.getElementById('vol-contact') as HTMLInputElement;
+  const roleSelect = document.getElementById('vol-role') as HTMLSelectElement;
+  const availabilitySelect = document.getElementById('vol-availability') as HTMLSelectElement;
+  const motivationInput = document.getElementById('vol-motivation') as HTMLTextAreaElement;
+
+  nameInput?.addEventListener('input', () => validateField(nameInput, document.getElementById('vol-name-error')!));
+  emailInput?.addEventListener('input', () => validateField(emailInput, document.getElementById('vol-email-error')!));
+  contactInput?.addEventListener('input', () => validateField(contactInput, document.getElementById('vol-contact-error')!));
+  roleSelect?.addEventListener('change', () => validateField(roleSelect, document.getElementById('vol-role-error')!));
+  availabilitySelect?.addEventListener('change', () => validateField(availabilitySelect, document.getElementById('vol-availability-error')!));
+  motivationInput?.addEventListener('input', () => validateField(motivationInput, document.getElementById('vol-motivation-error')!));
+
+  let lastSubmission = {
+    name: '',
+    role: '',
+    passId: ''
+  };
+
+  form?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    // Validate inputs
+    const isNameValid = validateField(nameInput, document.getElementById('vol-name-error')!);
+    const isEmailValid = validateField(emailInput, document.getElementById('vol-email-error')!);
+    const isContactValid = validateField(contactInput, document.getElementById('vol-contact-error')!);
+    const isRoleValid = validateField(roleSelect, document.getElementById('vol-role-error')!);
+    const isAvailabilityValid = validateField(availabilitySelect, document.getElementById('vol-availability-error')!);
+    const isMotivationValid = validateField(motivationInput, document.getElementById('vol-motivation-error')!);
+
+    // Specialties checkboxes validation
+    const checkedSpecialties: string[] = [];
+    const checkboxes = form.querySelectorAll('input[name="specialties"]:checked');
+    checkboxes.forEach((cb) => {
+      checkedSpecialties.push((cb as HTMLInputElement).value);
+    });
+
+    const specialtiesError = document.getElementById('vol-specialties-error')!;
+    let isSpecialtiesValid = true;
+    if (checkedSpecialties.length === 0) {
+      specialtiesError.textContent = 'Please select at least one area of interest.';
+      isSpecialtiesValid = false;
+    } else {
+      specialtiesError.textContent = '';
+    }
+
+    if (!isNameValid || !isEmailValid || !isContactValid || !isRoleValid || !isAvailabilityValid || !isMotivationValid || !isSpecialtiesValid) {
+      const firstInvalid = document.querySelector('.form-input--invalid, .form-select.form-input--invalid, .form-input--textarea.form-input--invalid, #vol-specialties-error:not(:empty)');
+      firstInvalid?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      return;
+    }
+
+    // Spinner state
+    const textSpan = submitBtn.querySelector('span')!;
+    const arrowSvg = submitBtn.querySelector('.submit-arrow') as HTMLElement;
+    const spinner = submitBtn.querySelector('.submit-spinner') as HTMLElement;
+
+    submitBtn.disabled = true;
+    textSpan.textContent = 'Submitting...';
+    if (arrowSvg) arrowSvg.style.display = 'none';
+    spinner.removeAttribute('hidden');
+
+    const randId = Math.random().toString(36).substring(2, 6).toUpperCase();
+    const passId = `ICA-CREW-${randId}`;
+
+    const formData = {
+      name: nameInput.value.trim(),
+      email: emailInput.value.trim(),
+      contact: contactInput.value.trim(),
+      role: roleSelect.value,
+      availability: availabilitySelect.value,
+      specialties: checkedSpecialties,
+      motivation: motivationInput.value.trim(),
+      experience: (document.getElementById('vol-experience') as HTMLTextAreaElement).value.trim(),
+      timestamp: new Date().toISOString()
+    };
+
+    lastSubmission = {
+      name: formData.name,
+      role: formData.role,
+      passId: passId
+    };
+
+    // Save to local storage for testing backup
+    try {
+      const volunteers = JSON.parse(localStorage.getItem('infraconf_volunteers') || '[]');
+      volunteers.push({ ...formData, passId });
+      localStorage.setItem('infraconf_volunteers', JSON.stringify(volunteers));
+    } catch (e) {
+      console.error('LocalStorage error:', e);
+    }
+
+    // Back up to Google Forms
+    const formUrl = 'https://docs.google.com/forms/u/4/d/1URr5v6Ct805hIu3zgMScAaVfN8ET_in6LMmrqXBkxZY/formResponse';
+    const submissionBody = new URLSearchParams();
+    submissionBody.append('entry.248961691', formData.name);
+    submissionBody.append('entry.283723943', formData.email);
+    submissionBody.append('entry.1946525760', formData.contact);
+    submissionBody.append('entry.213561612', formData.role);
+    submissionBody.append('entry.1850822049', formData.availability);
+    
+    if (formData.specialties.length > 0) {
+      formData.specialties.forEach(spec => {
+        submissionBody.append('entry.1105880213', spec);
+      });
+    } else {
+      submissionBody.append('entry.1105880213', 'General Interest');
+    }
+    
+    submissionBody.append('entry.339685399', formData.motivation);
+
+    try {
+      await fetch(formUrl, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded'
+        },
+        body: submissionBody.toString()
+      });
+    } catch (err) {
+      console.error('Google form submission failed:', err);
+    }
+
+    // Populate success card
+    if (successName) successName.textContent = formData.name;
+    if (successEmail) successEmail.textContent = formData.email;
+
+    const ticketName = document.getElementById('ticket-name')!;
+    const ticketFocus = document.getElementById('ticket-focus')!;
+    const ticketDiscord = document.getElementById('ticket-discord')!;
+    const ticketPassId = document.getElementById('ticket-pass-id')!;
+
+    if (ticketName) ticketName.textContent = formData.name;
+    if (ticketFocus) ticketFocus.textContent = formData.specialties[0] || 'Operations';
+    if (ticketDiscord) ticketDiscord.textContent = formData.contact;
+    if (ticketPassId) ticketPassId.textContent = passId;
+
+    formContainer.style.opacity = '0';
+    formContainer.style.transform = 'translateY(-10px)';
+
+    setTimeout(() => {
+      formContainer.setAttribute('hidden', '');
+      successContainer.removeAttribute('hidden');
+      successContainer.style.opacity = '1';
+      successContainer.style.transform = 'none';
+      successContainer.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }, 300);
+  });
+
+  // Download logic
+  const downloadBtn = document.getElementById('btn-download-ticket') as HTMLButtonElement;
+  downloadBtn?.addEventListener('click', async () => {
+    downloadBtn.disabled = true;
+    const originalText = downloadBtn.querySelector('span')!.textContent;
+    downloadBtn.querySelector('span')!.textContent = 'Generating Image...';
+
+    try {
+      if (!(window as any).html2canvas) {
+        const script = document.createElement('script');
+        script.src = 'https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js';
+        document.head.appendChild(script);
+        await new Promise((resolve) => script.onload = resolve);
+      }
+
+      const ticketNode = document.getElementById('downloadable-ticket')!;
+      
+      const canvas = await (window as any).html2canvas(ticketNode, {
+        scale: 3, 
+        backgroundColor: '#0F2B1F', 
+        logging: false,
+        useCORS: true
+      });
+
+      const url = canvas.toDataURL('image/png');
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = `infraconf-crew-${lastSubmission.name.toLowerCase().replace(/\s+/g, '-')}.png`;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    } catch (err) {
+      console.error('Failed to generate crew pass image:', err);
+    } finally {
+      downloadBtn.disabled = false;
+      downloadBtn.querySelector('span')!.textContent = originalText;
+    }
+  });
+
+  const returnHomeRegister = document.getElementById('btn-return-home-register') as HTMLAnchorElement;
+  if (returnHomeRegister && window.location.hostname.includes('github.io')) {
+    returnHomeRegister.href = window.location.origin + '/infraconf-web/';
+  }
+</script>
+
+<style>
+  .volunteer-section {
+    position: relative;
+    overflow: hidden;
+    min-height: calc(100svh - 64px - 300px);
+    display: flex;
+    align-items: center;
+    padding-block: var(--space-lg);
+  }
+
+  .volunteer-section__pattern {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+  }
+
+  .container--form {
+    max-width: 780px;
+    position: relative;
+    z-index: 2;
+  }
+
+  .form-wrapper {
+    position: relative;
+  }
+
+  .form-card {
+    background: rgba(15, 43, 31, 0.7);
+    border: 1px solid var(--mid);
+    padding: var(--space-lg) var(--space-md);
+    backdrop-filter: blur(20px);
+    border-radius: 4px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+  }
+
+  .form-header {
+    margin-bottom: var(--space-lg);
+    text-align: center;
+  }
+
+  .form-subtitle {
+    font-size: 0.95rem;
+    font-weight: 300;
+    color: rgba(255, 255, 255, 0.5);
+    line-height: 1.7;
+    margin-top: var(--space-sm);
+  }
+
+  /* Perks design grid */
+  .perks-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-md);
+    margin-bottom: var(--space-lg);
+  }
+
+  .perk-card {
+    background: rgba(29, 76, 55, 0.2);
+    border: 1px solid rgba(127, 255, 197, 0.1);
+    padding: var(--space-md);
+    border-radius: 4px;
+    transition: border-color 0.2s, transform 0.2s;
+  }
+
+  .perk-card:hover {
+    border-color: rgba(127, 255, 197, 0.3);
+    transform: translateY(-2px);
+  }
+
+  .perk-icon {
+    width: 36px;
+    height: 36px;
+    margin-bottom: var(--space-sm);
+  }
+
+  .perk-title {
+    font-family: var(--serif);
+    font-size: 1.15rem;
+    font-weight: 500;
+    color: var(--white);
+    margin-bottom: 6px;
+  }
+
+  .perk-text {
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.5);
+    line-height: 1.5;
+  }
+
+  .form-element {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+  }
+
+  .form-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-sm) var(--space-md);
+  }
+
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .form-group--checkboxes {
+    border-top: 1px solid var(--mid);
+    padding-top: var(--space-md);
+    margin-top: 8px;
+  }
+
+  .form-label {
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.85);
+  }
+
+  .form-label-opt {
+    color: rgba(255, 255, 255, 0.4);
+    text-transform: none;
+    font-family: var(--sans);
+    font-size: 0.75rem;
+  }
+
+  .form-input,
+  .form-select {
+    width: 100%;
+    background: rgba(29, 76, 55, 0.3);
+    border: 1px solid var(--mid);
+    padding: 12px 16px;
+    font-size: 0.95rem;
+    color: var(--white);
+    font-family: var(--sans);
+    border-radius: 2px;
+    transition: border-color 0.2s, box-shadow 0.2s;
+  }
+
+  .form-input--textarea {
+    resize: vertical;
+    font-family: var(--sans);
+    line-height: 1.5;
+  }
+
+  .form-input:focus,
+  .form-select:focus {
+    outline: none;
+    border-color: var(--mint);
+    box-shadow: 0 0 0 1px var(--mint);
+  }
+
+  .form-input--invalid {
+    border-color: rgba(255, 100, 100, 0.6) !important;
+    box-shadow: 0 0 0 1px rgba(255, 100, 100, 0.4) !important;
+  }
+
+  .form-select {
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%23E8A030' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 16px center;
+    background-size: 12px;
+    padding-right: 40px;
+  }
+
+  .form-select option {
+    background: var(--deep);
+    color: var(--white);
+  }
+
+  .form-error {
+    font-size: 0.78rem;
+    color: rgba(255, 100, 100, 0.85);
+    min-height: 16px;
+  }
+
+  .checkbox-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-top: var(--space-xs);
+  }
+
+  .checkbox-container {
+    display: grid;
+    grid-template-columns: 20px 1fr;
+    gap: 12px;
+    align-items: flex-start;
+    cursor: pointer;
+    user-select: none;
+  }
+
+  .checkbox-input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0; width: 0;
+  }
+
+  .checkbox-box {
+    width: 20px;
+    height: 20px;
+    background: rgba(29, 76, 55, 0.3);
+    border: 1px solid var(--mid);
+    border-radius: 2px;
+    position: relative;
+    margin-top: 2px;
+    transition: border-color 0.2s, background-color 0.2s;
+  }
+
+  .checkbox-container:hover .checkbox-box {
+    border-color: var(--amber);
+  }
+
+  .checkbox-input:checked ~ .checkbox-box {
+    background: var(--amber);
+    border-color: var(--amber);
+  }
+
+  .checkbox-box::after {
+    content: "";
+    position: absolute;
+    display: none;
+    left: 6px;
+    top: 2px;
+    width: 5px;
+    height: 10px;
+    border: solid var(--deep);
+    border-width: 0 2.5px 2.5px 0;
+    transform: rotate(45deg);
+  }
+
+  .checkbox-input:checked ~ .checkbox-box::after {
+    display: block;
+  }
+
+  .checkbox-label {
+    font-size: 0.875rem;
+    color: rgba(255, 255, 255, 0.7);
+    font-weight: 300;
+    line-height: 1.4;
+    transition: color 0.2s;
+  }
+
+  .checkbox-label strong {
+    font-weight: 500;
+    color: var(--white);
+    display: block;
+    margin-bottom: 2px;
+  }
+
+  .checkbox-container:hover .checkbox-label {
+    color: var(--white);
+  }
+
+  .form-footer {
+    display: flex;
+    justify-content: center;
+    margin-top: var(--space-sm);
+  }
+
+  .btn--submit {
+    width: 100%;
+    justify-content: center;
+    font-weight: 600;
+    letter-spacing: 0.03em;
+  }
+
+  .submit-spinner {
+    width: 16px;
+    height: 16px;
+    border: 2px solid var(--deep);
+    border-top: 2px solid transparent;
+    border-radius: 50%;
+    animation: rotate-spinner 0.8s linear infinite;
+  }
+
+  @keyframes rotate-spinner {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+
+  .form-card--success {
+    text-align: center;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+  }
+
+  .success-icon {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto var(--space-md);
+  }
+
+  .success-icon svg {
+    width: 28px;
+    height: 28px;
+  }
+
+  .success-actions {
+    display: flex;
+    gap: var(--space-sm);
+    justify-content: center;
+    margin-top: var(--space-md);
+  }
+
+  /* Crew Pass Card Styling (Amber / Terracotta Theme) */
+  .ticket-preview-wrapper {
+    margin: var(--space-md) auto;
+    max-width: 380px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .ticket-preview {
+    width: 100%;
+    background: #4C2F1D; /* Warm copper/terracotta backdrop */
+    border: 1px solid var(--terra);
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4);
+    text-align: left;
+    position: relative;
+    padding: 24px;
+  }
+
+  .ticket-preview__watermark {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(1.1);
+    width: 100%;
+    opacity: 0.18;
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  .ticket-preview__watermark .infraconf-art-wrapper {
+    margin: 0 !important;
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+
+  .ticket-preview__watermark .infraconf-art-bg-grid {
+    display: none !important;
+  }
+
+  .ticket-preview__top {
+    text-align: center;
+    padding-bottom: var(--space-sm);
+    position: relative;
+    z-index: 2;
+  }
+
+  .ticket-preview__logo {
+    font-size: 1.8rem;
+    color: var(--amber);
+    line-height: 1;
+    margin-bottom: 6px;
+  }
+
+  .ticket-preview__brand {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 1.6rem;
+    color: var(--amber);
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+  }
+
+  .ticket-preview__brand-sub {
+    font-family: var(--mono);
+    font-size: 0.65rem;
+    color: var(--white);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-top: 4px;
+  }
+
+  .ticket-preview__badge {
+    display: inline-block;
+    font-family: var(--mono);
+    font-size: 0.55rem;
+    color: var(--amber);
+    border: 1px solid rgba(232, 160, 48, 0.25);
+    padding: 3px 8px;
+    border-radius: 1px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-top: 12px;
+  }
+
+  .ticket-preview__separator {
+    position: relative;
+    height: 16px;
+    margin: 16px -24px;
+    display: flex;
+    align-items: center;
+    z-index: 2;
+  }
+
+  .ticket-preview__cutout {
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    background: #0f2b1f; 
+    border-radius: 50%;
+    border: 1px solid var(--mid);
+    z-index: 2;
+  }
+
+  .ticket-preview__cutout--left {
+    left: -9px;
+  }
+
+  .ticket-preview__cutout--right {
+    right: -9px;
+  }
+
+  .ticket-preview__dash {
+    width: 100%;
+    height: 1px;
+    border-top: 1px dashed var(--terra);
+  }
+
+  .ticket-preview__body {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    position: relative;
+    z-index: 2;
+  }
+
+  .ticket-preview__row {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+
+  .ticket-preview__label {
+    font-family: var(--mono);
+    font-size: 0.6rem;
+    color: rgba(255, 255, 255, 0.4);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 2px;
+  }
+
+  .ticket-preview__val {
+    font-size: 0.9rem;
+    color: var(--white);
+    font-weight: 500;
+  }
+
+  .btn--download {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    padding: 10px 20px;
+    border-radius: 2px;
+    border: none;
+    transition: opacity 0.2s;
+    margin-top: var(--space-sm);
+    cursor: pointer;
+  }
+
+  .btn--download:hover {
+    opacity: 0.9;
+  }
+
+  .form-footer-wrapper {
+    margin-top: var(--space-sm);
+  }
+
+  .form-disclaimer {
+    font-size: 0.75rem;
+    color: rgba(255, 255, 255, 0.45);
+    text-align: center;
+    line-height: 1.5;
+    margin-top: 14px;
+    max-width: 52ch;
+    margin-inline: auto;
+  }
+
+  .form-privacy-link {
+    color: var(--amber);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+
+  .form-privacy-link:hover {
+    color: var(--white);
+  }
+
+  @media (max-width: 768px) {
+    .form-grid {
+      grid-template-columns: 1fr;
+    }
+    .perks-grid {
+      grid-template-columns: 1fr;
+      gap: var(--space-sm);
+    }
+    .form-card {
+      padding: var(--space-md) var(--space-sm);
+    }
+    .success-actions {
+      flex-direction: column;
+    }
+    .success-actions a {
+      width: 100%;
+      justify-content: center;
+    }
+  }
+</style>
