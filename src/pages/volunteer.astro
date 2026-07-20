@@ -3,6 +3,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
 import InfraConfAfricaArt from '../components/InfraConfAfricaArt.astro';
+import Logo from '../components/Logo.astro';
 
 const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
 ---
@@ -256,7 +257,7 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
               </div>
 
               <div class="ticket-preview__top">
-                <div class="ticket-preview__logo">▲</div>
+                <div class="ticket-preview__logo"><Logo size={24} /></div>
                 <div class="ticket-preview__brand">infraconf</div>
                 <div class="ticket-preview__brand-sub">africa · 2026</div>
                 <div class="ticket-preview__badge">Crew Pass</div>
