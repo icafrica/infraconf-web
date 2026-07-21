@@ -1,16 +1,12 @@
 ---
 /**
- * InfraConf Africa — Monogram Server Chip Logo Mark
- *
- * A creative, typographic monogram chip representing "ica" (InfraConf Africa):
- *   - "i": vertical server node status pillar with glowing mint LED
- *   - "c": container network loop curve
- *   - "a": cluster node / gateway apex with amber crossbar
+ * InfraConf Africa — Monogram Logo Mark ("ica")
+ * Cluster Mesh Topology Direction (Server Pillar, Container Loop, Gateway Apex, Subnet Bus)
  *
  * Props:
  *   size    — height in pixels (default 32)
  *   variant — "dark" (default) | "light" | "mono"
- *   chip    — boolean, whether to show chip background card & grid (default true)
+ *   chip    — boolean, whether to show chip background card & grid (default false)
  */
 interface Props {
   size?: number;
@@ -19,23 +15,27 @@ interface Props {
   class?: string;
 }
 
-const { size = 32, variant = 'dark', chip = true, class: className = '' } = Astro.props;
+const { size = 32, variant = 'dark', chip = false, class: className = '' } = Astro.props;
 
 const width = Math.round(size * (68 / 48));
 
 const colors = {
   dark: {
-    bg: '#091810',
-    border: '#1D402B',
+    bg: '#05120C',
+    border: 'rgba(127, 255, 197, 0.35)',
     grid: '#7FFFC5',
+    gridOpacity: 0.22,
+    bus: '#7FFFC5',
     stem: '#FFFFFF',
     mintDot: '#7FFFC5',
     amber: '#E8A030',
   },
   light: {
-    bg: '#F0FDF4',
-    border: '#C8E8D8',
+    bg: '#EBF9F1',
+    border: '#2E7552',
     grid: '#1D4C37',
+    gridOpacity: 0.25,
+    bus: '#1D4C37',
     stem: '#0F2B1F',
     mintDot: '#1D4C37',
     amber: '#D97706',
@@ -44,6 +44,8 @@ const colors = {
     bg: 'none',
     border: 'currentColor',
     grid: 'none',
+    gridOpacity: 0,
+    bus: 'currentColor',
     stem: 'currentColor',
     mintDot: 'currentColor',
     amber: 'currentColor',
@@ -67,15 +69,18 @@ const colors = {
       <rect x="0.75" y="0.75" width="66.5" height="46.5" rx="9.25" fill={colors.bg} stroke={colors.border} stroke-width="1.5"/>
 
       <!-- Background Tech Grid / Circuit Traces -->
-      <path d="M 6 16 H 62 M 6 32 H 62" stroke={colors.grid} stroke-width="0.8" opacity="0.08" stroke-dasharray="2 4"/>
-      <path d="M 13 6 V 42 M 34 6 V 42 M 55 6 V 42" stroke={colors.grid} stroke-width="0.8" opacity="0.08" stroke-dasharray="2 4"/>
+      <path d="M 6 16 H 62 M 6 32 H 62" stroke={colors.grid} stroke-width="0.9" opacity={colors.gridOpacity} stroke-dasharray="2 4"/>
+      <path d="M 13 6 V 42 M 34 6 V 42 M 55 6 V 42" stroke={colors.grid} stroke-width="0.9" opacity={colors.gridOpacity} stroke-dasharray="2 4"/>
     </>
   )}
+
+  <!-- Subnet Data Bus Connector Trace -->
+  <line x1="13" y1="27" x2="47" y2="27" stroke={colors.bus} stroke-width="1" stroke-dasharray="2 2" opacity={variant === 'mono' ? 0.6 : 0.45}/>
 
   <!-- Letter 'i' — Server Node Status Pillar -->
   <line x1="13" y1="20" x2="13" y2="34" stroke={colors.stem} stroke-width="3.5" stroke-linecap="round"/>
   <circle cx="13" cy="12" r="2.5" fill={colors.mintDot}/>
-  <circle cx="13" cy="12" r="4.5" fill={colors.mintDot} opacity="0.25"/>
+  <circle cx="13" cy="12" r="4.5" fill={colors.mintDot} opacity="0.35"/>
 
   <!-- Letter 'c' — Container / Network Loop -->
   <path d="M 31 20 Q 22 20 22 27 Q 22 34 31 34" stroke={colors.stem} stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
