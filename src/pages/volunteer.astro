@@ -449,21 +449,31 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
     // Back up to Google Forms
     const formUrl = 'https://docs.google.com/forms/u/4/d/1URr5v6Ct805hIu3zgMScAaVfN8ET_in6LMmrqXBkxZY/formResponse';
     const submissionBody = new URLSearchParams();
+
+    // Correct Google Form Entry ID Mappings:
+    // entry.248961691 -> Full Name
+    // entry.283723943 -> Email Address
+    // entry.1946525760 -> Current Role
+    // entry.213561612 -> Specialization Areas
+    // entry.1850822049 -> Motivation / Why do you want to join?
+    // entry.1105880213 -> Weekly Availability
+    // entry.339685399 -> Prior Experience
+
     submissionBody.append('entry.248961691', formData.name);
     submissionBody.append('entry.283723943', formData.email);
-    submissionBody.append('entry.1946525760', formData.contact);
-    submissionBody.append('entry.213561612', formData.role);
-    submissionBody.append('entry.1850822049', formData.availability);
+    submissionBody.append('entry.1946525760', formData.contact ? `${formData.role} (${formData.contact})` : formData.role);
     
     if (formData.specialties.length > 0) {
       formData.specialties.forEach(spec => {
-        submissionBody.append('entry.1105880213', spec);
+        submissionBody.append('entry.213561612', spec);
       });
     } else {
-      submissionBody.append('entry.1105880213', 'General Interest');
+      submissionBody.append('entry.213561612', 'General Interest');
     }
     
-    submissionBody.append('entry.339685399', formData.motivation);
+    submissionBody.append('entry.1850822049', formData.motivation);
+    submissionBody.append('entry.1105880213', formData.availability);
+    submissionBody.append('entry.339685399', formData.experience || 'None');
 
     try {
       await fetch(formUrl, {
